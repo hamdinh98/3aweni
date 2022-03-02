@@ -3,9 +3,10 @@ const connectDB = require('./config/db');
 const bookRoutes = require('./routes/BookApi')
 const app = express();
 
+const cors  = require('cors')
 // Connect Database
 connectDB();
-
+app.use(cors)
 app.get('/', (req, res) => res.send('Hello world!'));
 
 app.use(bookRoutes)
