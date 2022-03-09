@@ -2,80 +2,80 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="footer-area heding-bg pos-rel pt-100" style="background-image:url(assets/img/bg/02.png)">
-            <div className="container">
-                <div className="footer-bottom-area">
-                    <div className="row mb-30">
-                        <div className="col-xl-2 col-lg-3 col-md-6  wow fadeInUp2 animated" data-wow-delay='.3s'>
-                            <div className="footer__widget mb-30">
-                                <h5 className="semi-title mb-25">Quick Links</h5>
-                                <ul className="fot-list">
-                                    <li><a href="#">About us</a></li>
-                                    <li><a href="#">Latest events</a></li>
-                                    <li><a href="#">How It Works</a></li>
-                                    <li><a href="#">News & articles</a></li>
-                                    <li><a href="#">Contact us</a></li>
-                                </ul>
+        <footer className="site-footer ">
+            <div className="footer-content-area">
+                <div className="container">
+                    <div className="footer-widgets">
+                        <div className="row justify-content-between">
+                            <div className="col-xl-3 col-lg-4 col-md-6">
+                                <div className="widget about-widget">
+                                    <div className="footer-logo"><img src="assets/img/logo-white.png" alt="Funden"/>
+                                    </div>
+                                    <p>Sed ut perspiciatis unde omn iste natus error sit voluptatem</p>
+                                    <div className="newsletter-form"><h5 className="form-title">Join Newsletters</h5>
+                                        <form action="#"><input type="text" placeholder="Email Address"/>
+                                            <button type="submit"><i className="far fa-arrow-right"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-xl-2 col-lg-3 col-md-6 wow fadeInUp2 animated" data-wow-delay='.5s'>
-                            <div className="footer__widget mb-30 pl-40">
-                                <h5 className="semi-title mb-25">Our Project</h5>
-                                <ul className="fot-list">
-                                    <li><a href="#">Education</a></li>
-                                    <li><a href="#">Design</a></li>
-                                    <li><a href="#">Film & Video</a></li>
-                                    <li><a href="#">Technology</a></li>
-                                    <li><a href="#">Games</a></li>
-                                </ul>
+                            <div className="col-lg-2 col-md-5 col-sm-6">
+                                <div className="widget nav-widget"><h4 className="widget-title">Our Projects</h4>
+                                    <ul>
+                                        <li><a href="project-1">Medical &amp; Health</a></li>
+                                        <li><a href="project-2">Educations</a></li>
+                                        <li><a href="project-1">Technology</a></li>
+                                        <li><a href="project-3">Web Development</a></li>
+                                        <li><a href="project-2">Food &amp; Clothes</a></li>
+                                        <li><a href="project-1">Video &amp; Movies</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-xl-4 col-lg-6 col-md-6  wow fadeInUp2 animated" data-wow-delay='.7s'>
-                            <div className="footer__widget mb-25 pl-85">
-                                <h5 className="semi-title mb-25">Our Project</h5>
-                                <p className="mb-10">Perspi ciatis unde omnis iste nat
-                                    error sit voluptatem accusan</p>
-                                <ul className="fot-list address-list">
-                                    <li><a href="#"><i className="far fa-map-marker-alt"></i> 250 Main Street, 2nd
-                                        Floor,
-                                        USA</a></li>
-                                    <li><a href="#"><i className="far fa-envelope"></i> support@gmail.com</a></li>
-                                    <li><a href="#"><i className="far fa-phone-volume"></i> 888 (0123) 456 79</a></li>
-                                </ul>
-
+                            <div className="col-lg-2 col-md-6 col-sm-6">
+                                <div className="widget nav-widget"><h4 className="widget-title">Support</h4>
+                                    <ul>
+                                        <li><a href="about">Privacy Policy</a></li>
+                                        <li><a href="contact">Conditions</a></li>
+                                        <li><a href="company-overview">Company</a></li>
+                                        <li><a href="faq">Faq &amp; Terms</a></li>
+                                        <li><a href="contact">Contact Us</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-xl-4 col-lg-6 col-md-6  wow fadeInUp2 animated" data-wow-delay='.9s'>
-                            <div className="footer__widget fot_abot mb-30 pl-85">
-                                <h5 className="semi-title mb-25">Donation Us</h5>
-                                <p className="mb-30">Sed ut perspi ciatis unde omnis iste
-                                    natus error sit voluptatem accusantiu doloremque laudantiu totam</p>
-                                <div className="subscribe-content foter-subscribe">
-                                    <form className="subscribe-form"
-                                          action="https://www.devsnews.com/template/fande/fande/form.php">
-                                        <input className="form-control" type="text" placeholder="Enter Your Email">
-                                            <button><i className="far fa-arrow-right"></i></button>
-                                        </input>
-                                    </form>
+                            <div className="col-lg-auto col-md-5 col-sm-8">
+                                <div className="widget contact-widget"><h4 className="widget-title">Contact Us</h4>
+                                    <ul className="info-list">
+                                        <li><span className="icon"><i className="far fa-phone"></i></span><span
+                                            className="info"><span
+                                            className="info-title">Phone Number</span><a
+                                            href="#">+012(345) 78 93</a></span>
+                                        </li>
+                                        <li><span className="icon"><i className="far fa-envelope-open"></i></span><span
+                                            className="info"><span className="info-title">Email Address</span><a
+                                            href="#">support@gmail.com</a></span>
+                                        </li>
+                                        <li><span className="icon"><i className="far fa-map-marker-alt"></i></span><span
+                                            className="info"><span className="info-title">Locations</span><a href="#">59 Main Street, USA</a></span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <a href="#top-menu" className="scroll-target"><i className="far fa-arrow-up"></i></a>
-                <div className="copy-right-area pt-30">
-                    <div className="row align-items-center">
-                        <div className="col-xl-7 col-lg-7 col-md-6">
-                            <div className="footer-log mb-30">
-                                <a href="index.html" className="footer-logo mb-30"><img
-                                    src="assets/img/logo/footer-logo1.png"
-                                    alt=""/></a>
+                    <div className="copyright-area">
+                        <div className="row flex-md-row-reverse">
+                            <div className="col-md-6">
+                                <ul className="social-icons">
+                                    <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i className="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i className="fab fa-youtube"></i></a></li>
+                                    <li><a href="#"><i className="fab fa-behance"></i></a></li>
+                                    <li><a href="#"><i className="fab fa-google-plus-g"></i></a></li>
+                                </ul>
                             </div>
-                        </div>
-                        <div className="col-xl-5 col-lg-5 col-md-6">
-                            <div className="copyright mb-30 text-md-right">
-                                <p>© 2020 Given. All Rights Reserved</p>
-                            </div>
+                            <div className="col-md-6"><p className="copyright-text">©  <a
+                                href="#">Funden</a>.
+                                All Rights Reserved</p></div>
                         </div>
                     </div>
                 </div>

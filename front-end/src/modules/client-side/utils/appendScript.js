@@ -3,4 +3,5 @@ export const appendScript = (scriptToAppend) => {
     script.src = scriptToAppend;
     script.async = true;
     document.body.appendChild(script);
+
 }
