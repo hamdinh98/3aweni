@@ -55,9 +55,9 @@ const registration = async (req, res) => {
                                     , (err, token) => {
                                         if (err)
                                             throw err
-                                        //console.log(u.email);
-                                        mailer(u.email).catch(err => console.log(err))
-                                        res.json({ msg: 'user added successfully', token: token })
+                                        console.log(JSON.stringify(u._id));
+                                        mailer(u).catch(err => console.log(err))
+                                        res.status(200).json({ msg: 'user added successfully', token: token })
 
                                     });
                             })
@@ -84,8 +84,8 @@ const login = async (req, res) => {
         return res.status(400).json({ error: errors })
     } else {
         const userfounded = await User.find({ email: email })
-        console.log(userfounded);
-        if (!userfounded) {
+        //console.log(`line 87 : ${userfounded}`);
+        if (!userfounded || userfounded[0].enable == 0 && userfounded[0].confirm == 1) {
             return res.status(400).json({ error: "Invalid credentials" })
         }
         let isMatch = await bcrypt.compare(password, userfounded[0].password)
@@ -152,7 +152,7 @@ const generateAccessToken = async (req, res) => {
             refreshToken,
             process.env.REFRESH_TOKEN_SECRET
         );
-        // user = { email: 'jame@gmail.com', iat: 1633586290, exp: 1633586350 }
+
         const { email } = user;
         const accessToken = await JWT.sign(
             { email },
@@ -202,16 +202,46 @@ const authToken = async (req, res, next) => {
     if (!user) {
         return res.send(403).json({ msg: "invalid access token" })
     }
-    // generateAccessToken(req, res)
-    next()
 
+    next()
 };
 
-module.exports = authToken;
+
+const blockUser = (req, res) => {
+    console.log(req.body.email);
+    if (!req.body.email) {
+        return res.status(400).json({ msg: "invalid email" })
+    }
+    User.updateOne({ email: String(req.body.email) }, { $set: { enable: 0 } }).then(result => res.status(200).json({ msg: result })).catch(err => res.status(500).json({ msg: err }))
+
+}
 
 
 
-module.exports = { registration, login, logout, generateAccessToken, authToken };
+
+
+
+const listUsers = async (req, res) => {
+
+
+    const List = await User.find()
+    if (!List)
+        return res.status(404).json({ msg: "error when retrieving list of users" })
+    return res.status(200).json({ msg: List })
+}
+
+
+
+
+const confirm = (req, res) => {
+
+
+    User.updateOne({ _id: String(req.params.id) }, { $set: { confirm: 1 } }).then(result => res.status(200).json({ msg: result })).catch(err => res.status(500).json({ msg: err }))
+
+}
+
+
+module.exports = { registration, login, logout, generateAccessToken, authToken, blockUser, listUsers, confirm };
 
 
 

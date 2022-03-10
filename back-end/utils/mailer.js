@@ -20,10 +20,10 @@ module.exports = async function main(receiver) {
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '"aweni" <noreply@example.com>',
-        to: receiver, // list of receivers
+        to: receiver.email, // list of receivers
         subject: "Hello ✔", // Subject line
         text: "thank you for registration", // plain text body
-        html: "<b>thank you for registration</b>", // html body
+        html: `<b>thank you for registration<br/><a href='http://localhost:5000/confirm/${receiver._id}'>confirm</a></b>`, // html body
     });
 
     console.log("Message sent: %s", info.messageId);

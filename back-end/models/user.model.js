@@ -1,7 +1,6 @@
 
 const mongoose = require('mongoose');
 
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String
@@ -18,10 +17,31 @@ const userSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
+
+    enable: {
+        type: Number,
+        default: 1
+    },
+
+    confirm: {
+        type: Number,
+        default: 0
+    },
+
+    Role:
+    {
+        type: String,
+        enum: ['USER', 'ADMIN', 'MODERATOR'],
+        default: 'USER'
+    }
+    ,
+
     addedDate: {
         type: Date,
         default: Date.now()
     }
+
+
 })
 
 
