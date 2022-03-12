@@ -1,38 +1,46 @@
-.App {
-  text-align: center;
+
+
+.main-btn
+{
+    background-color: coral;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.page-title-area 
+{
+    background-image:url("/public/assets/img/bg/page-title-bg.jpg");
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.page-title-area{
+    background-image:url("/public/assets/img/bg/page-title-bg.jpg");
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.project-image-area
+{
+    background-image:url("/public/assets/img/shape/09.png");
 }
 
-.App-link {
-  color: #61dafb;
+
+.project-img
+{
+
+    visibility: "visible"; animation-delay: "0.2s"; animation-name: "fadeInUp2";
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.widget-donate-box
+{
+    background-image:url("/public/assets/img/events/15.jpg");
+}
+
+
+
+
+
+.img-card
+{
+        width: 100%;
+        object-fit: contain;
 }
