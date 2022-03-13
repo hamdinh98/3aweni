@@ -84,7 +84,7 @@ const login = async (req, res) => {
         return res.status(400).json({ error: errors })
     } else {
         const userfounded = await User.find({ email: email })
-        //console.log(`line 87 : ${userfounded}`);
+        console.log(`line 87 : ${userfounded}`);
         if (!userfounded || userfounded[0].enable == 0 && userfounded[0].confirm == 1) {
             return res.status(400).json({ error: "Invalid credentials" })
         }
@@ -94,10 +94,13 @@ const login = async (req, res) => {
             return res.status(401).json({ msg: "password invalid" })
         }
         const accessToken = await JWT.sign(
-            { email: email },
+            {
+                email: userfounded[0].email,
+                role: userfounded[0].role
+            },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "20s",
+                expiresIn: "1h",
             }
         );
 
@@ -106,7 +109,7 @@ const login = async (req, res) => {
             { email: email },
             process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "10m",
+                expiresIn: "1d",
             }
         );
 
@@ -184,28 +187,6 @@ const logout = (req, res) => {
 
 
 
-const authToken = async (req, res, next) => {
-
-    const accessToken = req.header("access-token");
-
-    // If accessToken not found, send error message
-    if (!accessToken) {
-        return res.status(401).json({
-            msg: "accessToken not found",
-        },
-        );
-    }
-
-    // Authenticate accessToken
-    const user = JWT.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
-
-    if (!user) {
-        return res.send(403).json({ msg: "invalid access token" })
-    }
-
-    next()
-};
-
 
 const blockUser = (req, res) => {
     console.log(req.body.email);
@@ -241,7 +222,7 @@ const confirm = (req, res) => {
 }
 
 
-module.exports = { registration, login, logout, generateAccessToken, authToken, blockUser, listUsers, confirm };
+module.exports = { registration, login, logout, generateAccessToken, blockUser, listUsers, confirm };
 
 
 

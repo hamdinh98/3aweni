@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const userRoute = require('./routes/user.route')
 const cors = require('cors')
 const app = express();
+const passport = require('passport')
 // Connect Database
 connectDB();
 //config
@@ -14,7 +15,8 @@ app.use(bodyParser.json())
 
 
 app.use(userRoute);
-
+app.use(passport.initialize())
+require('./security/passport')(passport)
 // parse application/json
 app.get('/', (req, res) => res.send('Hello world!'));
 
