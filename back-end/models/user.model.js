@@ -3,19 +3,35 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
 
     email: {
-        type: String
+        type: String,
+        required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
+    },
+    birthDate: {
+        type: Date,
+
+    },
+    country: {
+        type: String,
+
+    },
+    state: {
+        type: String,
+
     },
     img:
     {
         data: Buffer,
-        contentType: String
+        contentType: String,
+
     },
 
     enable: {
@@ -31,18 +47,16 @@ const userSchema = new mongoose.Schema({
     Role:
     {
         type: String,
-        enum: ['USER', 'ADMIN', 'MODERATOR'],
+        enum: ['USER', 'ADMIN'],
         default: 'USER'
-    }
-    ,
-
-    addedDate: {
-        type: Date,
-        default: Date.now()
+    },
+},
+    {
+        timestamps: true,
     }
 
 
-})
+)
 
 
 module.exports = User = mongoose.model('user', userSchema)

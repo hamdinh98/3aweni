@@ -1,7 +1,7 @@
 
 
 const express = require('express');
-const { login, registration, logout, generateAccessToken, blockUser, listUsers, confirm } = require('../controllers/user.controller')
+const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm } = require('../controllers/user.controller')
 const upload = require('../utils/uploadFileMulter')
 const passport = require("passport")
 const route = express.Router();
@@ -27,7 +27,7 @@ route.get('/admin', passport.authenticate('jwt', { session: false }), inRole(ROL
 })
 
 //private ressource based on role 
-route.delete('/deleteUser', passport.authenticate('jwt', { session: false }), inRole(ROLES.ADMIN), blockUser)
+route.delete('/suspend', passport.authenticate('jwt', { session: false }), inRole(ROLES.ADMIN), suspend)
 
 //private ressource based on role 
 route.get('/list', passport.authenticate('jwt', { session: false }), inRole(ROLES.ADMIN), listUsers)
@@ -37,6 +37,15 @@ route.get('/user', passport.authenticate('jwt', { session: false }), inRole(ROLE
 
     res.send("user")
 })
+
+
+
+
+route.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
+route.get('/auth/google/redirect', passport.authenticate('google', { session: false, failureRedirect: `https://localhost:5000/login` }), (req, res) => {
+    //console.log(req.user);
+    res.redirect(req.user); //req.user has the redirection_url
+});
 
 
 module.exports = route

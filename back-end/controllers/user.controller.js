@@ -11,7 +11,7 @@ const path = require('path');
 let refreshTokens = [];
 // method that contain all of the process of registration
 const registration = async (req, res) => {
-    console.log(req.file);
+    // console.log(req.file);
     const { errors, isValid } = validationRegister(req.body)
 
     if (!isValid) {
@@ -33,7 +33,10 @@ const registration = async (req, res) => {
 
                         data: fs.readFileSync(path.join(__dirname, '../uploads/' + req.files[0].filename)),
                         contentType: 'image/jpg || image/png'
-                    }
+                    },
+                    birthDate: req.body.birthDate,
+                    country: req.body.country,
+                    state: req.body.state,
                 });
 
                 bcrypt.genSalt(10, (err, salt) => {
@@ -55,7 +58,7 @@ const registration = async (req, res) => {
                                     , (err, token) => {
                                         if (err)
                                             throw err
-                                        console.log(JSON.stringify(u._id));
+                                        //console.log(JSON.stringify(u._id));
                                         mailer(u).catch(err => console.log(err))
                                         res.status(200).json({ msg: 'user added successfully', token: token })
 
@@ -84,7 +87,7 @@ const login = async (req, res) => {
         return res.status(400).json({ error: errors })
     } else {
         const userfounded = await User.find({ email: email })
-        console.log(`line 87 : ${userfounded}`);
+        // console.log(`line 87 : ${userfounded}`);
         if (!userfounded || userfounded[0].enable == 0 && userfounded[0].confirm == 1) {
             return res.status(400).json({ error: "Invalid credentials" })
         }
@@ -188,7 +191,7 @@ const logout = (req, res) => {
 
 
 
-const blockUser = (req, res) => {
+const suspend = (req, res) => {
     console.log(req.body.email);
     if (!req.body.email) {
         return res.status(400).json({ msg: "invalid email" })
@@ -222,7 +225,8 @@ const confirm = (req, res) => {
 }
 
 
-module.exports = { registration, login, logout, generateAccessToken, blockUser, listUsers, confirm };
+
+module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens };
 
 
 
