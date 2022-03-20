@@ -1,7 +1,7 @@
 
 
 const express = require('express');
-const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm } = require('../controllers/user.controller')
+const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode } = require('../controllers/user.controller')
 const upload = require('../utils/uploadFileMulter')
 const passport = require("passport")
 const route = express.Router();
@@ -32,20 +32,34 @@ route.delete('/suspend', passport.authenticate('jwt', { session: false }), inRol
 //private ressource based on role 
 route.get('/list', passport.authenticate('jwt', { session: false }), inRole(ROLES.ADMIN), listUsers)
 
-//private ressource based on role 
-route.get('/user', passport.authenticate('jwt', { session: false }), inRole(ROLES.USER), (req, res) => {
-
-    res.send("user")
-})
 
 
 
 
+//change forgetten password 
+route.post('/sendVerifCode', sendCode)
+route.post('/updatePassword', verifCode, updatePassword)
+
+// route.get("/test", (req, res, next) => {
+//     console.log("first middleware");
+//     req.var1 = "hello"
+//     next()
+// }, (req, res, next) => {
+//     req.var2 = "world"
+//     console.log("second middleware");
+//     next()
+
+// }, (req, res, next) => {
+//     console.log("third middleware");
+//     console.log(req.var1);
+//     console.log(req.var2);
+// })
+// google auth
 route.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
 route.get('/auth/google/redirect', passport.authenticate('google',
     { session: false, failureRedirect: `https://localhost:5000/login` }), (req, res) => {
         //console.log(req.user);
-        res.redirect(req.user); //req.user has the redirection_url
+        res.status(200).redirect(req.user); //req.user has the redirection_url
     });
 
 

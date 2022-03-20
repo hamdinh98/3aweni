@@ -1,7 +1,12 @@
 const nodemailer = require("nodemailer");
 
 // async..await is not allowed in global scope, must use a wrapper
-module.exports = async function main(receiver) {
+
+// NOTICE : 
+// mode : if true => email for registration 
+// mode : if false => email for verification identiy for changing the forgetten password  
+
+module.exports = async function main(receiver, mode, code) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -17,14 +22,26 @@ module.exports = async function main(receiver) {
         },
     });
 
+    let info;
+
+    if (mode) {
+        info = await transporter.sendMail({
+            from: '"aweni" <noreply@example.com>',
+            to: receiver.email, // list of receivers
+            subject: "Hello ✔", // Subject line
+            text: "thank you for registration", // plain text body
+            html: `<b>thank you for registration ${receiver.name}<br/><a href='http://localhost:5000/confirm/${receiver._id}'>confirm</a></b>`, // html body
+        });
+
+    } else {
+        info = await transporter.sendMail({
+            from: '"aweni" <noreply@example.com>',
+            to: receiver.email, // list of receivers
+            subject: "verifying identity", // Subject line
+            html: `<p>if you want to change your forgetten password you must to verifie your identity using this code below<br /><strong>${code}</strong></p><br /> This code is available for 20min`, // html body
+        });
+    }
     // send mail with defined transport object
-    let info = await transporter.sendMail({
-        from: '"aweni" <noreply@example.com>',
-        to: receiver.email, // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "thank you for registration", // plain text body
-        html: `<b>thank you for registration<br/><a href='http://localhost:5000/confirm/${receiver._id}'>confirm</a></b>`, // html body
-    });
 
     console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>

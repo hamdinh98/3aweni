@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs')
 const JWT = require('jsonwebtoken')
 const mailer = require('../utils/mailer');
 const fs = require('fs');
+const Validator = require("validator");
 const path = require('path');
 const FormatDate = require('../utils/DateFormat');
 
@@ -42,7 +43,7 @@ const registration = async (req, res) => {
                     country: req.body.country,
                     state: req.body.state,
                 });
-                FormatDate(newUser.birthDate);
+                // FormatDate(newUser.birthDate);
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if (err) {
@@ -63,7 +64,7 @@ const registration = async (req, res) => {
                                         if (err)
                                             throw err
                                         //console.log(JSON.stringify(u._id));
-                                        mailer(u).catch(err => console.log(err))
+                                        mailer(u, true).catch(err => console.log(err))
                                         res.status(200).json({ msg: 'user added successfully', token: token })
 
                                     });
@@ -222,9 +223,82 @@ const confirm = (req, res) => {
 
 }
 
+// change forgotten password contains 2 method 
+let code
+let user
+const sendCode = (req, res, next) => {
+    // console.log(req.body.email);
+    if (!Validator.isEmail(req.body.email)) {
+        return res.status(400).json({ msg: "invalid email" })
+    }
 
 
-module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens };
+    User.findOne({ email: req.body.email })
+        .then(userData => {
+            if (!userData) {
+                return res.status(404).json({ msg: "user not found please verify your email" })
+            }
+            user = userData
+            code = Math.floor(1000 + Math.random() * 9000)
+
+            //send email contains a verif code 
+            mailer(userData, false, code).catch(err => console.log(err))
+
+            // lifetime of code is 20 min 
+            setTimeout(() => {
+                code = undefined
+                console.log("code value set to undefiend");
+            }, 1.2e+6)
+
+            res.status(200).json({ code: code })
+            next()
+
+        })
+        .catch(err => res.status(500).json({ msg: "something wrong" }))
+}
+const verifCode = (req, res, next) => {
+    console.log(code);
+    if (!req.body.code) {
+        return res.status(400).json({ msg: "please type you code to verify your identity" })
+    }
+
+    if (code == undefined) {
+        return res.status(500).json({ msg: 'code does not match' })
+    }
+    if (req.body.code != code) {
+        return res.status(500).json({ msg: "invalid code" })
+    }
+    next()
+}
+
+
+const updatePassword = (req, res) => {
+
+    console.log(req.body.password);
+    if (!Validator.isLength(req.body.password, { min: 6, max: 30 })) {
+        return res.status(400).json({ msg: "Password must be at least 6 characters" })
+    }
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+            if (err) {
+                throw err
+            }
+            User.updateOne({ email: user.email }, { $set: { password: hash } })
+                .then(result => { res.status(200).json({ msg: "password updated with success" }) })
+                .catch(err => { res.status(500).json({ msg: err }) })
+
+        })
+
+
+    })
+
+
+
+}
+
+
+
+module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens, sendCode, updatePassword, verifCode };
 
 
 
