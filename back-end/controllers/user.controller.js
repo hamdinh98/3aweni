@@ -6,6 +6,7 @@ const JWT = require('jsonwebtoken')
 const mailer = require('../utils/mailer');
 const fs = require('fs');
 const path = require('path');
+const FormatDate = require('../utils/DateFormat');
 
 // this array contains all the refreshTokens provided in the different methods 
 let refreshTokens = [];
@@ -24,21 +25,24 @@ const registration = async (req, res) => {
                 return res.status(400).json({ email: "Email already exists" });
             }
             else {
-                // console.log(req.files);
+                // console.log(req.files[0].filename);
+                console.log(req.body.birthDate);
                 const newUser = new User({
                     name: req.body.name,
                     email: req.body.email,
                     password: req.body.password,
                     img: {
 
-                        data: fs.readFileSync(path.join(__dirname, '../uploads/' + req.files[0].filename)),
-                        contentType: 'image/jpg || image/png'
+                        path: path.join('back-end/uploads/' + req.files[0].filename),
+
+
                     },
                     birthDate: req.body.birthDate,
+                    gender: req.body.gender,
                     country: req.body.country,
                     state: req.body.state,
                 });
-
+                FormatDate(newUser.birthDate);
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if (err) {
@@ -87,10 +91,17 @@ const login = async (req, res) => {
         return res.status(400).json({ error: errors })
     } else {
         const userfounded = await User.find({ email: email })
-        // console.log(`line 87 : ${userfounded}`);
-        if (!userfounded || userfounded[0].enable == 0 && userfounded[0].confirm == 1) {
+        // console.log(` ${userfounded[0].confirm}`);
+        if (!userfounded) {
             return res.status(400).json({ error: "Invalid credentials" })
         }
+        if (userfounded[0].enable == 0) {
+            return res.status(400).json({ error: "this account was suspending by the admin" })
+        }
+        if (userfounded[0].confirm == 0) {
+            return res.status(400).json({ error: "You must confirm your account check your email please !" })
+        }
+
         let isMatch = await bcrypt.compare(password, userfounded[0].password)
 
         if (!isMatch) {
@@ -186,11 +197,6 @@ const logout = (req, res) => {
 
 }
 
-
-
-
-
-
 const suspend = (req, res) => {
     console.log(req.body.email);
     if (!req.body.email) {
@@ -199,11 +205,6 @@ const suspend = (req, res) => {
     User.updateOne({ email: String(req.body.email) }, { $set: { enable: 0 } }).then(result => res.status(200).json({ msg: result })).catch(err => res.status(500).json({ msg: err }))
 
 }
-
-
-
-
-
 
 const listUsers = async (req, res) => {
 
@@ -214,13 +215,10 @@ const listUsers = async (req, res) => {
     return res.status(200).json({ msg: List })
 }
 
-
-
-
 const confirm = (req, res) => {
 
 
-    User.updateOne({ _id: String(req.params.id) }, { $set: { confirm: 1 } }).then(result => res.status(200).json({ msg: result })).catch(err => res.status(500).json({ msg: err }))
+    User.updateOne({ _id: String(req.params.id) }, { $set: { confirm: 1 } }).then(result => res.status(200).json({ msg: "confirmed" })).catch(err => res.status(500).json({ msg: "something is wrong !" }))
 
 }
 

@@ -32,6 +32,7 @@
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",
+    "request": "^2.88.2",
     "validation": "^0.0.1"
   }
 }

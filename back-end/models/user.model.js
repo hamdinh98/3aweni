@@ -10,27 +10,31 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
+
     },
     password: {
         type: String,
         required: true
+
     },
     birthDate: {
         type: Date,
-
+        required: true
     },
     country: {
         type: String,
+        required: true
 
     },
     state: {
         type: String,
+        required: true
 
     },
     img:
     {
-        data: Buffer,
-        contentType: String,
+        path: String,
+
 
     },
 
@@ -50,6 +54,10 @@ const userSchema = new mongoose.Schema({
         enum: ['USER', 'ADMIN'],
         default: 'USER'
     },
+    gender: {
+        type: String,
+        enum: ['male', 'female']
+    }
 },
     {
         timestamps: true,
