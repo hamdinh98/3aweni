@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config()
+// ajouter url de DB dans le fichier .env que vous devez créer 
 const dbURL = process.env.DB_URL
 
 const connectDB = async () => {
