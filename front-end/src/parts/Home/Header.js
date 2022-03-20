@@ -6,19 +6,23 @@ import Preloader from "../../components/Home/Preloader"
 const Header = () => {
     return (
         <header
-            className="site-header sticky-header d-none d-lg-block topbar-transparent transparent-header header-sticky___">
+            className="site-header sticky-header topbar-transparent transparent-header header-sticky  ">
             <div className="navbar-wrapper">
 
                 <div className="container">
 
                     <div className="navbar-inner">
 
-                        <div className="site-logo"><a href="index.html"><img src="/assets/img/logo/3aweni.png" alt="Funden" /></a>
+                        <div className="site-logo"><a href="index.html"><img src="/assets/img/logo" alt="Funden" /></a>
                         </div>
 
                         <NavbarMenu />
-                        <Login />
-                        <SignUp />
+                        <div className="d-flex justify-content-around">
+                            <Login />
+                            <SignUp />
+
+
+                        </div>
 
                     </div>
                 </div>

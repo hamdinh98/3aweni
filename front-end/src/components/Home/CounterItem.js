@@ -1,7 +1,7 @@
 
 
 
-const CounterItem = (props) => {
+const CounterItem = () => {
 
     return (
         <div className="col-xl-auto col-lg-5 col-md-5 col-sm-6">

@@ -9,7 +9,7 @@ const ProjectCard = () => {
 
     return (
         <div className="col-lg-4 col-md-6 col-sm-10">
-            <div className="project-item mb-30">
+            <div className="project-item mb-3">
                 <img src="/assets/img/project/02.jpg" className="img-card" />
                 <div className="content">
                     <div className="cats">
@@ -21,7 +21,6 @@ const ProjectCard = () => {
                     <h5 className="title"><TitleProject /></h5>
 
                     <div className="project-stats">
-
                         <ProgressBar />
                     </div>
                     <ReleaseDate />

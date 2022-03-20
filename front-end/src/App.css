@@ -42,5 +42,72 @@
 .img-card
 {
         width: 100%;
+        
         object-fit: contain;
 }
+
+.slick-track 
+{
+
+    width:"460%";left:"-100%"
+}
+
+.col
+{
+    width:"100%";display:"inline-block"
+}
+
+.slick-slide
+{
+    width:"4.3478260869565215%"
+}
+
+
+
+/* login page */
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background-image: url("/public/assets/img/goal/01.jpg");
+
+    background-size:100% 100%;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #12cef0, #36d851, #74f069, #118302);
+  
+   
+  }
+  
+  @media (min-width: 768px) {
+    .gradient-form {
+      height: 100vh !important;
+    }
+  }
+  @media (min-width: 769px) {
+    .gradient-custom-2 {
+      border-top-right-radius: .3rem;
+      border-bottom-right-radius: .3rem;
+    }
+  }
+.login-section
+{
+    background-color: #eee;
+}
+
+.imgLogin
+{
+    width: 80%;
+
+}
+
+.goalPic
+{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+/*registration form */
+
+
