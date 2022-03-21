@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+
 
     },
     birthDate: {
@@ -23,12 +23,12 @@ const userSchema = new mongoose.Schema({
     },
     country: {
         type: String,
-        required: true
+
 
     },
     state: {
         type: String,
-        required: true
+
 
     },
     img:

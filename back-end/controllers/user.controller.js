@@ -6,7 +6,7 @@ const JWT = require('jsonwebtoken')
 const mailer = require('../utils/mailer');
 const fs = require('fs');
 const Validator = require("validator");
-const path = require('path');
+
 const FormatDate = require('../utils/DateFormat');
 
 // this array contains all the refreshTokens provided in the different methods 
@@ -34,9 +34,7 @@ const registration = async (req, res) => {
                     password: req.body.password,
                     img: {
 
-                        path: path.join('back-end/uploads/' + req.files[0].filename),
-
-
+                        path: '/back-end/uploads/' + req.files[0].filename,
                     },
                     birthDate: req.body.birthDate,
                     gender: req.body.gender,
@@ -213,9 +211,10 @@ const listUsers = async (req, res) => {
     const List = await User.find()
     if (!List)
         return res.status(404).json({ msg: "error when retrieving list of users" })
+
     return res.status(200).json({ msg: List })
 }
-
+//confirm registration 
 const confirm = (req, res) => {
 
 
@@ -223,7 +222,7 @@ const confirm = (req, res) => {
 
 }
 
-// change forgotten password contains 2 method 
+// changing forgotten password contains 3 methods
 let code
 let user
 const sendCode = (req, res, next) => {
@@ -270,8 +269,6 @@ const verifCode = (req, res, next) => {
     }
     next()
 }
-
-
 const updatePassword = (req, res) => {
 
     console.log(req.body.password);
@@ -284,8 +281,8 @@ const updatePassword = (req, res) => {
                 throw err
             }
             User.updateOne({ email: user.email }, { $set: { password: hash } })
-                .then(result => { res.status(200).json({ msg: "password updated with success" }) })
-                .catch(err => { res.status(500).json({ msg: err }) })
+                .then(result => { return res.status(200).json({ msg: "password updated with success" }) })
+                .catch(err => { return res.status(500).json({ msg: err }) })
 
         })
 
@@ -297,8 +294,36 @@ const updatePassword = (req, res) => {
 }
 
 
+//modifie password using the old one 
+const modifiePassword = async (req, res) => {
 
-module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens, sendCode, updatePassword, verifCode };
+    const isMatch = await bcrypt.compare(req.body.oldPassword, req.user.password)
+
+    if (!isMatch)
+        return res.status(404).json({ msg: "invalid password" })
+
+    if (!Validator.isLength(req.body.newPassword, { min: 6, max: 30 })) {
+        return res.status(400).json({ msg: "Password must be at least 6 characters" })
+    }
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.newPassword, salt, (err, hash) => {
+            if (err) {
+                throw err
+            }
+            User.updateOne({ email: req.user.email }, { $set: { password: hash } })
+                .then(result => { return res.status(200).json({ msg: "password updated with success" }) })
+                .catch(err => { return res.status(500).json({ msg: err }) })
+
+        })
+
+
+    })
+
+}
+
+
+
+module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens, sendCode, updatePassword, verifCode, modifiePassword };
 
 
 

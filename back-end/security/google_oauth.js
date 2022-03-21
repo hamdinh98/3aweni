@@ -31,14 +31,13 @@ module.exports = (passport) => {
                         const parsedBody = JSON.parse(body)
                         // console.log(parsedBody.birthdays[0].date);
                         const googleUser = new User({
-                            password: "null",
+
                             enable: 1,
                             confirm: 1,
                             name: profile._json.name,
                             email: profile._json.email,
                             birthDate: `${parsedBody.birthdays[0].date.year}-${parsedBody.birthdays[0].date.month}-${parsedBody.birthdays[0].date.day}`,
-                            country: "UNKOWN",
-                            state: "UNKOWN",
+
                             img:
                             {
                                 path: profile._json.picture,

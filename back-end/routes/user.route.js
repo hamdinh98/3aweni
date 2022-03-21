@@ -1,7 +1,7 @@
 
 
 const express = require('express');
-const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode } = require('../controllers/user.controller')
+const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword } = require('../controllers/user.controller')
 const upload = require('../utils/uploadFileMulter')
 const passport = require("passport")
 const route = express.Router();
@@ -40,20 +40,12 @@ route.get('/list', passport.authenticate('jwt', { session: false }), inRole(ROLE
 route.post('/sendVerifCode', sendCode)
 route.post('/updatePassword', verifCode, updatePassword)
 
-// route.get("/test", (req, res, next) => {
-//     console.log("first middleware");
-//     req.var1 = "hello"
-//     next()
-// }, (req, res, next) => {
-//     req.var2 = "world"
-//     console.log("second middleware");
-//     next()
 
-// }, (req, res, next) => {
-//     console.log("third middleware");
-//     console.log(req.var1);
-//     console.log(req.var2);
-// })
+//modifie password using old one 
+route.put('/modifiePassword', passport.authenticate('jwt', { session: false }), inRole(ROLES.USER), modifiePassword)
+
+
+
 // google auth
 route.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
 route.get('/auth/google/redirect', passport.authenticate('google',
