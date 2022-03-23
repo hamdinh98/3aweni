@@ -11,13 +11,6 @@ module.exports = (passport) => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
         function (accessToken, refreshToken, profile, cb) {
-            ;
-            // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-            //     return cb(err, user);
-
-            // });
-
-            // console.log(profile);
 
 
             request(`https://people.googleapis.com/v1/people/${profile.id}?personFields=birthdays,genders,locations&access_token=${accessToken}`, function (error, response, body) {
@@ -51,7 +44,10 @@ module.exports = (passport) => {
                             if (err) {
                                 return console.log(err);
                             }
-                            return console.log(result);
+                            else {
+                                console.log(result);
+                                cb(undefined, accessToken)
+                            }
 
                         })
 
