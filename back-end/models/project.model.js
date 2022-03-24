@@ -6,17 +6,13 @@ const projectSchema = new mongoose.Schema({
         required: true
     },
 
-    creationDate: {
-        type: Date,
-        default: new Date()
-    },
-
     askedAmount: {
         type: Number,
-        default: 0
+        required: true
     },
 
-    Founder: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    Founder: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    donations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Donation' }]
 
 },
     {
@@ -24,7 +20,6 @@ const projectSchema = new mongoose.Schema({
     }
 )
 
-/*const Project = mongoose.model('Project',projectSchema);
-export default Project;*/
+
 
 module.exports = Project = mongoose.model('Project', projectSchema);

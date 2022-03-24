@@ -61,7 +61,9 @@ const userSchema = new mongoose.Schema({
 
     FoundedProjects: [
         { type: mongoose.Schema.Types.ObjectId, ref: 'Project' }
-    ]
+    ],
+    donations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Donation' }],
+    backedProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }]
 
 },
     {

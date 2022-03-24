@@ -1,7 +1,8 @@
 
 
 const express = require('express');
-const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat } = require('../controllers/user.controller')
+const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword,
+    verifCode, modifiePassword, statusAccounts, genderStat, profile } = require('../controllers/user.controller')
 const upload = require('../utils/uploadFileMulter')
 const passport = require("passport")
 const route = express.Router();
@@ -60,6 +61,8 @@ route.get('/auth/google/redirect', passport.authenticate('google',
 route.get("/enables", statusAccounts)
 route.get("/genderStat", genderStat)
 
+
+route.get("/profile", passport.authenticate('jwt', { session: false }), profile)
 
 module.exports = route
 

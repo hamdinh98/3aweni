@@ -6,7 +6,7 @@ const JWT = require('jsonwebtoken')
 const mailer = require('../utils/mailer');
 const fs = require('fs');
 const Validator = require("validator");
-
+const Project = require('../models/project.model')
 const FormatDate = require('../utils/DateFormat');
 
 // this array contains all the refreshTokens provided in the different methods 
@@ -294,6 +294,7 @@ const updatePassword = (req, res) => {
 }
 
 
+
 //modifie password using the old one 
 const modifiePassword = async (req, res) => {
 
@@ -354,9 +355,16 @@ const genderStat = (req, res) => {
 }
 
 
+const profile = (req, res) => {
+    return res.status(200).json(req.user)
+}
 
 
-module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat };
+
+
+
+
+module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, profile };
 
 
 
