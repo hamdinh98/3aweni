@@ -59,6 +59,10 @@ const userSchema = new mongoose.Schema({
         enum: ['male', 'female']
     },
 
+    FoundedProjects: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'Project' }
+    ]
+
 },
     {
         timestamps: true,
@@ -68,4 +72,4 @@ const userSchema = new mongoose.Schema({
 )
 
 
-module.exports = User = mongoose.model('user', userSchema)
+module.exports = User = mongoose.model('User', userSchema)

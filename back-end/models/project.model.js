@@ -1,29 +1,30 @@
 const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
-        required : true
+        required: true
     },
 
-    creationDate:{
+    creationDate: {
         type: Date,
         default: new Date()
     },
 
-    askedAmount:{
+    askedAmount: {
         type: Number,
-        default:0
-    }
+        default: 0
+    },
 
+    Founder: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 
 },
     {
         timestamps: true,
     }
-    )
+)
 
 /*const Project = mongoose.model('Project',projectSchema);
 export default Project;*/
 
-module.exports = Project = mongoose.model('Project',projectSchema);
+module.exports = Project = mongoose.model('Project', projectSchema);

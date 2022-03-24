@@ -1,6 +1,9 @@
 const express = require('express');
 const route = express.Router();
-const {getProject} = require("../controllers/project.controller");
+const { getProject, AddProject } = require("../controllers/project.controller");
 
-route.get('/project',getProject);
+route.get('/project', getProject);
+
+
+route.post('/addProject/:id', AddProject)
 module.exports = route;
