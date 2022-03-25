@@ -6,6 +6,21 @@ const projectSchema = new mongoose.Schema({
         required: true
     },
 
+    title :{
+        type : String,
+        required:true
+    },
+
+    description :{
+        type : String,
+        required:true
+    },
+
+    enable :{
+        type:Number,
+        default:1
+    },
+
     askedAmount: {
         type: Number,
         required: true

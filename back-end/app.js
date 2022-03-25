@@ -1,9 +1,11 @@
 const express = require('express');
 const connectDB = require('./config/db');
-const bodyParser = require('body-parser')
-const userRoute = require('./routes/user.route')
-const projectRoute = require('./routes/project.route')
-const badgeCategoryRoute = require('./routes/badgeCategory.route')
+const bodyParser = require('body-parser');
+const userRoute = require('./routes/user.route');
+const projectRoute = require('./routes/project.route');
+const incomeRoute = require('./routes/income.route');
+const expensesRoute = require ('./routes/expenses.route');
+const badgeCategoryRoute = require('./routes/badgeCategory.route');
 const cors = require('cors')
 const app = express();
 const passport = require('passport')
@@ -22,6 +24,8 @@ app.use(userRoute);
 app.use(passport.initialize())
 app.use(projectRoute);
 app.use(badgeCategoryRoute);
+app.use(incomeRoute);
+app.use(expensesRoute);
 require('./security/passport')(passport)
 require('./security/google_oauth')(passport)
 // parse application/json
