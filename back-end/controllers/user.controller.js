@@ -9,10 +9,15 @@ const Validator = require("validator");
 const Project = require('../models/project.model')
 const FormatDate = require('../utils/DateFormat');
 
+
+
+
 // this array contains all the refreshTokens provided in the different methods 
 let refreshTokens = [];
+
+
 // method that contain all of the process of registration
-const registration = async (req, res) => {
+const registration = (req, res) => {
     // console.log(req.file);
     const { errors, isValid } = validationRegister(req.body)
 
@@ -40,6 +45,7 @@ const registration = async (req, res) => {
                     gender: req.body.gender,
                     country: req.body.country,
                     state: req.body.state,
+                    phone: req.body.phone
                 });
                 // FormatDate(newUser.birthDate);
                 bcrypt.genSalt(10, (err, salt) => {
@@ -49,23 +55,20 @@ const registration = async (req, res) => {
                         }
                         newUser.password = hash;
                         User.create(newUser)
-                            .then(u => {
-                                JWT.sign(
-                                    { user: u.email }
-                                    ,
-                                    process.env.ACCESS_TOKEN_SECRET,
-                                    {
-                                        expiresIn: '10s',
-                                        algorithm: 'HS256'
-                                    }
-                                    , (err, token) => {
-                                        if (err)
-                                            throw err
-                                        //console.log(JSON.stringify(u._id));
-                                        mailer(u, true).catch(err => console.log(err))
-                                        res.status(200).json({ msg: 'user added successfully', token: token })
+                            .then(async u => {
+                                const accessToken = await JWT.sign({ user: u.email }, process.env.ACCESS_TOKEN_SECRET, {
+                                    expiresIn: '15', algorithm: 'HS256'
+                                })
+                                const refreshToken = await JWT.sign({ user: u.email }, process.env.REFRESH_TOKEN_SECRET, {
+                                    expiresIn: '2h', algorithm: 'HS256'
+                                })
+                                refreshTokens.push(refreshToken)
 
-                                    });
+                                // console.log(refreshTokens);
+                                res.status(200).json({
+                                    accessToken,
+                                    refreshToken,
+                                });
                             })
 
                     })
@@ -106,6 +109,7 @@ const login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ msg: "password invalid" })
         }
+        verifLogin(userfounded[0]);
         const accessToken = await JWT.sign(
             {
                 email: userfounded[0].email,
@@ -113,18 +117,18 @@ const login = async (req, res) => {
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "1h",
+                expiresIn: "15",
             }
         );
 
-        // Refresh token
         const refreshToken = await JWT.sign(
             { email: email },
             process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "1d",
+                expiresIn: "1h",
             }
         );
+
 
         // Set refersh token in refreshTokens array
         refreshTokens.push(refreshToken);
@@ -133,7 +137,7 @@ const login = async (req, res) => {
             accessToken,
             refreshToken,
         });
-        console.log(refreshTokens);
+        // console.log(refreshTokens);
     }
 
 }
@@ -189,7 +193,7 @@ const generateAccessToken = async (req, res) => {
 
 
 const logout = (req, res) => {
-    const refreshToken = req.header("x-auth-token");
+    const refreshToken = req.header("refresh-token");
     refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
     res.status(204).json({ msg: "logout successfully" });
     console.log(refreshTokens);

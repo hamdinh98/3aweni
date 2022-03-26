@@ -6,7 +6,6 @@ const ProjectsList = () => {
 
     return (
         <div>
-
             <PageTitle />
             <section className="project-section section-gap-extra-bottom primary-soft-bg">
 
@@ -17,7 +16,6 @@ const ProjectsList = () => {
                         <ProjectCard />
                         <ProjectCard />
                         <ProjectCard />
-
                     </div>
                 </div>
             </section>

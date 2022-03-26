@@ -3,7 +3,7 @@
 const Discussion = () => {
 
     return (
-        <div className="tab-pane fade" id="contact-03" role="tabpanel" aria-labelledby="contact2-tab">
+        <div className=" mx-3" >
             <div className="row">
                 <div className="col-xl-10">
                     <div className="review-box pt-50">

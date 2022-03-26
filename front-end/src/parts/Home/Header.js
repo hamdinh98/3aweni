@@ -4,9 +4,10 @@ import Login from "../../components/Home/LoginButton"
 import SignUp from "../../components/Home/SignupButton"
 import Preloader from "../../components/Home/Preloader"
 const Header = () => {
-    return (
+    return (<div>
+
         <header
-            className="site-header sticky-header topbar-transparent transparent-header header-sticky  ">
+            className=" mx-5   ">
             <div className="navbar-wrapper">
 
                 <div className="container">
@@ -28,6 +29,8 @@ const Header = () => {
                 </div>
             </div>
         </header>
+
+    </div>
 
 
     )

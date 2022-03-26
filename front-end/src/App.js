@@ -6,29 +6,30 @@ import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 import Header from './parts/Home/Header';
 import Footer from './parts/Home/Footer';
-import ProjectCard from './parts/ProjectsList/ProjectCard';
 import ProjectsList from './pages/ProjectsList';
 import AboutUs from './pages/AboutUs';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import NotFound404 from './pages/NotFound404';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
+export default function App() {
 
-
-export default class App extends React.Component {
-    render() {
-        return (
-            <div>
-
-                {/* <ProjectDetails /> */}
-                {/* <Home /> */}
-                {/* <AboutUs /> */}
-
-                <ProjectsList />
-                {/* <Login /> */}
-                {/* <Registration /> */}
-
-            </div>
-        )
-    }
+    return (
+        <BrowserRouter>
+            <Header />
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/about' element={<AboutUs />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/projectDetails/*' element={<ProjectDetails />} />
+                <Route path='/ProjectsList' element={<ProjectsList />} />
+                <Route path='/Registration' element={<Registration />} />
+                <Route path='*' element={<NotFound404 />} />
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+    )
 }
+
 
