@@ -4,18 +4,13 @@
 const CategorieCard = (props) => {
 
     return (
-        <div className="col-xl-4 col-md-6 col-sm-10 wow fadeInUp" data-wow-delay="0s">
-
-            <div className="fancy-box-item mt-30">
-
-                <div className="icon"><i className="flaticon-reading-book"></i>
+        <div class="col-xl-2 col-lg-4 col-md-4 custom-col wow fadeInUp2 animated" data-wow-delay='.1s'>
+            <div class="features white-bg pos-rel text-center mb-30">
+                <div class="features__icon mb-20">
+                    <i class="flaticon-dish"></i>
                 </div>
-
-                <div className="content">
-                    <h4 className="title"><a href="project-details">{props.value}</a></h4>
-                </div>
+                <h6><a href="about.html">{props.value}</a></h6>
             </div>
-
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { useState } from "react"
+
 import CategorieCard from "../../components/Home/CategorieCard"
 
 
@@ -21,39 +21,28 @@ const PopularCategories = () => {
 
 
     return (
-        <section className="popular-categories section-gap">
-
-            <div className="container">
-
-                <div className="categories-header">
-
-                    <div className="row align-items-center justify-content-between">
-
-                        <div className="col-auto">
-
-                            <div className="common-heading mb-30">
-
-                                <span className="tagline"><i className="fas fa-plus"></i> what we do
-
-                                    <span className="heading-shadow-text">Category
-                                    </span>
-                                </span>
-                                <h2 className="title">Popular Categories</h2>
-                            </div>
-                        </div>
-
-                        <div className="col-auto"><a className="main-btn mb-30" href="project-1">View All Category <i
-                            className="far fa-angle-right"></i></a>
+        <section class="feature-area grey-bg pos-rel pt-130 pb-100">
+            <div class="round-shape">
+                <img src="/assets/img/shape/01.png" alt="" />
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1 wow fadeInUp2 animated" data-wow-delay='.1s'>
+                        <div class="section-title text-center mb-85">
+                            <h6 class="left-line pl-75 pr-75">Features Categories</h6>
+                            <h2>Explore Our Crowd Founding <br />
+                                <span>Features Categories</span></h2>
                         </div>
                     </div>
                 </div>
 
-                <div className="row justify-content-center fancy-icon-boxes">
-                    {cards}
+                <div class="row justify-content-lg-between">
 
+                    {cards}
                 </div>
             </div>
         </section>
+
     )
 }
 

@@ -106,8 +106,26 @@
 }
 
 
-
+/*header */
+header
+{
+  background-image: url("/public/assets/img/bg/07.png");
+}
 
 /*registration form */
 
 
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+  }
+  .card-registration .select-arrow {
+    top: 13px;
+  }
+
+  .registration-form
+  {
+      background-image: url("/public/assets/img/bg/03.jpg");
+  }

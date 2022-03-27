@@ -2,7 +2,10 @@
 
 const Footer = () => {
 
-    return (
+    return (<div>
+        <br />
+        <br />
+        <br />
         <footer className="site-footer ">
 
             <div className="footer-content-area">
@@ -132,6 +135,7 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
+    </div>
     )
 }
 
