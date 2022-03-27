@@ -1,9 +1,6 @@
 
 
-.main-btn
-{
-    background-color: coral;
-}
+
 
 
 .page-title-area 
@@ -84,8 +81,8 @@
   }
   @media (min-width: 769px) {
     .gradient-custom-2 {
-      border-top-right-radius: .3rem;
-      border-bottom-right-radius: .3rem;
+      border-top-right-radius: .1rem;
+      border-bottom-right-radius: .1rem;
     }
   }
 .login-section
@@ -128,4 +125,19 @@ header
   .registration-form
   {
       background-image: url("/public/assets/img/bg/03.jpg");
-  }
+    }
+    
+    /*Login form*/
+    
+    
+    .login-section
+    {
+  background-image: url("/public/assets/img/bg/03.jpg");
+
+}
+
+
+
+
+/*Not found 404*/
+

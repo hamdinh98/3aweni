@@ -9,7 +9,7 @@ const Validator = require("validator");
 const Project = require('../models/project.model')
 const FormatDate = require('../utils/DateFormat');
 
-
+const Donation = require('../models/donation.model')
 
 
 // this array contains all the refreshTokens provided in the different methods 
@@ -109,7 +109,7 @@ const login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ msg: "password invalid" })
         }
-        verifLogin(userfounded[0]);
+
         const accessToken = await JWT.sign(
             {
                 email: userfounded[0].email,
@@ -117,7 +117,7 @@ const login = async (req, res) => {
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "15",
+                expiresIn: "1h",
             }
         );
 
@@ -125,7 +125,7 @@ const login = async (req, res) => {
             { email: email },
             process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "1h",
+                expiresIn: "2h",
             }
         );
 
@@ -363,12 +363,32 @@ const profile = (req, res) => {
     return res.status(200).json(req.user)
 }
 
+// as a donor, i can see statistics about my spending and the number of projects i backed 
+
+const totalMoneyBacked = (req, res) => {
+    Donation.find({
+        '_id': req.user.donations
+    }, { _id: 0, Money: 1 }, function (err, docs) {
+        if (err)
+            return res.status(500).json(err)
+
+        var total = 0;
+        for (let i = 0; i < docs.length; i++) {
+            total += docs[i].Money
+        }
+        return res.status(200).json({ total: total })
+    });
+
+}
 
 
 
 
 
-module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, profile };
+
+
+
+module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, refreshTokens, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, profile, totalMoneyBacked };
 
 
 

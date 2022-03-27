@@ -2,27 +2,25 @@ import NavbarMenu from "../../components/Home/NavbarMenu"
 
 import Login from "../../components/Home/LoginButton"
 import SignUp from "../../components/Home/SignupButton"
-import Preloader from "../../components/Home/Preloader"
+import { Link } from "react-router-dom"
 const Header = () => {
-    return (<div>
+    return (
 
         <header
-            className=" mx-5   ">
+            className=" mx-5  ">
             <div className="navbar-wrapper">
 
                 <div className="container">
 
-                    <div className="navbar-inner">
+                    <div className="navbar navbar-light">
 
-                        <div className="site-logo"><a href="index.html"><img src="/assets/img/logo" alt="Funden" /></a>
+                        <div className="site-logo"><Link to="/"><img src="/assets/img/logo" alt="Funden" /></Link>
                         </div>
 
                         <NavbarMenu />
-                        <div className="d-flex justify-content-around">
+                        <div className="d-flex justify-content-end">
                             <Login />
                             <SignUp />
-
-
                         </div>
 
                     </div>
@@ -30,7 +28,7 @@ const Header = () => {
             </div>
         </header>
 
-    </div>
+
 
 
     )
@@ -38,3 +36,4 @@ const Header = () => {
 
 
 export default Header
+

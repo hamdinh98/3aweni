@@ -6,6 +6,8 @@ const Footer = () => {
         <br />
         <br />
         <br />
+        <br />
+
         <footer className="site-footer ">
 
             <div className="footer-content-area">

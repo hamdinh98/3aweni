@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword,
-    verifCode, modifiePassword, statusAccounts, genderStat, profile } = require('../controllers/user.controller')
+    verifCode, modifiePassword, statusAccounts, genderStat, profile, totalMoneyBacked } = require('../controllers/user.controller')
 const upload = require('../utils/uploadFileMulter')
 const passport = require("passport")
 const route = express.Router();
@@ -63,6 +63,8 @@ route.get("/genderStat", genderStat)
 
 
 route.get("/profile", passport.authenticate('jwt', { session: false }), profile)
+
+route.get("/totalMoneyBacked", passport.authenticate('jwt', { session: false }), totalMoneyBacked)
 
 module.exports = route
 
