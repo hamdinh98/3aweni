@@ -112,4 +112,34 @@ const getFundingProgress= async (req,res)=>{
 }
 
 
-module.exports = { getProject, AddProject, donateToProject, deleteProject, getFundingProgress};
+const getDonationTrendByMonth= async (req,res)=>{
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required");
+
+   const dons = await Donation.aggregate([
+
+       { $match: { "Project":  mongoose.Types.ObjectId(req.params.idProjet) } },
+
+       { $group: {
+
+                _id:
+                    {
+                        month:{
+                            $month: '$createdAt'
+                        }
+                    },
+
+               somme:{
+                   $sum:'$Money'
+               }
+        }
+
+        }
+    ])
+console.log (dons)
+
+
+}
+
+
+module.exports = { getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth};
