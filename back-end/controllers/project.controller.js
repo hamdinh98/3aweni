@@ -136,10 +136,51 @@ const getDonationTrendByMonth= async (req,res)=>{
 
         }
     ])
-console.log (dons)
+//console.log (dons)
+
+    return res.status(200).json(dons);
 
 
 }
 
 
-module.exports = { getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth};
+const getListOfBackers= async (req,res)=>{
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required");
+
+     Donation.aggregate([
+
+        { $match: { "Project":  mongoose.Types.ObjectId(req.params.idProjet) } },
+
+
+
+        { $group: {
+
+                _id:
+                    {
+                        Backer: '$Backer'
+                    },
+
+                somme:{
+                    $sum:'$Money'
+                }
+            }
+
+        }
+    ]).then(dons=>{
+        const testTab = dons.map (async user=>{
+            return await User.findById(user._id.Backer,{_id:0,name:1});
+        })
+         dons._id.Backer= {}
+     }
+
+    )
+
+
+    return res.status(200).json(dons);
+
+
+}
+
+
+module.exports = { getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth,getListOfBackers};
