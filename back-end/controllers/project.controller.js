@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user.model')
 const Donation = require("../models/donation.model");
 const Ledger = require('../models/LedgerBook.model');
+const {login} = require("./user.controller");
 const getProject = async (req, res) => {
 
         try{
@@ -151,9 +152,6 @@ const getListOfBackers= async (req,res)=>{
      Donation.aggregate([
 
         { $match: { "Project":  mongoose.Types.ObjectId(req.params.idProjet) } },
-
-
-
         { $group: {
 
                 _id:
@@ -162,22 +160,30 @@ const getListOfBackers= async (req,res)=>{
                     },
 
                 somme:{
-                    $sum:'$Money'
+                    $sum: '$Money'
                 }
             }
 
         }
     ]).then(dons=>{
-        const testTab = dons.map (async user=>{
-            return await User.findById(user._id.Backer,{_id:0,name:1});
-        })
-         dons._id.Backer= {}
+        // dons yraja3 feha s7i7a w ne9ssa les nom
+        return  res.status(200).json(dons)
+     /*  const result =  dons.map (async user=>{
+              const fullName =await User.findOne({_id:user._id.Backer},{_id:0,name:1});
+          // console.log(fullName)
+              return {
+                  ...user,
+                  name: fullName
+              }
+        })*/
+
+
      }
 
     )
 
 
-    return res.status(200).json(dons);
+
 
 
 }
