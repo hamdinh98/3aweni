@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose');
-
+const findOrCreate = require('mongoose-findorcreate')
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -38,8 +38,6 @@ const userSchema = new mongoose.Schema({
     img:
     {
         path: String,
-
-
     },
 
     enable: {
@@ -77,5 +75,5 @@ const userSchema = new mongoose.Schema({
 
 )
 
-
+userSchema.plugin(findOrCreate)
 module.exports = User = mongoose.model('User', userSchema)

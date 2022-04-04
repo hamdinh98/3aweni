@@ -65,6 +65,7 @@ const registration = (req, res) => {
                                 refreshTokens.push(refreshToken)
 
                                 // console.log(refreshTokens);
+                                mailer(u)
                                 res.status(200).json({
                                     accessToken,
                                     refreshToken,
@@ -212,7 +213,7 @@ const suspend = (req, res) => {
 const listUsers = async (req, res) => {
 
 
-    const List = await User.find()
+    const List = await User.find({}, { _id: 0, confirm: 0, enable: 0, Role: 0 })
     if (!List)
         return res.status(404).json({ msg: "error when retrieving list of users" })
 
