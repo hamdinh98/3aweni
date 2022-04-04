@@ -3,9 +3,10 @@ const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
 const userRoute = require('./routes/user.route');
 const projectRoute = require('./routes/project.route');
-const incomeRoute = require('./routes/income.route');
-const expensesRoute = require('./routes/expenses.route');
+
+
 const badgeCategoryRoute = require('./routes/badgeCategory.route');
+const ledgerBookRoute = require('./routes/LedgerBook.route');
 const cors = require('cors')
 const app = express();
 const passport = require('passport')
@@ -25,8 +26,7 @@ app.use(passport.initialize())
 
 app.use(projectRoute);
 app.use(badgeCategoryRoute);
-app.use(incomeRoute);
-app.use(expensesRoute);
+app.use(ledgerBookRoute);
 require('./security/passport')(passport)
 require('./security/google_oauth')(passport)
 // parse application/json

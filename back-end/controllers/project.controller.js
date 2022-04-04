@@ -1,14 +1,19 @@
 
-
-
 const Project = require('../models/project.model');
 const mongoose = require('mongoose')
 const User = require('../models/user.model')
-const Donation = require("../models/donation.model")
-const getProject = (req, res) => {
-        // res.send('post works');
+const Donation = require("../models/donation.model");
+const Ledger = require('../models/LedgerBook.model');
+const {login} = require("./user.controller");
+const getProject = async (req, res) => {
 
-        return res.status(200).json({ msg: "it works" })
+        try{
+                const projects = await Project.find();
+                res.status(200).json(projects);
+        }
+        catch (error) {
+                res.status(404).json({message:error.message});
+        }
 }
 
 
@@ -27,6 +32,7 @@ const AddProject = (req, res) => {
                         return res.status(201).json({ project: project })
                 })
                 .catch(err => { return res.status(500).json({ err: err }) })
+
 }
 
 // to donate to project user must be logged in 
@@ -63,6 +69,124 @@ const donateToProject = (req, res) => {
 }
 
 
+const deleteProject = (req,res)=>{
+    if (!req.params.idProjet)
+         return res.status(400).json("_id project required");
+
+    Project.findByIdAndDelete(req.params.idProjet,(error,result)=>{
+            if(error){
+                    return res.status(500).json(error);
+            }
+           Ledger.findByIdAndDelete(result.hasLedger)
+               .then(result2=>{
+                       return res.status(200).json("project deleted successfully")
+
+               })
+               .catch(error=>{
+                       return res.status(500).json(error);
+               })
+
+    })
+}
+
+const getFundingProgress= async (req,res)=>{
+    if (!req.params.idProjet)
+         return res.status(400).json("_id project required");
+
+    const {donations,askedAmount} = await Project.findById(req.params.idProjet,{
+            _id:0,
+            donations:1,
+            askedAmount:1
+    });
+
+    let sum=0;
+
+    for (let i=0;i<donations.length;i++)
+    {
+            const dont = await Donation.findById(donations[i],{_id:0,Money:1})
+            sum+=dont.Money;
+
+    }
+        console.log(askedAmount);
+
+    return res.status(200).json({progress : `${(sum/askedAmount)*100} %`} )
+}
 
 
-module.exports = { getProject, AddProject, donateToProject };
+const getDonationTrendByMonth= async (req,res)=>{
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required");
+
+   const dons = await Donation.aggregate([
+
+       { $match: { "Project":  mongoose.Types.ObjectId(req.params.idProjet) } },
+
+       { $group: {
+
+                _id:
+                    {
+                        month:{
+                            $month: '$createdAt'
+                        }
+                    },
+
+               somme:{
+                   $sum:'$Money'
+               }
+        }
+
+        }
+    ])
+//console.log (dons)
+
+    return res.status(200).json(dons);
+
+
+}
+
+
+const getListOfBackers= async (req,res)=>{
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required");
+
+     Donation.aggregate([
+
+        { $match: { "Project":  mongoose.Types.ObjectId(req.params.idProjet) } },
+        { $group: {
+
+                _id:
+                    {
+                        Backer: '$Backer'
+                    },
+
+                somme:{
+                    $sum: '$Money'
+                }
+            }
+
+        }
+    ]).then(dons=>{
+        // dons yraja3 feha s7i7a w ne9ssa les nom
+        return  res.status(200).json(dons)
+     /*  const result =  dons.map (async user=>{
+              const fullName =await User.findOne({_id:user._id.Backer},{_id:0,name:1});
+          // console.log(fullName)
+              return {
+                  ...user,
+                  name: fullName
+              }
+        })*/
+
+
+     }
+
+    )
+
+
+
+
+
+}
+
+
+module.exports = { getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth,getListOfBackers};
