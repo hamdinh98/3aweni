@@ -5,7 +5,7 @@ const userRoute = require('./routes/user.route');
 const projectRoute = require('./routes/project.route');
 
 
-const badgeCategoryRoute = require('./routes/badgeCategory.route');
+const badgeCategoryRoute = require('./routes/Badge.route');
 const ledgerBookRoute = require('./routes/LedgerBook.route');
 const cors = require('cors')
 const app = express();

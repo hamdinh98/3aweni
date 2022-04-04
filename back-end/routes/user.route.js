@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword,
-    verifCode, modifiePassword, statusAccounts, genderStat, profile, totalMoneyBacked } = require('../controllers/user.controller')
+    verifCode, modifiePassword, statusAccounts, genderStat, profile, totalMoneyBacked } = require('../controllers/user.controller/user.controller')
 const upload = require('../utils/uploadFileMulter')
 const passport = require("passport")
 const route = express.Router();
