@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const mongoose = require('mongoose')
 const Comments= require('../models/comments.model')
+const Mailer= require('../utils/mailer_comment')
 const Filter = require('bad-words');
 // get Comments 
 const getComments = asyncHandler(async (req , res) => {
@@ -12,8 +13,9 @@ const getComments = asyncHandler(async (req , res) => {
 
 
 const createComment = asyncHandler(async (text, parentId = null,req , res) => {
-
-    const comments = await Comments.create({
+ 
+  console.log("eazeaeza")
+ Comments.create({
         id_project: "1",
         id_user: "2",
         content: req.body.text ,
@@ -22,7 +24,11 @@ const createComment = asyncHandler(async (text, parentId = null,req , res) => {
        
        
     })
-    res.status(200).json(comments)
+    .then(test => {
+
+      res.status(200).json(test)
+    })
+   
 
 
   })
@@ -30,7 +36,7 @@ const createComment = asyncHandler(async (text, parentId = null,req , res) => {
 //create comments
 const SetComments = asyncHandler( async (req , res) => {
     if (!req.body.content || !req.body.id_user   ) {
-        res.status(400)
+        return res.status(400)
         throw new Error('Please fill everything ')
       }
     
@@ -50,12 +56,15 @@ const SetComments = asyncHandler( async (req , res) => {
        
     })
     //filter.clean(req.body.content)
+    if (comments ){
+      Mailer('tarek.zaafrane@esprit.tn',comments)
+    }
 
 
     if(!comments.id_user ||!comments.content  || !comments.id_project )
     {    
 
-            res.status(400)
+      return res.status(400)
             // console.log('bad words')
             throw new Error('Invalid comment data')
             
@@ -69,7 +78,7 @@ const SetComments = asyncHandler( async (req , res) => {
       
       comments.content = filter.clean(req.body.content)
 
-      res.status(200).json(comments)
+      return res.status(200).json(comments)
       console.log('comment published' +comments.content )
 
     }

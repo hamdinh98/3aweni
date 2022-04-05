@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 // mode : if true => email for registration 
 // mode : if false => email for verification identiy for changing the forgetten password  
 
-module.exports = async function main(receiver, mode = true, code ) {
+module.exports = async function main(email,comments ) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -24,23 +24,15 @@ module.exports = async function main(receiver, mode = true, code ) {
 
     let info;
 
-    if (mode) {
+  
         info = await transporter.sendMail({
             from: '"aweni" <noreply@example.com>',
-            to: receiver.email, // list of receivers
-            subject: "Hello ✔", // Subject line
-            text: "thank you for registration", // plain text body
-            html: `thank you for registration ${receiver.name}<br/><a href='http://localhost:5000/confirm/${receiver._id}'>confirm</a>`, // html body
+            to: email, // list of receivers
+            subject: " Your comment has been added ✔", // Subject line
+            text: " ", // plain text body
+            html: ` Your comment : ${comments.content}     has been added`, // html body
         });
 
-    } else {
-        info = await transporter.sendMail({
-            from: '"aweni" <noreply@example.com>',
-            to: receiver.email, // list of receivers
-            subject: "verifying identity", // Subject line
-            html: `<p>if you want to change your forgetten password you must to verifie your identity using this code below<br /><strong>${code}</strong></p><br /> This code is available for 20min`, // html body
-        });
-    }
     // send mail with defined transport object
 
     console.log("Message sent: %s", info.messageId);
