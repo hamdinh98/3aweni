@@ -53,19 +53,32 @@ const donateToProject = (req, res) => {
 
     // console.log(req.user);
     //console.log(req.user._id);
-    Donation.create(req.body).then(donation => {
+    Donation.findOne({Backer:mongoose.Types.ObjectId(req.user._id),Project:mongoose.Types.ObjectId(req.params.idProject)})
+        .then(result=>{
+            if (!result)
+            {
+                Donation.create(req.body).then(donation => {
 
-        // add the _id of donation to founder(user) collection and add the project to the backedProjects List 
-        User.findByIdAndUpdate(req.user._id, { $push: { donations: donation._id, backedProjects: req.params.idProject } })
-            .catch(err => { return res.status(500).json({ msg: "error when updating user collection", err: err }) })
+                    // add the _id of donation to founder(user) collection and add the project to the backedProjects List
+                    User.findByIdAndUpdate(req.user._id, { $push: { donations: donation._id, backedProjects: req.params.idProject } })
+                        .catch(err => { return res.status(500).json({ msg: "error when updating user collection", err: err }) })
 
-        // add the _id of donation to project collection 
-        Project.findByIdAndUpdate(req.params.idProject, { $push: { donations: donation._id } })
-            .catch(err => { return res.status(500).json({ msg: "error when updating project collection", err: err }) })
+                    // add the _id of donation to project collection
+                    Project.findByIdAndUpdate(req.params.idProject, { $push: { donations: donation._id } })
+                        .catch(err => { return res.status(500).json({ msg: "error when updating project collection", err: err }) })
 
-        return res.status(201).json({ donation: donation })
-    }).catch(err => { return res.status(500).json(err) })
+                    return res.status(201).json({ donation: donation })
+                }).catch(err => { return res.status(500).json(err) })
+            }
 
+            else
+            {
+                result.Money+=req.body.Money;
+                Donation.updateOne({_id:result._id}, {Money:result.Money}).then(newResult=>{
+                    return res.status(200).json(newResult)
+                })
+            }
+        })
 
 }
 
@@ -157,42 +170,35 @@ const getListOfBackers = async (req, res) => {
     Donation.aggregate([
 
         { $match: { "Project": mongoose.Types.ObjectId(req.params.idProjet) } },
+
         {
-            $group: {
+            $project:{
+                Backer: '$Backer',
+                Money:'$Money',
 
-                _id:
-                {
-                    Backer: '$Backer'
-                },
-
-                somme: {
-                    $sum: '$Money'
-                }
             }
-
         }
-    ]).then(dons => {
-        // dons yraja3 feha s7i7a w ne9ssa les nom
+
+    ]).then(async dons => {
+
+        for(var i=0;i<dons.length;i++)
+        {
+            const {name} =await User.findOne({_id:dons[i].Backer},{_id:0,name:1});
+            dons [i] ={
+                ...dons[i],
+                name
+            }
+        }
+        //console.log(dons)
         return res.status(200).json(dons)
-        /*  const result =  dons.map (async user=>{
-                 const fullName =await User.findOne({_id:user._id.Backer},{_id:0,name:1});
-             // console.log(fullName)
-                 return {
-                     ...user,
-                     name: fullName
-                 }
-           })*/
 
 
     }
 
     )
 
-
-
-
-
 }
 
+// somme mta3 el money na7iha mel methodes lo5rin w 7otha fil donation (kol user 3andou entré wa7da w dima te7seb total)
 
 module.exports = { getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth, getListOfBackers };
