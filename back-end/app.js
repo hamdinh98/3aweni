@@ -3,8 +3,10 @@ const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
 const userRoute = require('./routes/user.route');
 const projectRoute = require('./routes/project.route');
-const badgeCategoryRoute = require('./routes/badgeCategory.route');
-const ledgerBookRoute = require ('./routes/LedgerBook.route');
+
+
+const badgeCategoryRoute = require('./routes/Badge.route');
+const ledgerBookRoute = require('./routes/LedgerBook.route');
 const cors = require('cors')
 const app = express();
 const passport = require('passport')
@@ -23,6 +25,7 @@ app.use(logger('dev'))
 
 app.use(userRoute);
 app.use(passport.initialize())
+
 app.use(projectRoute);
 app.use(badgeCategoryRoute);
 app.use(ledgerBookRoute);
@@ -34,7 +37,7 @@ app.use('/api/comments',require('./routes/comments.route'))
 require('./security/passport')(passport)
 require('./security/google_oauth')(passport)
 // parse application/json
-app.get('/', (req, res) => res.send('Hello world!'));
+
 
 
 

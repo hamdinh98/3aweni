@@ -1,11 +1,10 @@
 
-
+import { Link } from "react-router-dom"
 
 const SignUp = () => {
-    return (<div className="navbar-extra d-flex align-items-center" ><a
-        className="main-btn nav-btn d-none d-sm-inline-block" href="events" > SignUp </a><a href="#" className="nav-toggler">
-            <span>
-            </span></a>
+    return (<div className="navbar-extra d-flex align-items-center" ><Link className="main-btn nav-btn d-none d-sm-inline-block" to='/registration'>SignUp</Link><a href="#" className="nav-toggler">
+        <span>
+        </span></a>
     </div>)
 }
 

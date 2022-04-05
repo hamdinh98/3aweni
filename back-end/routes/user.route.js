@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { login, registration, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword,
-    verifCode, modifiePassword, statusAccounts, genderStat, profile, totalMoneyBacked } = require('../controllers/user.controller')
+    verifCode, modifiePassword, statusAccounts, genderStat, profile, totalMoneyBacked } = require('../controllers/user.controller/user.controller')
 const upload = require('../utils/uploadFileMulter')
 const passport = require("passport")
 const route = express.Router();
@@ -50,21 +50,26 @@ route.put('/modifiePassword', passport.authenticate('jwt', { session: false }), 
 // google auth
 route.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
 route.get('/auth/google/redirect', passport.authenticate('google',
-    { session: false, failureRedirect: `https://localhost:5000/login` }), (req, res) => {
-        //console.log(req.user);
-        res.status(200).redirect(req.user); //req.user has the redirection_url
-    });
+    { session: false, failureRedirect: `/failure`, successRedirect: "/success" }));
 
+
+route.get('/success', (req, res) => {
+    console.log(req.user);
+    res.status(200).json("successfull login with google")
+})
+route.get('/failure', (req, res) => {
+    res.status(200).json("failure login with google")
+})
 
 //user stat 
 
-route.get("/enables", statusAccounts)
+route.get("/enables", passport.authenticate('jwt', { session: false }), inRole(ROLES.ADMIN), statusAccounts)
 route.get("/genderStat", genderStat)
 
 
-route.get("/profile", passport.authenticate('jwt', { session: false }), profile)
+route.get("/profile", passport.authenticate('jwt', { session: false }), inRole(ROLES.USER), profile)
 
-route.get("/totalMoneyBacked", passport.authenticate('jwt', { session: false }), totalMoneyBacked)
+route.get("/totalMoneyBacked", passport.authenticate('jwt', { session: false }), inRole(ROLES.USER), totalMoneyBacked)
 
 module.exports = route
 

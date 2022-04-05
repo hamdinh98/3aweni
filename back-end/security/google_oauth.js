@@ -11,51 +11,56 @@ module.exports = (passport) => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
         function (accessToken, refreshToken, profile, cb) {
-
-
+            // console.log(`access token : ${accessToken}`);
+            // console.log(refreshToken);
             request(`https://people.googleapis.com/v1/people/${profile.id}?personFields=birthdays,genders,locations&access_token=${accessToken}`, function (error, response, body) {
-                console.error('error:', error); // Print the error if one occurred
-                console.log('statusCode:', response && response.statusCode);
-                console.log('body:', body);
+                // console.error('error:', error); // Print the error if one occurred
+                // console.log('statusCode:', response && response.statusCode);
+                // console.log('body:', body);
 
-                User.findOne({ email: profile._json.email }).then(u => {
-                    if (!u) {
+                // User.findOrCreate(googleUser, (err, result) => {
+                //     if (err)
+                //         cb(err, undefined)
+                //     else {
+                //         console.log({ result, accessToken, refreshToken });
+                //         cb(undefined, result, { accessToken, refreshToken })
+                //     }
 
-                        const parsedBody = JSON.parse(body)
-                        // console.log(parsedBody.birthdays[0].date);
-                        const googleUser = new User({
+                // })
+                User.findOne({ email: profile._json.email })
+                    .then(user => {
+                        if (!user) {
+                            const parsedBody = JSON.parse(body)
+                            const googleUser = new User({
+                                enable: 1,
+                                confirm: 1,
+                                name: profile._json.name,
+                                email: profile._json.email,
+                                birthDate: `${parsedBody.birthdays[0].date.year}-${parsedBody.birthdays[0].date.month}-${parsedBody.birthdays[0].date.day}`,
 
-                            enable: 1,
-                            confirm: 1,
-                            name: profile._json.name,
-                            email: profile._json.email,
-                            birthDate: `${parsedBody.birthdays[0].date.year}-${parsedBody.birthdays[0].date.month}-${parsedBody.birthdays[0].date.day}`,
+                                img:
+                                {
+                                    path: profile._json.picture,
 
-                            img:
-                            {
-                                path: profile._json.picture,
+                                },
 
-                            },
+                                gender: parsedBody.genders[0].value
+                            })
 
-                            gender: parsedBody.genders[0].value
-                        })
-                        // console.log(`${googleUser}`);
-                        User.create(googleUser, (err, result) => {
-                            if (err) {
-                                return console.log(err);
-                            }
-                            else {
-                                console.log(result);
-                                cb(undefined, accessToken)
-                            }
+                            User.create(googleUser, (err, result) => {
+                                if (err) {
+                                    cb(err, undefined)
+                                }
+                                else {
 
-                        })
+                                    return cb(undefined, result, { accessToken, refreshToken })
+                                }
+                            })
 
-                    }
-                    else
-                        return console.log(u);
-
-                })
+                        }
+                        else
+                            return cb(undefined, user, { accessToken, refreshToken })
+                    })
 
             });
 

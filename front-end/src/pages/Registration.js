@@ -1,6 +1,9 @@
 
 import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form";
 const Registration = () => {
+    const { register, handleSubmit } = useForm();
+
     return (
         <section className="registration-form h-100">
             <div className="container py-5 h-100">
@@ -16,7 +19,10 @@ const Registration = () => {
 
                                     />
                                 </div>
-                                <div className="col-xl-6">
+                                <form className="col-xl-6" onSubmit={handleSubmit((data) => {
+                                    console.log("hello");
+                                    console.log(data);
+                                })}>
                                     <div className="card-body p-md-5 text-black">
                                         <h3 className="mb-5 text-uppercase">registration form</h3>
 
@@ -24,32 +30,32 @@ const Registration = () => {
                                             <div className="col-md-6 mb-4">
                                                 <div className="form-outline">
                                                     <input type="text" id="form3Example1m" className="form-control form-control-lg" />
-                                                    <label className="form-label" for="form3Example1m">First name</label>
+                                                    <label className="form-label" for="form3Example1m" {...register("firstName", { required: true })}>First name</label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 mb-4">
                                                 <div className="form-outline">
                                                     <input type="text" id="form3Example1n" className="form-control form-control-lg" />
-                                                    <label className="form-label" for="form3Example1n">Last name</label>
+                                                    <label className="form-label" for="form3Example1n" {...register("LastName", { required: true })}>Last name</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="form-outline mb-4">
                                             <input type="email" id="form3Example8" className="form-control form-control-lg" />
-                                            <label className="form-label" for="form3Example8">Email</label>
+                                            <label className="form-label" for="form3Example8" {...register("Email", { required: true })}>Email</label>
                                         </div>
 
                                         <div className="row">
                                             <div className="col-md-6 mb-4">
                                                 <div className="form-outline">
                                                     <input type="password" id="form3Example1m1" className="form-control form-control-lg" />
-                                                    <label className="form-label" for="form3Example1m1">Password</label>
+                                                    <label className="form-label" for="form3Example1m1"{...register("password", { required: true })}>Password</label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 mb-4">
                                                 <div className="form-outline">
                                                     <input type="password" id="form3Example1n1" className="form-control form-control-lg" />
-                                                    <label className="form-label" for="form3Example1n1">confirm password</label>
+                                                    <label className="form-label" for="form3Example1n1" {...register("confirmPassword", { required: true })}>confirm password</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,13 +89,13 @@ const Registration = () => {
                                         <div className="row">
                                             <div className="col-md-6 mb-4">
 
-                                                <input type="text" className="country" />
+                                                <input type="text" className="country" {...register("country", { required: true })} />
                                                 <label >country</label>
 
                                             </div>
                                             <div className="col-md-6 mb-4">
 
-                                                <input type="text" className="state" />
+                                                <input type="text" className="state" {...register("state", { required: true })} />
                                                 <label >state</label>
                                             </div>
                                         </div>
@@ -108,11 +114,11 @@ const Registration = () => {
                                         </div>
 
                                         <div className="d-flex justify-content-end pt-3">
-                                            <button type="button" className="btn btn-warning btn-lg ms-2">Submit</button>
+                                            <input type="submit" className="btn btn-warning btn-lg ms-2" />
                                         </div>
 
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
