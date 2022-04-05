@@ -14,7 +14,7 @@ const Header = () => {
 
                     <div className="navbar navbar-light">
 
-                        <div className="site-logo"><Link to="/"><img src="/assets/img/logo" alt="Funden" /></Link>
+                        <div className="site-logo"><Link to="/"><img src="/assets/img/logo/logo_small.png" alt="Funden" /></Link>
                         </div>
 
                         <NavbarMenu />
