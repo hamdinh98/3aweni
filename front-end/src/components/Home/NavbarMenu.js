@@ -11,8 +11,11 @@ const NavbarMenu = () => {
                 <li><a href="#">Start a Campaign
 
                 </a>
-
                 </li>
+                <li><a href="commentaire">Commentaire</a>
+                </li>
+
+                
 
             </ul>
         </div>

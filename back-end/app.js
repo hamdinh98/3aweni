@@ -19,11 +19,18 @@ app.use(logger('dev'))
 
 
 
+
+
 app.use(userRoute);
 app.use(passport.initialize())
 app.use(projectRoute);
 app.use(badgeCategoryRoute);
 app.use(ledgerBookRoute);
+
+//comments
+
+app.use('/api/comments',require('./routes/comments.route'))
+
 require('./security/passport')(passport)
 require('./security/google_oauth')(passport)
 // parse application/json
