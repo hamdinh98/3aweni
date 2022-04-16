@@ -13,13 +13,15 @@ import Registration from './pages/Registration';
 import NotFound404 from './pages/NotFound404';
 import Commentaire from './pages/Commentaire';
 import LedgerBook from './pages/LedgerBook';
+import Dashboard from "./pages/Dashboard/Dashboard";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 
 export default function App() {
 
     return (
         <BrowserRouter>
-            <Header />
+            {/*<Header />*/}
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<AboutUs />} />
@@ -29,9 +31,10 @@ export default function App() {
                 <Route path='/Registration' element={<Registration />} />
                 <Route path='/Commentaire' element={<Commentaire/>}/>
                 <Route path='/LedgerBook' element={<LedgerBook/>}/>
+                <Route path='/Dashboard' element={<Dashboard/>}/>
                 <Route path='*' element={<NotFound404 />} />
             </Routes>
-            <Footer />
+            {/*<Footer />*/}
         </BrowserRouter>
     )
 }
