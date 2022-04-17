@@ -6,20 +6,22 @@ export default function Sidebar()
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
+                {/*if you want to add another menu (with title and items),
+                 copy the block below named sidebarMenu*/}
                 <div className="sidebarMenu">
                     <h3 className="sidebarTitle">Dashboard</h3>
                     <ul className="sidebarList">
                         <li className="sidebarItem">
-                            <Home/> Home
+                            <Home className="sidebarIcon"/> Home
                         </li>
                         <li className="sidebarItem">
-                          <Timeline/> Statistics
+                          <Timeline className="sidebarIcon"/> Statistics
                         </li>
                         <li className="sidebarItem">
-                            <Person/> Users
+                            <Person className="sidebarIcon"/> Users
                         </li>
                         <li className="sidebarItem">
-                            <Store/> Projects
+                            <Store className="sidebarIcon"/> Projects
                         </li>
                     </ul>
                 </div>

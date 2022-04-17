@@ -15,6 +15,13 @@
     justify-content: space-between;
 }
 
+.topbarImage{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .topRight{
     display: flex;
     align-items: center;
@@ -46,12 +53,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.placeholder{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #02b663;
-    cursor: pointer;
 }

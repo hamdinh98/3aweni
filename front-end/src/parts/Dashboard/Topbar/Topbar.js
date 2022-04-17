@@ -9,11 +9,11 @@ export default function Topbar()
             <div className="topbarWrapper">
                 <div className="logo">
 
-                    <span className="placeholder"></span>
 
-                    {/*<Link to="/Dashboard">
-                        <img src="../../../../public/assets/img/logo/3aweni.png" alt=""/>
-                    </Link>*/}
+
+                    <Link to="/Dashboard">
+                        <img className="topbarImage" src="/assets/img/logo/3aweni.png" alt=""/>
+                    </Link>
                 </div>
 
                 <div className="topRight">
@@ -27,7 +27,8 @@ export default function Topbar()
                     </div>
 
                     <div>
-                        <span className="placeholder"></span>
+                        {/*change this one to dynamic user profile picture*/}
+                        <img className="topbarImage" src="/assets/img/logo/3aweni.png" alt=""/>
                     </div>
 
                 </div>

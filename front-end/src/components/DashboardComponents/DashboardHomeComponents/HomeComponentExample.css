@@ -1,0 +1,48 @@
+.HomeComponentExample{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.DashboardHomeWrapper{
+    flex: 1;
+    padding: 30px;
+    margin: 0px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px -2px rgba(0,0,0,0.75);
+}
+
+.ItemTitle{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.itemsContainer{
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+}
+
+.UserNumber{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.UserTrend{
+    display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.ArrowIcon{
+    color: #3adb15;
+    font-size: 0.9rem !important;
+}
+
+.ArrowIcon.negative{
+    color: red;
+}
