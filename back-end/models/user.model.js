@@ -58,7 +58,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['male', 'female']
     },
-
     FoundedProjects: [
         { type: mongoose.Schema.Types.ObjectId, ref: 'Project' }
     ],
@@ -67,9 +66,10 @@ const userSchema = new mongoose.Schema({
 
     backedProjects: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Project',
-        badge: {
-            type: String,
-        }
+    }],
+
+    badges: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Badge'
     }]
 
 },

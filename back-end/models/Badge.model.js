@@ -7,18 +7,29 @@ const badgeSchema = new mongoose.Schema({
         unique: true
     },
 
-    minimumAmount: {
+    AmoutMoney: {
         type: Number,
-        required: true
     },
 
-    logo: {
-        path: String
+    nbBackedProject: {
+        type: Number,
+    },
+
+    nbFoundedProject: {
+        type: Number,
+    },
+
+    image: {
+        path: {
+            type: String
+        }
     }
+
+
 },
     {
         timestamps: true
     }
 );
 
-module.exports = Badge = mongoose.model('BadgeCategory', badgeSchema);
+module.exports = Badge = mongoose.model('Badge', badgeSchema);

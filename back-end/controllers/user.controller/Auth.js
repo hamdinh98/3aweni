@@ -6,7 +6,7 @@ const JWT = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const User = require('../../models/user.model');
 const mailer = require('../../utils/mailer');
-
+const Badge = require('../../models/Badge.model')
 
 
 
@@ -139,6 +139,8 @@ const login = async (req, res) => {
     }
 
 }
+
+
 
 const generateAccessToken = async (req, res) => {
     const refreshToken = req.header("refresh-token");

@@ -36,11 +36,6 @@ const updateBadge = (req, res) => {
     })
 }
 
-
-const BadgeAffectation = (money) => {
-
-}
-
 const getBadge = (req, res) => {
     if (!req.params.idBadge)
         return res.setStatus(400)
@@ -61,4 +56,4 @@ const getAllBadges = (req, res) => {
 
 }
 
-module.exports = { addBadge, updateBadge, deleteBadge, getBadge, getAllBadges, BadgeAffectation }
+module.exports = { addBadge, updateBadge, deleteBadge, getBadge, getAllBadges }

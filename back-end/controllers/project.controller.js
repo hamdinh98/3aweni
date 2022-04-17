@@ -4,7 +4,8 @@ const mongoose = require('mongoose')
 const User = require('../models/user.model')
 const Donation = require("../models/donation.model");
 const Ledger = require('../models/LedgerBook.model');
-const { login } = require("./user.controller/user.controller");
+
+
 
 const getProject = async (req, res) => {
 
@@ -53,10 +54,10 @@ const donateToProject = (req, res) => {
 
     // console.log(req.user);
     //console.log(req.user._id);
-    Donation.findOne({Backer:mongoose.Types.ObjectId(req.user._id),Project:mongoose.Types.ObjectId(req.params.idProject)})
-        .then(result=>{
-            if (!result)
-            {
+    Donation.findOne({ Backer: mongoose.Types.ObjectId(req.user._id), Project: mongoose.Types.ObjectId(req.params.idProject) })
+        .then(async result => {
+
+            if (!result) {
                 Donation.create(req.body).then(donation => {
 
                     // add the _id of donation to founder(user) collection and add the project to the backedProjects List
@@ -71,13 +72,14 @@ const donateToProject = (req, res) => {
                 }).catch(err => { return res.status(500).json(err) })
             }
 
-            else
-            {
-                result.Money+=req.body.Money;
-                Donation.updateOne({_id:result._id}, {Money:result.Money}).then(newResult=>{
-                    return res.status(200).json(newResult)
-                })
+            else {
+                result.Money += req.body.Money;
+                Donation.updateOne({ _id: result._id }, { Money: result.Money })
+                    .then(newResult => {
+                        return res.status(200).json(newResult)
+                    })
             }
+
         })
 
 }
@@ -172,19 +174,21 @@ const getListOfBackers = async (req, res) => {
         { $match: { "Project": mongoose.Types.ObjectId(req.params.idProjet) } },
 
         {
-            $project:{
+            $project: {
                 Backer: '$Backer',
-                Money:'$Money',
+                Money: '$Money',
 
             }
         }
 
     ]).then(async dons => {
+        console.log(dons);
+        for (var i = 0; i < dons.length; i++) {
 
-        for(var i=0;i<dons.length;i++)
-        {
-            const {name} =await User.findOne({_id:dons[i].Backer},{_id:0,name:1});
-            dons [i] ={
+            const name = await User.findOne({ _id: dons[i].Backer }, { _id: 0, name: 1 });
+            console.log(name);
+
+            dons[i] = {
                 ...dons[i],
                 name
             }

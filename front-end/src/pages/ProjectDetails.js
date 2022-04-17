@@ -2,8 +2,8 @@ import Gallery from "../parts/ProjectDetails/Gallery"
 import Updates from '../parts/ProjectDetails/Updates'
 import BackerList from '../parts/ProjectDetails/BackerList'
 import Description from '../parts/ProjectDetails/Description'
-import Discussion from "../parts/ProjectDetails/Discussion"
 import PageTitle from "../parts/ProjectDetails/PageTitle"
+import Comments_List from '../parts/Commentaire/Commentaire_Part'
 import { Link, Routes, Route } from "react-router-dom"
 const ProjectDetails = () => {
     return (
@@ -30,7 +30,7 @@ const ProjectDetails = () => {
                         <Routes>
 
                             <Route path="/" element={<Description />} />
-                            <Route path="/discussion" element={<Discussion />} />
+                            <Route path="/discussion" element={<Comments_List />} />
                             <Route path="/updates" element={<Updates />} />
                             <Route path="/backerList" element={<BackerList />} />
 

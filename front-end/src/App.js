@@ -11,8 +11,8 @@ import AboutUs from './pages/AboutUs';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import NotFound404 from './pages/NotFound404';
-import Commentaire from './pages/Commentaire';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Dashboard from './pages/Dashboard';
 
 export default function App() {
 
@@ -26,7 +26,7 @@ export default function App() {
                 <Route path='/projectDetails/*' element={<ProjectDetails />} />
                 <Route path='/ProjectsList' element={<ProjectsList />} />
                 <Route path='/Registration' element={<Registration />} />
-                <Route path='/Commentaire' element={<Commentaire/>}/>
+                <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='*' element={<NotFound404 />} />
             </Routes>
             <Footer />

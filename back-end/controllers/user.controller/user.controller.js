@@ -2,16 +2,16 @@ const User = require('../../models/user.model');
 
 const bcrypt = require('bcryptjs')
 const mailer = require('../../utils/mailer');
-const fs = require('fs');
+
 const Validator = require("validator");
-const Project = require('../../models/project.model')
-const FormatDate = require('../../utils/DateFormat');
+
 
 const Donation = require('../../models/donation.model')
 
 const { registration, generateAccessToken, login, logout, confirm } = require('../user.controller/Auth')
-const { genderStat, statusAccounts } = require('../user.controller/StatisticsUser')
-// this array contains all the refreshTokens provided in the different methods 
+const { genderStat, statusAccounts } = require('../user.controller/StatisticsUser');
+
+
 
 
 
@@ -146,8 +146,8 @@ const modifiePassword = async (req, res) => {
 const profile = (req, res) => {
     return res.status(200).json(req.user)
 }
-
-// as a donor, i can see statistics about my spending and the number of projects i backed 
+// as a donor, i can see statistics about my spending and the number of projects i backed
+// id user est récupérer de token 
 const totalMoneyBacked = (req, res) => {
     Donation.find({
         '_id': req.user.donations
@@ -163,13 +163,6 @@ const totalMoneyBacked = (req, res) => {
     });
 
 }
-
-
-
-
-
-
-
 
 module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, profile, totalMoneyBacked };
 
