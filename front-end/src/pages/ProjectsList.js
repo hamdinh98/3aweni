@@ -1,3 +1,5 @@
+import Footer from "../parts/Home/Footer"
+import Header from "../parts/Home/Header"
 import PageTitle from "../parts/ProjectsList/PageTitle"
 import ProjectCard from "../parts/ProjectsList/ProjectCard"
 
@@ -6,6 +8,7 @@ const ProjectsList = () => {
 
     return (
         <div>
+            <Header />
             <PageTitle />
             <section className="project-section section-gap-extra-bottom primary-soft-bg">
 
@@ -19,7 +22,7 @@ const ProjectsList = () => {
                     </div>
                 </div>
             </section>
-
+            <Footer />
         </div>
     )
 }

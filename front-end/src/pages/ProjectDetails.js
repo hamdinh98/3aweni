@@ -5,9 +5,12 @@ import Description from '../parts/ProjectDetails/Description'
 import PageTitle from "../parts/ProjectDetails/PageTitle"
 import Comments_List from '../parts/Commentaire/Commentaire_Part'
 import { Link, Routes, Route } from "react-router-dom"
+import Header from "../parts/Home/Header"
+import Footer from "../parts/Home/Footer"
 const ProjectDetails = () => {
     return (
         <div>
+            <Header />
             <PageTitle />
             <Gallery />
             <section className="our-overview-area pos-rel  wow fadeInUp2 animated" data-wow-delay='.5s'>
@@ -39,6 +42,7 @@ const ProjectDetails = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     )
 }
