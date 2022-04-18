@@ -1,8 +1,8 @@
 import React from "react";
-import "./HomeComponentExample.css"
+import "./CardsExample.css"
 import {ArrowDownward, ArrowUpward} from "@mui/icons-material";
 
-export default function HomeComponentExample()
+export default function CardsExample()
 {
     return(
         <div className="HomeComponentExample">
@@ -44,5 +44,4 @@ export default function HomeComponentExample()
 
         </div>
     )
-
 }
