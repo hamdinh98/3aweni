@@ -3,13 +3,20 @@ import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import Header from '../parts/Home/Header';
 import Footer from '../parts/Home/Footer';
+import { useDispatch, useSelector } from 'react-redux'
+import { RegistrationAction } from '../redux/actions/AuthActions';
 const Registration = () => {
-    const { register, handleSubmit } = useForm();
+    const { register } = useForm();
+    const dispatch = useDispatch();
+    const AuthState = useSelector(state => state.Auth)
+    console.log(AuthState);
+
+
 
     return (
         <>
             <Header />
-            <section className="registration-form h-100">
+            <section className=" h-100">
                 <div className="container py-5 h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col">
@@ -23,17 +30,14 @@ const Registration = () => {
 
                                         />
                                     </div>
-                                    <form className="col-xl-6" onSubmit={handleSubmit((data) => {
-                                        console.log("hello");
-                                        console.log(data);
-                                    })}>
+                                    <form className="col-xl-6">
                                         <div className="card-body p-md-5 text-black">
                                             <h3 className="mb-5 text-uppercase">registration form</h3>
 
                                             <div className="row">
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
-                                                        <input type="text" id="form3Example1m" className="form-control form-control-lg" />
+                                                        <input type="text" className="form-control form-control-lg" />
                                                         <label className="form-label" for="form3Example1m" {...register("firstName", { required: true })}>First name</label>
                                                     </div>
                                                 </div>
@@ -63,8 +67,6 @@ const Registration = () => {
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                             <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
 
                                                 <h6 className="mb-0 me-4">Gender: </h6>
@@ -118,7 +120,7 @@ const Registration = () => {
                                             </div>
 
                                             <div className="d-flex justify-content-end pt-3">
-                                                <input type="submit" className="btn btn-warning btn-lg ms-2" />
+                                                <input type="submit" className="btn btn-warning btn-lg ms-2" onClick={() => dispatch(RegistrationAction)} />
                                             </div>
 
                                         </div>
