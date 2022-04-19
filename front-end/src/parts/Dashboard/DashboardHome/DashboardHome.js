@@ -17,7 +17,7 @@ export default function DashboardHome()
         <div className="DashboardHome">
             <CardsExample/>
             {/*write grid in the parameters if you want chart with a grid, otherwise don't*/}
-            <ChartExample title="Donation analysis" data={ChartDataEXample} dataKey="uv" grid/>
+            <ChartExample title="Donation analysis" data={ChartDataEXample} dataKey={{uv:"uv",pv:"pv"}} grid/>
 
             <div className="HomeWidgets">
                 <WidgetSmExample/>

@@ -30,7 +30,7 @@ export default function App() {
                 <Route path='/Registration' element={<Registration />} />
                 <Route path='/Commentaire' element={<Commentaire />} />
                 <Route path='/LedgerBook' element={<LedgerBook />} />
-                <Route path='/Dashboard' element={<Dashboard />} />
+                <Route path='/Dashboard/*' element={<Dashboard />} />
                 <Route path='*' element={<NotFound404 />} />
             </Routes>
             {/*<Footer />*/}

@@ -2,6 +2,6 @@ import "./DashboardUsers.css"
 
 export default function DashboardUsers(){
     return(
-        <div className="DashboardUsers"></div>
+        <div className="DashboardUsers">hello dashboard</div>
     )
 }

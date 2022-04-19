@@ -18,7 +18,8 @@ export default function ChartExample ({title,data,dataKey,grid})
                     {/*Tooltip shows specific data when you hover on the graph*/}
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey={dataKey} stroke="green" activeDot={{ r: 8 }}/>
+                    <Line type="monotone" dataKey={dataKey.uv} stroke="green" activeDot={{ r: 8 }}/>
+                    <Line type="monotone" dataKey={dataKey.pv} stroke="red" activeDot={{ r: 8 }}/>
                     {/*<Line type="monotone" dataKey="pv" stroke="orange"/>*/}
                 </LineChart>
             </ResponsiveContainer>

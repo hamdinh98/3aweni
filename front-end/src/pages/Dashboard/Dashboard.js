@@ -3,8 +3,9 @@ import Topbar from "../../parts/Dashboard/Topbar/Topbar";
 import Sidebar from "../../parts/Dashboard/Sidebar/Sidebar";
 import "./Dashboard.css"
 import DashboardHome from "../../parts/Dashboard/DashboardHome/DashboardHome";
-import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, BrowserRouter} from "react-router-dom";
 import DashboardUsers from "../../parts/Dashboard/DashboardUsers/DashboardUsers";
+import Home from "../Home";
 
 const Dashboard=()=>
 {
@@ -17,7 +18,14 @@ const Dashboard=()=>
             container is a bootstrap reserved name, and it will ruin the current style*/}
             <div className="contain">
                 <Sidebar/>
-                <DashboardHome/>
+
+                    <Routes>
+
+                        <Route path='/'  element={<DashboardHome />}/>
+                        <Route path='/user' element={<DashboardUsers />}/>
+                    </Routes>
+
+
                 {/*
                 <Routes>
                     <Route path="/Dashboard" element={<DashboardHome/>}/>
