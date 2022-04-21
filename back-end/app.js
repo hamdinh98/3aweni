@@ -3,7 +3,7 @@ const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
 const userRoute = require('./routes/user.route');
 const projectRoute = require('./routes/project.route');
-
+const commentsRoute = require('./routes/comments.route')
 
 const badgeCategoryRoute = require('./routes/Badge.route');
 const ledgerBookRoute = require('./routes/LedgerBook.route');
@@ -29,10 +29,10 @@ app.use(passport.initialize())
 app.use(projectRoute);
 app.use(badgeCategoryRoute);
 app.use(ledgerBookRoute);
-
+app.use(commentsRoute)
 //comments
 
-app.use('/api/comments',require('./routes/comments.route'))
+app.use('/api/comments', require('./routes/comments.route'))
 
 require('./security/passport')(passport)
 require('./security/google_oauth')(passport)

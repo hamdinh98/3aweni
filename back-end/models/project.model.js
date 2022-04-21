@@ -6,19 +6,19 @@ const projectSchema = new mongoose.Schema({
         required: true
     },
 
-    title :{
-        type : String,
-        required:true
+    title: {
+        type: String,
+        required: true
     },
 
-    description :{
-        type : String,
-        required:true
+    description: {
+        type: String,
+        required: true
     },
 
-    enable :{
-        type:Number,
-        default:1
+    enable: {
+        type: Number,
+        default: 1
     },
 
     askedAmount: {
@@ -28,7 +28,8 @@ const projectSchema = new mongoose.Schema({
 
     Founder: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     donations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Donation' }],
-    hasLedger: { type: mongoose.Schema.Types.ObjectId, ref: 'LedgerBook' }
+    hasLedger: { type: mongoose.Schema.Types.ObjectId, ref: 'LedgerBook' },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
 
 },
     {

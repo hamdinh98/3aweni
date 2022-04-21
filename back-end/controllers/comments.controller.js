@@ -1,168 +1,99 @@
-const asyncHandler = require('express-async-handler')
-const mongoose = require('mongoose')
-const Comments= require('../models/comments.model')
-const Mailer= require('../utils/mailer_comment')
+const Comment = require('../models/comments.model')
+const Project = require('../models/project.model')
 const Filter = require('bad-words');
-// get Comments 
-const getComments = asyncHandler(async (req , res) => {
-    const comments = await Comments.find()
- 
-    console.log(comments)
-    res.status(200).json(comments)
-})
+const filter = new Filter();
+//CRUD comment 
+// the adding process of comment require a content verif
+const add = (req, res) => {
+  if (!req.body)
+    return res.status(400).json("body required")
 
+  // bind the project_id with the comment 
+  req.body.Project = req.params.idProject
+  // this line aims to hide the bad word by ***
+  req.body.content = filter.clean(req.body.content)
+  req.body.creator = req.user._id
+  Comment.create(req.body)
+    .then(result => {
+      Project.findByIdAndUpdate(req.params.idProject, { $push: { comments: req.params.idProject } })
+        .then(result1 => {
+          return res.status(200).json(result)
+        })
+        .catch(err1 => {
 
-const createComment = asyncHandler(async (text, parentId = null,req , res) => {
- 
-  console.log("eazeaeza")
- Comments.create({
-        id_project: "1",
-        id_user: "2",
-        content: req.body.text ,
-        date: new Date(),
-        parentId ,
-       
-       
+          return res.status(500).json(err1)
+        })
     })
-    .then(test => {
-
-      res.status(200).json(test)
+    .catch(err => {
+      return res.status(500).json(err)
     })
-   
+}
 
+const update = (req, res) => {
+  if (!req.body)
+    return res.status(400).json("body required")
 
-  })
-
-//create comments
-const SetComments = asyncHandler( async (req , res) => {
-    if (!req.body.content || !req.body.id_user   ) {
-        return res.status(400)
-        throw new Error('Please fill everything ')
-      }
-    
-
-      let aujourdhui = new Date()
-
-     var filter = new Filter()
-        filter.addWords("salut")
-
-    const comments = await Comments.create({
-        id_project: req.params.id_project,
-        id_user: req.body.id_user,
-        content:req.body.content,
-        date: aujourdhui,
-        parentId:req.body.parentId ,
-       
-       
+  Comment.updateOne({ _id: req.params.id }, req.body)
+    .then(result => {
+      return res.status(200).json(result)
     })
-    //filter.clean(req.body.content)
-    if (comments ){
-      Mailer('tarek.zaafrane@esprit.tn',comments)
-    }
+    .catch(err => {
+      return res.status(500).json(err)
+    })
+}
+
+// as a adminstrator i can delete comments
+const Delete = async (req, res) => {
+  // console.log(req.params.id);
+  const result = await Comment.findByIdAndDelete(req.params.id)
+  if (result)
+    return res.status(200).json("comment deleted with success")
+  return res.status(500).json("error")
+
+}
 
 
-    if(!comments.id_user ||!comments.content  || !comments.id_project )
-    {    
+const getComment = async (req, res) => {
+  const comment = await Comment.findById(req.params.idComment)
+  console.log(comment);
 
-      return res.status(400)
-            // console.log('bad words')
-            throw new Error('Invalid comment data')
-            
-              }
+}
 
-    else {
-      console.log('comment published' +comments.content )
+const like = (req, res) => {
+  Comment.findByIdAndUpdate(req.params.idComment, { $inc: { likes: 1 } })
+    .then(result => {
+      return res.status(200).json("like affected with success")
+    })
+    .catch(err => {
+      return res.status(500).json(err)
+    })
+}
+const dislike = (req, res) => {
+  Comment.findByIdAndUpdate(req.params.idComment, { $inc: { dislikes: 1 } })
+    .then(result => {
+      return res.status(200).json("dislike affected with success")
+    })
+    .catch(err => {
+      return res.status(500).json(err)
+    })
+}
 
-      if(filter.isProfane(comments.content) )
-      console.log('bad words')
-      
-      comments.content = filter.clean(req.body.content)
 
-      return res.status(200).json(comments)
-      console.log('comment published' +comments.content )
+const removeByOwner = async (req, res) => {
+  const comment = await Comment.findById(req.params.idComment)
 
-    }
-})
-
-//update comments
-const UpdateComments = asyncHandler(async (req , res) => {
-
-    const comments = await Comments.findById(req.params.id)
-
-  if (!comments) {
-    res.status(400)
-    throw new Error('comments not found')
-  }
-  const updatedComments = await Comments.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  })
-
-    res.status(200).json(updatedComments)
-})
-
-//delete Comments 
-const DeleteComments = asyncHandler(async (req , res) => {
-  
+  if (JSON.stringify(req.user._id) !== JSON.stringify(comment.creator))
+    return res.status(403).json("enable to remove comment because you're not the creator!")
+  const result = await Comment.deleteOne({ _id: req.params.idComment })
+  if (result)
+    return res.status(200).json("comment removed by his own creator with success ")
+  return res.status(500).json("error")
+}
 
 
 
-   const comments = await Comments.findById(req.params.id)
-
-    if (!comments) {
-      res.status(400)
-      throw new Error('comments not found')
-    }
-
-    await comments.remove()
-    res.status(200).json({id : req.params.id})
-      
 
 
-})
-
-
-// const findProjectById = asyncHandler ( async(req , res) => {
-
-//   const project = await Project.findById(req.params.id)
-
-//   if (!project) {
-//     res.status(400)
-//     throw new Error('project not found')
-//   }
-
-//   res.status(200).json(project)
-
-  
-// })
-
-
-const getCommentsByProjectsId = asyncHandler ( async(req , res) => {
-
-  const comments = await Comments.find({id_project: req.params.id_project} )
-
-  if (!comments) {
-    res.status(400)
-    throw new Error('Comments not found')
-  }
-
-  res.status(200).json(comments)
-
-  
-})
-
-const getCommentsWithNullParentId = asyncHandler ( async(req , res) => {
-
-  const comments = await Comments.find({parentId: "null"} )
-
-  if (!comments) {
-    res.status(400)
-    throw new Error('Comments not found')
-  }
-
-  res.status(200).json(comments)
-
-  
-})
 module.exports = {
-    getCommentsByProjectsId, SetComments ,UpdateComments ,DeleteComments,createComment ,getComments ,getCommentsWithNullParentId
+  add, update, Delete, getComment, like, dislike, removeByOwner
 }

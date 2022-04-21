@@ -1,21 +1,21 @@
-const express = require ('express')
-const { getCommentsByProjectsId, getCommentsWithNullParentId,SetComments ,createComment,UpdateComments ,DeleteComments ,getComments } = require('../controllers/comments.controller')
+const express = require('express')
+const { Delete, add, getComment, update, like, dislike, removeByOwner } = require('../controllers/comments.controller')
+const passport = require("passport")
 const router = express.Router()
+const { ROLES, inRole } = require('../security/RoleMiddleware')
+
+router.post('/addComment/:idProject', passport.authenticate('jwt', { session: false }), add)
+router.put('/update/:id', passport.authenticate('jwt', { session: false }), update)
+
+// as a adminstrator i can delete comments 
+router.delete('/delete/:id', passport.authenticate('jwt', { session: false }), inRole(ROLES.ADMIN), Delete)
 
 
+router.get('/searchComment/:idComment', passport.authenticate('jwt', { session: false }), getComment)
 
-router.get('/' , getComments)
+router.post("/like/:idComment", passport.authenticate('jwt', { session: false }), like)
+router.post("/dislike/:idComment", passport.authenticate('jwt', { session: false }), dislike)
 
-router.get('/:id_project' ,getCommentsByProjectsId )
-
-router.post('/newcomment/:id_project' , SetComments)
-
-router.put ('/updatecomment/:id' , UpdateComments)
-
-router.get('/parentIdNull' , getCommentsWithNullParentId)
-
-router.delete('/deletecomment/:id' , DeleteComments)
-
-router.post('/newcomment2' , createComment)
+router.delete("/removeByOwner/:idComment", passport.authenticate('jwt', { session: false }), removeByOwner)
 
 module.exports = router
