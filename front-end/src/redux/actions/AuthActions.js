@@ -2,12 +2,17 @@
 import axios from "axios"
 import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION } from "../reducers/AuthReducer"
 export const RegistrationAction = (user) => dispatch => {
-    axios.post("http://localhost:5000/signIn", user).then(result => {
-        // console.log(result.data);
-        dispatch({
-            type: REGISTRATION_ACTION,
-        })
+    axios.post("http://localhost:5000/signIn", user, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     })
+        .then(result => {
+            // console.log(result.data);
+            dispatch({
+                type: REGISTRATION_ACTION,
+            })
+        })
         .catch(err => {
             console.log(err);
             dispatch({

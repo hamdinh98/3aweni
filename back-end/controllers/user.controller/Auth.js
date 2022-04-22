@@ -30,13 +30,12 @@ const registration = (req, res) => {
                 return res.status(400).json("Email already exists");
             }
             else {
-                // console.log(req.files[0].filename);
-                //console.log(req.body.birthDate);
+
                 const newUser = new User({
                     name: req.body.name,
                     email: req.body.email,
                     password: req.body.password,
-                    img: '/back-end/uploads/' + req.body.img,
+                    img: '/back-end/uploads/' + req.files[0].filename,
                     birthDate: req.body.birthDate,
                     gender: req.body.gender,
                     country: req.body.country,
