@@ -5,7 +5,7 @@ import Header from '../parts/Home/Header';
 import Footer from '../parts/Home/Footer';
 import { useDispatch, useSelector } from 'react-redux'
 import { RegistrationAction } from '../redux/actions/AuthActions';
-import { useState } from 'react';
+
 
 
 
@@ -14,13 +14,11 @@ import { useState } from 'react';
 
 const Registration = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [passwordMatch, setPasswordMatch] = useState(true)
+
     const dispatch = useDispatch();
     const AuthState = useSelector(state => state.Auth)
 
     const submit = (data) => {
-
-        setPasswordMatch(data.password === data.confirmPwd)
         // console.log(typeof data.img['0'].name);
         const user = {
             ...data,
@@ -28,7 +26,8 @@ const Registration = () => {
         }
         // console.log(user);
         // console.log(valid, passwordMatch);
-        passwordMatch && dispatch(RegistrationAction(user))
+        dispatch(RegistrationAction(user))
+        console.log(AuthState);
     }
 
     // useEffect(() => {
@@ -99,9 +98,9 @@ const Registration = () => {
                                                     <div className="form-outline">
                                                         <input type="password" id="form3Example1n1" className="form-control form-control-lg" {...register("confirmPwd", { required: true, })} />
                                                         <label className="form-label" for="form3Example1n1" >repeat password</label>
-                                                        {!passwordMatch && <div class="alert alert-danger" role="alert">
+                                                        {/* {AuthState.error.data?.confirmPwd && <div class="alert alert-danger" role="alert">
                                                             confirm password does not match
-                                                        </div>}
+                                                        </div>} */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -165,8 +164,11 @@ const Registration = () => {
                                     </form>
 
                                 </div>
-                                {passwordMatch && <div className="alert alert-success" role="alert">
+                                {!errors && AuthState.user && <div className="alert alert-success" role="alert">
                                     successfull registration please check your email to confirm your account
+                                </div>}
+                                {AuthState.error && <div className="alert alert-warning" role="alert">
+                                    {AuthState.error.data}
                                 </div>}
                             </div>
                         </div>

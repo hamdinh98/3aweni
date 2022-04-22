@@ -1,8 +1,23 @@
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../parts/Home/Footer"
 import Header from "../parts/Home/Header"
-
+import { LoginAction } from "../redux/actions/AuthActions";
 
 const Login = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const dispatch = useDispatch()
+    const AuthState = useSelector(state => state.Auth)
+    const navigate = useNavigate()
+    const submit = (data) => {
+        dispatch(LoginAction(data))
+        localStorage.setItem('refresh-token', AuthState.user.refreshToken)
+        AuthState.isConnected && navigate('/')
+        console.log(AuthState);
+    }
+
     return (
         <div>
             <Header />
@@ -20,27 +35,43 @@ const Login = () => {
                                                 <h4 className="mt-1 mb-5 pb-1">Welcome among us </h4>
                                             </div>
 
-                                            <form>
+                                            <form onSubmit={handleSubmit(submit)}>
                                                 <p>Please login to your account</p>
 
                                                 <div className="form-outline mb-4">
-                                                    <input type="email" id="form2Example11" className="form-control" placeholder="email address" />
-                                                    <label className="form-label" for="form2Example11">Username</label>
+                                                    <input type="email" id="form2Example11" className="form-control" placeholder="email address" {...register("email", { required: true, pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' })} />
+                                                    <label className="form-label" for="form2Example11">Email</label>
                                                 </div>
+                                                {(errors.email?.type === 'required') && <div class="alert alert-danger" role="alert">
+                                                    email is required
+                                                </div>}
+                                                {(errors.email?.type === 'pattern') && <div class="alert alert-danger" role="alert">
+                                                    invalid email
+                                                </div>}
 
                                                 <div className="form-outline mb-4">
-                                                    <input type="password" id="form2Example22" className="form-control" />
-                                                    <label className="form-label" for="form2Example22">Password</label>
+                                                    <input type="password" id="form2Example22" className="form-control" {...register("password", { required: true, minLength: 8 })} />
+                                                    <label className="form-label" for="form2Example22" >Password</label>
                                                 </div>
+                                                {(errors.password?.type === "required") && <div class="alert alert-danger" role="alert">
+                                                    password is required
+                                                </div>}
+                                                {(errors.password?.type === "minLength") && <div class="alert alert-danger" role="alert">
+                                                    password length must be at least 8
+                                                </div>}
 
                                                 <div className="text-center pt-1 mb-5 pb-1">
-                                                    <button className="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3" type="button">Log in</button>
+                                                    <button className="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3" type="submit">Log in</button>
+                                                    {/* {AuthState.error.data?.error} */}
+                                                    {AuthState?.error?.data?.error && <div className="alert alert-warning" role="alert">
+                                                        {AuthState?.error?.data?.error}
+                                                    </div>}
                                                     <a className="text-muted" href="#!">Forgot password?</a>
                                                 </div>
 
                                                 <div className="d-flex align-items-center justify-content-center pb-4">
                                                     <p className="mb-0 me-2">Don't have an account?</p>
-                                                    <button type="button" className="btn btn-outline-success">Create new</button>
+                                                    <Link to='/registration' className="btn btn-outline-success">Create new</Link>
                                                 </div>
 
                                                 <div className="text-center social-btn">
@@ -59,6 +90,17 @@ const Login = () => {
                     </div>
                 </div>
             </section >
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <Footer />
         </div>
     )

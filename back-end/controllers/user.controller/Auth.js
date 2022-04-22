@@ -27,7 +27,7 @@ const registration = (req, res) => {
     User.findOne({ email: req.body.email })
         .then(user => {
             if (user) {
-                return res.status(400).json({ email: "Email already exists" });
+                return res.status(400).json("Email already exists");
             }
             else {
                 // console.log(req.files[0].filename);
@@ -88,28 +88,28 @@ const login = async (req, res) => {
     if (!isValid) {
         return res.status(400).json({ error: errors })
     } else {
-        const userfounded = await User.find({ email: email })
-        // console.log(` ${userfounded[0].confirm}`);
+        const userfounded = await User.findOne({ email: email })
+
         if (!userfounded) {
             return res.status(400).json({ error: "Invalid credentials" })
         }
-        if (userfounded[0].enable == 0) {
+        if (userfounded.enable == 0) {
             return res.status(400).json({ error: "this account was suspending by the admin" })
         }
-        if (userfounded[0].confirm == 0) {
+        if (userfounded.confirm == 0) {
             return res.status(400).json({ error: "You must confirm your account check your email please !" })
         }
 
-        let isMatch = await bcrypt.compare(password, userfounded[0].password)
-        console.log(userfounded);
+        let isMatch = await bcrypt.compare(password, userfounded.password)
+        // console.log(userfounded);
         if (!isMatch) {
-            return res.status(401).json({ msg: "password invalid" })
+            return res.status(401).json({ error: "password invalid" })
         }
 
         const accessToken = await JWT.sign(
             {
-                email: userfounded[0].email,
-                role: userfounded[0].role
+                email: userfounded.email,
+                role: userfounded.role
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
@@ -129,14 +129,12 @@ const login = async (req, res) => {
         // Set refersh token in refreshTokens array
         refreshTokens.push(refreshToken);
 
-        const BadgesList = await Badge.find();
-        BadgesList.map(badge => {
 
-        })
 
-        res.json({
+        return res.json({
             accessToken,
             refreshToken,
+            userfounded
         });
         // console.log(refreshTokens);
     }
