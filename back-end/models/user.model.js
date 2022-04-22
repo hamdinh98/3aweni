@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     birthDate: {
         type: Date,
-        required: true
+        // required: true
     },
     country: {
         type: String,
@@ -33,9 +33,8 @@ const userSchema = new mongoose.Schema({
 
 
     },
-    img:
-    {
-        path: String,
+    img: {
+        type: String
     },
 
     enable: {

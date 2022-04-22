@@ -19,8 +19,10 @@ const registration = (req, res) => {
     const { errors, isValid } = validationRegister(req.body)
 
     if (!isValid) {
+        console.log(errors);
         return res.status(400).json(errors)
     }
+
 
     User.findOne({ email: req.body.email })
         .then(user => {
@@ -34,15 +36,11 @@ const registration = (req, res) => {
                     name: req.body.name,
                     email: req.body.email,
                     password: req.body.password,
-                    img: {
-
-                        path: '/back-end/uploads/' + req.files[0].filename,
-                    },
+                    img: '/back-end/uploads/' + req.body.img,
                     birthDate: req.body.birthDate,
                     gender: req.body.gender,
                     country: req.body.country,
                     state: req.body.state,
-                    phone: req.body.phone
                 });
                 // FormatDate(newUser.birthDate);
                 bcrypt.genSalt(10, (err, salt) => {
@@ -130,6 +128,11 @@ const login = async (req, res) => {
 
         // Set refersh token in refreshTokens array
         refreshTokens.push(refreshToken);
+
+        const BadgesList = await Badge.find();
+        BadgesList.map(badge => {
+
+        })
 
         res.json({
             accessToken,

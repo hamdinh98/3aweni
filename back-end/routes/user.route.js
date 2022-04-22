@@ -54,7 +54,7 @@ route.get('/auth/google/redirect', passport.authenticate('google',
 
 
 route.get('/success', (req, res) => {
-    console.log(req.user);
+    console.log(req.result);
     res.status(200).json("successfull login with google")
 })
 route.get('/failure', (req, res) => {

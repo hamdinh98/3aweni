@@ -2,12 +2,12 @@ const Badge = require('../models/Badge.model')
 
 // CRUD : badge 
 //The badge collection represent all the available badges
-// the badge affectation based on the amount of money donated per user
 
 const addBadge = (req, res) => {
     if (!req.body)
         return res.status(400).json("Body required");
-
+    req.body.image.path = req.files[0].filename
+    console.log(req.files[0].filename);
     Badge.create(req.body, (err, result) => {
         if (err)
             return res.status(500).json(err)

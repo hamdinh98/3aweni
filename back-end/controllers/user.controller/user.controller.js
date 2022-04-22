@@ -17,7 +17,7 @@ const { genderStat, statusAccounts } = require('../user.controller/StatisticsUse
 
 // an admin can ban user
 const suspend = (req, res) => {
-    console.log(req.body.email);
+    // console.log(req.body.email);
     if (!req.body.email) {
         return res.status(400).json({ msg: "invalid email" })
     }
@@ -135,12 +135,6 @@ const modifiePassword = async (req, res) => {
     })
 
 }
-
-
-
-
-
-
 
 
 const profile = (req, res) => {

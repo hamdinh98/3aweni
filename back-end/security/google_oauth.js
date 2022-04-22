@@ -11,22 +11,10 @@ module.exports = (passport) => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
         function (accessToken, refreshToken, profile, cb) {
-            // console.log(`access token : ${accessToken}`);
+            console.log(`access token : ${accessToken}`);
             // console.log(refreshToken);
             request(`https://people.googleapis.com/v1/people/${profile.id}?personFields=birthdays,genders,locations&access_token=${accessToken}`, function (error, response, body) {
-                // console.error('error:', error); // Print the error if one occurred
-                // console.log('statusCode:', response && response.statusCode);
-                // console.log('body:', body);
 
-                // User.findOrCreate(googleUser, (err, result) => {
-                //     if (err)
-                //         cb(err, undefined)
-                //     else {
-                //         console.log({ result, accessToken, refreshToken });
-                //         cb(undefined, result, { accessToken, refreshToken })
-                //     }
-
-                // })
                 User.findOne({ email: profile._json.email })
                     .then(user => {
                         if (!user) {

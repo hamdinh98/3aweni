@@ -5,11 +5,35 @@ import Header from '../parts/Home/Header';
 import Footer from '../parts/Home/Footer';
 import { useDispatch, useSelector } from 'react-redux'
 import { RegistrationAction } from '../redux/actions/AuthActions';
+import { useState } from 'react';
+
+
+
+
+
+
 const Registration = () => {
-    const { register } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [passwordMatch, setPasswordMatch] = useState(true)
     const dispatch = useDispatch();
     const AuthState = useSelector(state => state.Auth)
-    console.log(AuthState);
+
+    const submit = (data) => {
+
+        setPasswordMatch(data.password === data.confirmPwd)
+        // console.log(typeof data.img['0'].name);
+        const user = {
+            ...data,
+            img: data.img['0'].name
+        }
+        // console.log(user);
+        // console.log(valid, passwordMatch);
+        passwordMatch && dispatch(RegistrationAction(user))
+    }
+
+    // useEffect(() => {
+    //     console.log(AuthState.error);
+    // })
 
 
 
@@ -30,65 +54,67 @@ const Registration = () => {
 
                                         />
                                     </div>
-                                    <form className="col-xl-6">
+                                    <form className="col-xl-6" onSubmit={handleSubmit(submit)}>
                                         <div className="card-body p-md-5 text-black">
                                             <h3 className="mb-5 text-uppercase">registration form</h3>
 
                                             <div className="row">
                                                 <div className="col-md-6 mb-4">
-                                                    <div className="form-outline">
-                                                        <input type="text" className="form-control form-control-lg" />
-                                                        <label className="form-label" for="form3Example1m" {...register("firstName", { required: true })}>First name</label>
+                                                    <div className="form-outline mb-4">
+                                                        <input type="text" className="form-control form-control-lg" {...register("name", { required: true })} />
+
+                                                        <label className="form-label" for="form3Example1m" >Full name</label>
+                                                        {(errors.name?.type) && <div class="alert alert-danger" role="alert">
+                                                            name is required
+                                                        </div>}
                                                     </div>
                                                 </div>
-                                                <div className="col-md-6 mb-4">
-                                                    <div className="form-outline">
-                                                        <input type="text" id="form3Example1n" className="form-control form-control-lg" />
-                                                        <label className="form-label" for="form3Example1n" {...register("LastName", { required: true })}>Last name</label>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                             <div className="form-outline mb-4">
-                                                <input type="email" id="form3Example8" className="form-control form-control-lg" />
-                                                <label className="form-label" for="form3Example8" {...register("Email", { required: true })}>Email</label>
+                                                <input type="email" id="form3Example8" className="form-control form-control-lg" {...register("email", { required: true, pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' })} />
+                                                <label className="form-label" for="form3Example8" >Email</label>
+                                                {errors.email?.type === "required" && <div class="alert alert-danger" role="alert">
+                                                    email is required
+                                                </div>}
+                                                {errors.email?.type === "pattern" && <div class="alert alert-danger" role="alert">
+                                                    email is invalid
+                                                </div>}
                                             </div>
 
                                             <div className="row">
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
-                                                        <input type="password" id="form3Example1m1" className="form-control form-control-lg" />
-                                                        <label className="form-label" for="form3Example1m1"{...register("password", { required: true })}>Password</label>
+                                                        <input type="password" id="form3Example1m1" className="form-control form-control-lg" {...register("password", { required: true, minLength: 8 })} />
+                                                        <label className="form-label" for="form3Example1m1">Password</label>
+                                                        {errors.password?.type === "required" && <div className="alert alert-danger" role="alert">
+                                                            password is required
+                                                        </div>}
+                                                        {errors.password?.type === "minLength" && <div className="alert alert-danger" role="alert">
+                                                            password length must be at least 8
+                                                        </div>}
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
-                                                        <input type="password" id="form3Example1n1" className="form-control form-control-lg" />
-                                                        <label className="form-label" for="form3Example1n1" {...register("confirmPassword", { required: true })}>confirm password</label>
+                                                        <input type="password" id="form3Example1n1" className="form-control form-control-lg" {...register("confirmPwd", { required: true, })} />
+                                                        <label className="form-label" for="form3Example1n1" >repeat password</label>
+                                                        {!passwordMatch && <div class="alert alert-danger" role="alert">
+                                                            confirm password does not match
+                                                        </div>}
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                                            <div className="d-md-flex justify-content-start align-items-center mb-2 py-1">
 
                                                 <h6 className="mb-0 me-4">Gender: </h6>
-
-                                                <div className="form-check form-check-inline mb-0 me-4">
-                                                    <input
-                                                        className="form-check-input"
-                                                        type="radio"
-                                                    />
-                                                    <label className="form-check-label" for="femaleGender">Female</label>
-                                                </div>
-
-                                                <div className="form-check form-check-inline mb-0 me-4">
-                                                    <input
-                                                        className="form-check-input"
-                                                        type="radio"
-                                                        name="inlineRadioOptions"
-                                                        id="maleGender"
-                                                        value="option2"
-                                                    />
-                                                    <label className="form-check-label" for="maleGender">Male</label>
-                                                </div>
+                                                <select {...register("gender", { required: true })} >
+                                                    <option value="female">female</option>
+                                                    <option value="male">male</option>
+                                                </select>
+                                                {errors.gender?.type && <div class="alert alert-danger" role="alert">
+                                                    gender required
+                                                </div>}
 
                                             </div>
 
@@ -97,40 +123,56 @@ const Registration = () => {
 
                                                     <input type="text" className="country" {...register("country", { required: true })} />
                                                     <label >country</label>
+                                                    {errors.country?.type && <div class="alert alert-danger" role="alert">
+                                                        country required
+                                                    </div>}
 
                                                 </div>
                                                 <div className="col-md-6 mb-4">
 
                                                     <input type="text" className="state" {...register("state", { required: true })} />
                                                     <label >state</label>
+                                                    {errors.state?.type && <div class="alert alert-danger" role="alert">
+                                                        state is required
+                                                    </div>}
                                                 </div>
                                             </div>
 
                                             <div className="form-outline mb-4">
-                                                <input type="file" />
+                                                <input type="file" {...register("img", { required: true })} />
                                                 <label className="form-label" for="form3Example9">Profile Picture</label>
+                                                {errors.img?.type && <div class="alert alert-danger" role="alert">
+                                                    profile Picture is required
+                                                </div>}
                                             </div>
 
                                             <div className="form-outline mb-4">
-                                                <input type="date" id="form3Example90" className="form-control form-control-lg" />
-                                                <label className="form-label" for="form3Example90">birthDate</label>
+                                                <input type="date" id="form3Example90" className="form-control form-control-lg" {...register("birthDate", { required: true })} />
+                                                <label className="form-label" for="form3Example90" >birthDate</label>
+                                                {errors.birthDate?.type && <div class="alert alert-danger" role="alert">
+                                                    birthDate is required
+                                                </div>}
                                             </div>
                                             <div>
                                                 <Link to="/login">I have an account</Link>
                                             </div>
 
                                             <div className="d-flex justify-content-end pt-3">
-                                                <input type="submit" className="btn btn-warning btn-lg ms-2" onClick={() => dispatch(RegistrationAction)} />
+                                                <input type="submit" className="btn btn-warning btn-lg ms-2" />
                                             </div>
 
                                         </div>
                                     </form>
+
                                 </div>
+                                {passwordMatch && <div className="alert alert-success" role="alert">
+                                    successfull registration please check your email to confirm your account
+                                </div>}
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
             <Footer />
         </>
 

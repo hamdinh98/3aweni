@@ -14,7 +14,7 @@ export const ERROR = "ERROR"
 export default function (state = initialState, action) {
 
     switch (action.type) {
-        case REGISTRATION_ACTION:
+        case LOGIN_ACTION:
             return {
                 ...state,
                 user: action.payload

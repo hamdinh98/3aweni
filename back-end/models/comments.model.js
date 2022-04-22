@@ -14,7 +14,6 @@ const commentsSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    replies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
     creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     Project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' }
 })
