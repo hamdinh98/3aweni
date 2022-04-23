@@ -1,6 +1,6 @@
 
 import axios from "axios"
-import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION } from "../reducers/AuthReducer"
+import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION, SET_CONNECTED } from "../reducers/AuthReducer"
 export const RegistrationAction = (user) => dispatch => {
     axios.post("http://localhost:5000/signIn", user, {
         headers: {
@@ -8,13 +8,12 @@ export const RegistrationAction = (user) => dispatch => {
         }
     })
         .then(result => {
-            // console.log(result.data);
             dispatch({
                 type: REGISTRATION_ACTION,
             })
         })
         .catch(err => {
-            console.log(err);
+            // console.log(err);
             dispatch({
                 type: ERROR,
                 payload: err.response
@@ -36,4 +35,12 @@ export const LoginAction = (credentials) => dispatch => {
                 payload: err.response
             })
         })
+}
+
+
+export const setConnected = () => dispatch => {
+    dispatch({
+        type: SET_CONNECTED
+    })
+
 }

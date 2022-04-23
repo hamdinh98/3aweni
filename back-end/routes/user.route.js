@@ -10,7 +10,7 @@ const { ROLES, inRole } = require('../security/RoleMiddleware')
 
 route.post('/signIn', upload.any("imgProfile"), registration)
 route.post('/login', login)
-route.get('/token', generateAccessToken)
+route.post('/token', generateAccessToken)
 route.delete('/logout', logout)
 route.get('/confirm/:id', confirm)
 

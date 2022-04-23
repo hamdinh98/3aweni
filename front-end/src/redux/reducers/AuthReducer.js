@@ -10,6 +10,7 @@ const initialState = {
 export const LOGIN_ACTION = "LOGIN";
 export const REGISTRATION_ACTION = "REGISTRATION";
 export const ERROR = "ERROR"
+export const SET_CONNECTED = "SET_CONNECTED"
 
 export default function (state = initialState, action) {
 
@@ -26,6 +27,11 @@ export default function (state = initialState, action) {
         case ERROR:
             return {
                 error: action.payload
+            }
+        case SET_CONNECTED:
+            return {
+                ...state,
+                isConnected: true
             }
         default:
             return state

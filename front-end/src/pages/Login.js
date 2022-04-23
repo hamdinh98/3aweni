@@ -13,8 +13,9 @@ const Login = () => {
     const navigate = useNavigate()
     const submit = (data) => {
         dispatch(LoginAction(data))
-        localStorage.setItem('refresh-token', AuthState.user.refreshToken)
+        AuthState.isConnected && localStorage.setItem('authTokens', JSON.stringify(AuthState.user))
         AuthState.isConnected && navigate('/')
+
         console.log(AuthState);
     }
 
