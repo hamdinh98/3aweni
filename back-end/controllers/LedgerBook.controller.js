@@ -6,13 +6,15 @@ const displayLedger = async (req,res)=>{
     if (!req.params.idProjet)
         return res.status(400).json("_id project required")
 
-    try {
+
+
+    /*try {
         const ledger = await LedgerBook.findById(req.params.idProjet)
         res.status(200).json(ledger);
     }
     catch (error) {
         res.status(404).json({message:error.message});
-    }
+    }*/
 }
 
 
@@ -74,4 +76,19 @@ const addIncome = async (req,res)=>
         })
 }
 
-module.exports ={displayLedger,createLedger,addExpense,addIncome};
+
+const displayExpenses = async (req,res)=>{
+
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required")
+
+    try {
+        const expenses = await LedgerBook.findById(req.params.idProjet,{expenses})
+        res.status(200).json(expenses);
+    }
+    catch (error) {
+        res.status(404).json({message:error.message});
+    }
+}
+
+module.exports ={displayLedger,createLedger,addExpense,addIncome,displayExpenses};

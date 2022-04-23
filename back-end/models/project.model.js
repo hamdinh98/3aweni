@@ -18,7 +18,7 @@ const projectSchema = new mongoose.Schema({
 
     enable: {
         type: Number,
-        default: 1
+        default: 0
     },
 
     askedAmount: {
