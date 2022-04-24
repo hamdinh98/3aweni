@@ -6,6 +6,7 @@ import ProjectDetails from './pages/ProjectDetails';
 
 import ProjectsList from './pages/ProjectsList';
 import AboutUs from './pages/AboutUs';
+import Donate from './pages/Donate';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import NotFound404 from './pages/NotFound404';
@@ -37,7 +38,7 @@ export default function App() {
                 <Route path='/projectDetails/*' element={<ProjectDetails />} />
                 <Route path='/ProjectsList' element={<ProjectsList />} />
                 <Route path='/LedgerBook' element={<LedgerBook />} />
-
+                <Route path='/Donate' element={<Donate />} />
                 <Route exact path='/' element={<PrivateRoute />}>
                     <Route path='/Dashboard/*' element={<Dashboard />} />
                 </Route>

@@ -65,7 +65,7 @@ const Discussion = () => {
                             </div>
                             <div className="col-xl-12">
                                 <div className="review-btn">
-                                    <a className="theme_btn theme_btn_bg" href="contact.html">send
+                                    <a className="theme_btn theme_btn_bg" href="donate.html">send
                                         review <i className="far fa-arrow-right"></i></a>
                                 </div>
                             </div>
