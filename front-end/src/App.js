@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, { useEffect } from "react";
+import React from "react";
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 import ProjectsList from './pages/ProjectsList';
@@ -14,17 +14,11 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Test from './pages/test';
 import PrivateRoute from './utils/PrivateRoute';
-import { useSelector, useDispatch } from 'react-redux';
-import { setConnected } from "./redux/actions/AuthActions"
+
+import PublicRouteHandler from './utils/PublicRouteHandler';
 
 export default function App() {
-    const Auth = useSelector(state => state.Auth)
-    const dispatch = useDispatch()
-    useEffect(() => {
 
-        localStorage.getItem('authTokens') && !Auth.isConnected && dispatch(setConnected()) && console.log("test APP");
-    }, [])
-    console.log(Auth.isConnected);
 
     return (
         <BrowserRouter>
@@ -38,14 +32,22 @@ export default function App() {
                 <Route path='/ProjectsList' element={<ProjectsList />} />
                 <Route path='/LedgerBook' element={<LedgerBook />} />
                 <Route path='/Donate' element={<Donate />} />
-                <Route exact path='/' element={<PrivateRoute />}>
-                    <Route path='/Dashboard/*' element={<Dashboard />} />
+                <Route exact path='/' element={<PrivateRoute />} />
+                <Route exact path='/' element={<PublicRouteHandler />} >
+                    <Route path='/Registration' element={<Registration />} />
+                    <Route path='/login' element={<Login />} />
                 </Route>
-                <Route path='/test' element={<Test />} />
-                <Route exact path='/' element={<PrivateRoute />}>
-                </Route>
-                <Route path='*' element={<NotFound404 />} />
 
+                <Route exact path='/' element={<PrivateRoute />} >
+                    <Route path='/projectDetails/*' element={<ProjectDetails />} />
+                    <Route path='/ProjectsList' element={<ProjectsList />} />
+                    <Route path='/LedgerBook' element={<LedgerBook />} />
+                    <Route path='/Dashboard/*' element={<Dashboard />} />
+                    <Route path='/test' element={<Test />} />
+                </Route>
+
+
+                <Route path='*' element={<NotFound404 />} />
             </Routes>
             {/*<Footer />*/}
         </BrowserRouter>

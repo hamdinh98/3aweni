@@ -1,12 +1,21 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
+import { setConnected } from '../redux/actions/AuthActions';
 
 const PrivateRoute = () => {// If authorized, return an outlet that will render child elements
     // If not, return element that will navigate to login page
-    const Auth = useSelector(state => state.Auth)
-
-    return Auth.isConnected ? <Outlet /> : <Navigate to="/login" />;
+    // console.log(localStorage ? true : false);
+    // const dispatch = useDispatch()
+    // useEffect(() => {
+    //     if (!localStorage.getItem('user')) {
+    //         console.log("localstorage not found");
+    //         dispatch(setConnected())
+    //     }
+    // })
+    // console.log(isConnected);
+    // console.log(props.isConnected);
+    return localStorage.getItem('user') ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default PrivateRoute
