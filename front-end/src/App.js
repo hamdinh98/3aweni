@@ -3,10 +3,9 @@ import './App.css';
 import React, { useEffect } from "react";
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
-
 import ProjectsList from './pages/ProjectsList';
 import AboutUs from './pages/AboutUs';
-import Donate from './pages/Donate';
+import Donate from './pages/Donate/Donate';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import NotFound404 from './pages/NotFound404';
