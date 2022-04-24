@@ -3,6 +3,7 @@
 const initialState = {
     isConnected: false,
     user: {},
+    tokens: {},
     error: {}
 
 }
@@ -11,6 +12,8 @@ export const LOGIN_ACTION = "LOGIN";
 export const REGISTRATION_ACTION = "REGISTRATION";
 export const ERROR = "ERROR"
 export const SET_CONNECTED = "SET_CONNECTED"
+export const LOGOUT = "LOGOUT"
+export const PROFILE = "PROFILE"
 
 export default function (state = initialState, action) {
 
@@ -22,7 +25,8 @@ export default function (state = initialState, action) {
         case LOGIN_ACTION:
             return {
                 isConnected: true,
-                user: action.payload,
+                tokens: action.payload,
+                user: action.user
             }
         case ERROR:
             return {
@@ -33,6 +37,13 @@ export default function (state = initialState, action) {
                 ...state,
                 isConnected: true
             }
+        case LOGOUT:
+            return {
+                isConnected: false
+            }
+
+
+
         default:
             return state
     }

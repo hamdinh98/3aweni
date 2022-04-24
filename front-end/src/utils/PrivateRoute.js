@@ -1,12 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 
-const PrivateRoute = () => {
-    const auth = null; // determine if authorized, from context or however you're doing it
-
-    // If authorized, return an outlet that will render child elements
+const PrivateRoute = () => {// If authorized, return an outlet that will render child elements
     // If not, return element that will navigate to login page
-    return auth ? <Outlet /> : <Navigate to="/login" />;
+    const Auth = useSelector(state => state.Auth)
+
+    return Auth.isConnected ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default PrivateRoute

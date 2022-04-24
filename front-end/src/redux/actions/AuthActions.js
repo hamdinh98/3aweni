@@ -1,6 +1,8 @@
 
 import axios from "axios"
-import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION, SET_CONNECTED } from "../reducers/AuthReducer"
+import JWT from 'jwt-decode'
+import axiosInstance from "../../utils/axiosInterceptor"
+import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION, SET_CONNECTED, LOGOUT, PROFILE } from "../reducers/AuthReducer"
 export const RegistrationAction = (user) => dispatch => {
     axios.post("http://localhost:5000/signIn", user, {
         headers: {
@@ -26,7 +28,8 @@ export const LoginAction = (credentials) => dispatch => {
         .then(result => {
             dispatch({
                 type: LOGIN_ACTION,
-                payload: result.data
+                payload: { accessToken: result.data.accessToken, refreshToken: result.data.refreshToken },
+                user: result.data.user
             })
         })
         .catch(err => {
@@ -43,4 +46,20 @@ export const setConnected = () => dispatch => {
         type: SET_CONNECTED
     })
 
+}
+
+
+export const logout = () => dispatch => {
+    const authTokens = JSON.parse(localStorage.getItem('authTokens'))
+    axiosInstance.delete("/logout", {
+        headers: {
+            'refresh-token': authTokens.refreshToken
+        }
+    })
+        .then(result => {
+            dispatch({
+                type: LOGOUT
+            })
+            localStorage.removeItem('authTokens')
+        })
 }

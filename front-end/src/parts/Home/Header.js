@@ -18,8 +18,8 @@ const Header = () => {
 
                     <div className="navbar navbar-light">
 
-                        {/* <div className="site-logo"><Link to="/"><img src="/3aweni.png" alt="Funden" /></Link>
-                        </div> */}
+                        <div className="site-logo"><Link to="/"><img src="/3aweni.png" alt="Funden" /></Link>
+                        </div>
 
                         <NavbarMenu />
                         <div className="d-flex justify-content-end">

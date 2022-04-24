@@ -75,7 +75,7 @@ const login = async (req, res) => {
     if (!isValid) {
         return res.status(400).json({ error: errors })
     } else {
-        const userfounded = await User.findOne({ email: email })
+        const userfounded = await User.findOne({ email: email }, { enable: 0, confirm: 0, Role: 0, createdAt: 0, updatedAt: 0 }).po
 
         if (!userfounded) {
             return res.status(400).json({ error: "Invalid credentials" })
@@ -120,11 +120,10 @@ const login = async (req, res) => {
         refreshTokens.push(refreshToken);
         console.log(refreshTokens);
 
-
-
         return res.json({
             accessToken,
             refreshToken,
+            user: userfounded
         });
         // console.log(refreshTokens);
     }
@@ -140,7 +139,7 @@ const generateAccessToken = async (req, res) => {
         return res.status(401).json({ msg: "Token not found", });
     }
 
-    console.log(req.body.refresh);
+    //console.log(req.body.refresh);
 
     // If token does not exist, send error message
     if (!refreshTokens.includes(req.body.refresh)) {
@@ -158,7 +157,7 @@ const generateAccessToken = async (req, res) => {
             req.body.refresh,
             process.env.REFRESH_TOKEN_SECRET
         );
-        console.log(`user generate token ${user}`);
+        //console.log(`user generate token ${user}`);
         const { email } = user;
         const accessToken = JWT.sign(
             { email },

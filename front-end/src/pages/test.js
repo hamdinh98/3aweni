@@ -1,15 +1,11 @@
-import axiosInstance from "../utils/axiosInterceptor"
+import React from "react"
 const Test = () => {
-    var data;
-    const fechData = async () => {
-        data = await axiosInstance.get("/private")
 
-    }
     return (
         <>
             <h2>Test API axios interceptor</h2>
-            <button onClick={fechData}>TEST</button>
-            <p>{data?.data}</p>
+            <button>TEST</button>
+            <p>profile : {localStorage.getItem('user')}</p>
         </>
     )
 }

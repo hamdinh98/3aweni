@@ -4,12 +4,12 @@ const mongoose = require('mongoose')
 const User = require('../models/user.model')
 const Donation = require("../models/donation.model");
 const Ledger = require('../models/LedgerBook.model');
-
+const Comment = require('../models/comments.model')
 
 const getProject = async (req, res) => {
 
     try {
-        const projects = await Project.find({enable:1}).populate("Founder")
+        const projects = await Project.find({ enable: 1 }).populate("Founder")
             .populate("donations").populate("hasLedger").populate("comments");
         res.status(200).json(projects);
     }
@@ -97,9 +97,11 @@ const deleteProject = (req, res) => {
             .then(result2 => {
                 // lorsque on supprime un projet il faut supprimer ses donts 
                 Donation.deleteMany({ Project: req.params.idProjet })
-                    .then(re => {
-
-                        return res.status(200).json("project deleted successfully")
+                    .then(async re => {
+                        const deleted = await Comment.deleteMany({ Project: req.params.idProject })
+                        if (deleted) {
+                            return res.status(200).json("project deleted successfully")
+                        }
                     })
             })
             .catch(error => {
@@ -125,7 +127,7 @@ const getFundingProgress = async (req, res) => {
 
         sum += dont.Money;
     }
-    return res.status(200).json({ progress: `${(sum / askedAmount) * 100} %`,somme:sum })
+    return res.status(200).json({ progress: `${(sum / askedAmount) * 100} %`, somme: sum })
 }
 
 
@@ -193,7 +195,7 @@ const getListOfBackers = async (req, res) => {
 }
 
 
-const distributionByGender = async (req,res) => {
+const distributionByGender = async (req, res) => {
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
     Donation.aggregate([
@@ -204,25 +206,22 @@ const distributionByGender = async (req,res) => {
         var totalFemale = 0;
         for (var i = 0; i < dons.length; i++) {
 
-            const {gender} = await User.findOne({ _id: dons[i].Backer }, { _id: 0, gender:1 });
+            const { gender } = await User.findOne({ _id: dons[i].Backer }, { _id: 0, gender: 1 });
             totalProj += dons[i].Money;
 
-            if (gender=="male")
-            {
+            if (gender == "male") {
                 totalMale += dons[i].Money;
             }
-            else
-            {
+            else {
                 totalFemale += dons[i].Money;
             }
         }
-        return res.status(200).json({totalProj:totalProj,totalMale:totalMale,totalFemale:totalFemale})
-        }
+        return res.status(200).json({ totalProj: totalProj, totalMale: totalMale, totalFemale: totalFemale })
+    }
     )
 }
 
-const distributionByAgeGroup = async (req,res) =>
-{
+const distributionByAgeGroup = async (req, res) => {
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
 
@@ -231,43 +230,40 @@ const distributionByAgeGroup = async (req,res) =>
         { $match: { "Project": mongoose.Types.ObjectId(req.params.idProjet) } },
 
     ]).then(async dons => {
-            const today = new Date();
-            var totalProj = 0;
-            var young = 0;
-            var adult = 0;
-            var old = 0;
-            for (var i = 0; i < dons.length; i++) {
+        const today = new Date();
+        var totalProj = 0;
+        var young = 0;
+        var adult = 0;
+        var old = 0;
+        for (var i = 0; i < dons.length; i++) {
 
-                const name = await User.findOne({ _id: dons[i].Backer }, { _id: 0, birthDate:1 });
-                var age = today.getFullYear() - name.birthDate.getFullYear();
+            const name = await User.findOne({ _id: dons[i].Backer }, { _id: 0, birthDate: 1 });
+            var age = today.getFullYear() - name.birthDate.getFullYear();
 
-                totalProj += dons[i].Money;
+            totalProj += dons[i].Money;
 
-                if(age<=25)
-                {
-                    young += dons[i].Money;
-                }
-                else if(age>25 && age<=45)
-                {
-                    adult += dons[i].Money;
-                }
-                else
-                {
-                    old += dons[i].Money;
-                }
+            if (age <= 25) {
+                young += dons[i].Money;
             }
-            return res.status(200).json({totalProj:totalProj,young:young,adults:adult,old:old})
+            else if (age > 25 && age <= 45) {
+                adult += dons[i].Money;
+            }
+            else {
+                old += dons[i].Money;
+            }
         }
+        return res.status(200).json({ totalProj: totalProj, young: young, adults: adult, old: old })
+    }
     )
 }
 
 
-const enableProject =(req,res)=>{
+const enableProject = (req, res) => {
 
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
 
-    Project.updateOne({_id:req.params.idProjet},{$set:{enable:1}})
+    Project.updateOne({ _id: req.params.idProjet }, { $set: { enable: 1 } })
         .then(
             result => res.status(200).json({ msg: "confirmed" }))
         .catch(err => res.status(500).json({ msg: "something is wrong !" })
@@ -276,5 +272,7 @@ const enableProject =(req,res)=>{
 
 // somme mta3 el money na7iha mel methodes lo5rin w 7otha fil donation (kol user 3andou entré wa7da w dima te7seb total)
 
-module.exports = { getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth, getListOfBackers,
-                    distributionByGender,distributionByAgeGroup,enableProject};
+module.exports = {
+    getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth, getListOfBackers,
+    distributionByGender, distributionByAgeGroup, enableProject
+};

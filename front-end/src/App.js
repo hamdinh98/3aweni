@@ -21,8 +21,10 @@ export default function App() {
     const Auth = useSelector(state => state.Auth)
     const dispatch = useDispatch()
     useEffect(() => {
-        localStorage.getItem('authTokens') && !Auth.isConnected && dispatch(setConnected())
+
+        localStorage.getItem('authTokens') && !Auth.isConnected && dispatch(setConnected()) && console.log("test APP");
     }, [])
+    console.log(Auth.isConnected);
 
     return (
         <BrowserRouter>
@@ -39,8 +41,8 @@ export default function App() {
                 <Route exact path='/' element={<PrivateRoute />}>
                     <Route path='/Dashboard/*' element={<Dashboard />} />
                 </Route>
+                <Route path='/test' element={<Test />} />
                 <Route exact path='/' element={<PrivateRoute />}>
-                    <Route path='/test' element={<Test />} />
                 </Route>
                 <Route path='*' element={<NotFound404 />} />
 
