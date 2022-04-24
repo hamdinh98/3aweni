@@ -51,15 +51,12 @@ export const setConnected = () => dispatch => {
 
 export const logout = () => dispatch => {
     const authTokens = JSON.parse(localStorage.getItem('authTokens'))
-    axiosInstance.delete("/logout", {
-        headers: {
-            'refresh-token': authTokens.refreshToken
-        }
-    })
+    axiosInstance.delete("/logout", authTokens)
         .then(result => {
             dispatch({
                 type: LOGOUT
             })
             localStorage.removeItem('authTokens')
+            localStorage.removeItem('user')
         })
 }

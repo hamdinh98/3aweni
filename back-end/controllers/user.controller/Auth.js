@@ -75,7 +75,7 @@ const login = async (req, res) => {
     if (!isValid) {
         return res.status(400).json({ error: errors })
     } else {
-        const userfounded = await User.findOne({ email: email }, { enable: 0, confirm: 0, Role: 0, createdAt: 0, updatedAt: 0 }).po
+        const userfounded = await User.findOne({ email: email })
 
         if (!userfounded) {
             return res.status(400).json({ error: "Invalid credentials" })
@@ -178,8 +178,7 @@ const generateAccessToken = async (req, res) => {
 
 
 const logout = (req, res) => {
-    const refreshToken = req.header("refresh-token");
-    refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+    refreshTokens = refreshTokens.filter((token) => token !== req.body);
     console.log(refreshTokens);
     return res.status(204).json({ msg: "logout successfully" });
 
