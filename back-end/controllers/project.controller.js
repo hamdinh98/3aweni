@@ -166,14 +166,12 @@ const getListOfBackers = async (req, res) => {
     Donation.aggregate([
 
         { $match: { "Project": mongoose.Types.ObjectId(req.params.idProjet) } },
-
         {
             $project: {
                 Backer: '$Backer',
                 Money: '$Money',
             }
         }
-
     ]).then(async dons => {
         console.log(dons);
         for (var i = 0; i < dons.length; i++) {

@@ -1,20 +1,23 @@
 const LedgerBook = require ('../models/LedgerBook.model');
-const Project = require('../models/project.model')
+const Project = require('../models/project.model');
+const Donation = require("../models/donation.model");
 
 const displayLedger = async (req,res)=>{
-
     if (!req.params.idProjet)
-        return res.status(400).json("_id project required")
+        return res.status(400).json("_id project required");
+    const project =await Project.findById(req.params.idProjet).populate("donations");
+    const ledger = await LedgerBook.findOne({forProject:req.params.idProjet});
+        console.log(project)
+    project.donations.map((don)=>{
+        ledger.incomes.push({
+            incomeAmount:don.Money,
+            source:"donation"
+        })
 
+    });
+        await LedgerBook.findOneAndUpdate({forProject:req.params.idProjet},{$set:{incomes:ledger.incomes}});
 
-
-    /*try {
-        const ledger = await LedgerBook.findById(req.params.idProjet)
-        res.status(200).json(ledger);
-    }
-    catch (error) {
-        res.status(404).json({message:error.message});
-    }*/
+    return res.status(200).json(ledger);
 }
 
 
@@ -23,24 +26,50 @@ const displayLedger = async (req,res)=>{
 const createLedger = (req,res)=>{
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
-    if (!req.body)
-        return res.status(400).json("body required");
 
-    req.body.forProject=req.params.idProjet;
+    Project.findOne({_id:req.params.idProjet}).then(project=>{
+        console.log(!project.hasLedger)
+        if(!project.hasLedger)
+        {            req.body.forProject=req.params.idProjet;
+            const ledger={
+                incomes:[],
+                expenses:[],
+                forProject:req.params.idProjet
+            }
+            LedgerBook.create(ledger,(error, result) => {
+                if (error)
+                    return res.status(500).json(error);
+                Project.findByIdAndUpdate(req.params.idProjet,{$set:{hasLedger:result._id}})
+                    .then(result2=>{
+                        return res.status(200).json("ledger book linked successfully")
 
-    LedgerBook.create(req.body,(error, result) => {
-        if (error)
+                    })
+                    .catch(error=>{
+                        return res.status(500).json(error);
+                    })
+            })
+        }
+
+        else{
+            return res.status(400).json("this project already has ledger !");
+        }
+    })}
+
+const deleteLedger = (req,res)=>{
+    if (!req.params.idLedger)
+        return res.status(400).json("_id project required");
+
+    LedgerBook.findByIdAndDelete(req.params.idLedger,async (error,result)=>{
+        if(error){
             return res.status(500).json(error);
-        Project.findByIdAndUpdate(req.params.idProjet,{$set:{hasLedger:result._id}})
-            .then(result2=>{
-                return res.status(200).json("ledger book linked successfully")
+        }
 
-            })
-            .catch(error=>{
-                return res.status(500).json(error);
-            })
+        await Project.findOneAndUpdate({_id:result.forProject},{$unset:{hasLedger:1}})
+
+        return res.status(200).json("success")
     })
 }
+
 
 const addExpense = async (req,res)=>
 {
@@ -77,18 +106,5 @@ const addIncome = async (req,res)=>
 }
 
 
-const displayExpenses = async (req,res)=>{
 
-    if (!req.params.idProjet)
-        return res.status(400).json("_id project required")
-
-    try {
-        const expenses = await LedgerBook.findById(req.params.idProjet,{expenses})
-        res.status(200).json(expenses);
-    }
-    catch (error) {
-        res.status(404).json({message:error.message});
-    }
-}
-
-module.exports ={displayLedger,createLedger,addExpense,addIncome,displayExpenses};
+module.exports ={displayLedger,createLedger,addExpense,addIncome,deleteLedger};
