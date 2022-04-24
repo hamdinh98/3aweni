@@ -1,9 +1,13 @@
-import NavbarMenu from "../../components/Home/NavbarMenu"
 
 import Login from "../../components/Home/LoginButton"
 import SignUp from "../../components/Home/SignupButton"
 import { Link } from "react-router-dom"
+import NavBarProfile from "../../components/Home/NavBarProfile"
+import NavbarMenu from '../../components/Home/NavbarMenu';
+import { useSelector } from "react-redux";
 const Header = () => {
+
+    const { isConnected } = useSelector(state => state.Auth)
     return (
 
         <header
@@ -14,19 +18,20 @@ const Header = () => {
 
                     <div className="navbar navbar-light">
 
-                        <div className="site-logo"><Link to="/"><img src="/3aweni.png" alt="Funden" /></Link>
+                        <div className="site-logo"><Link to="/"><img src="/assets/img/logo/logo_small.png" alt="Funden" /></Link>
                         </div>
 
                         <NavbarMenu />
                         <div className="d-flex justify-content-end">
-                            <Login />
-                            <SignUp />
+
+                            {!localStorage.getItem('user') ? <><Login /><SignUp /></>
+                                : <NavBarProfile />}
                         </div>
 
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
 
 
 

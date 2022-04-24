@@ -13,8 +13,13 @@ const Login = () => {
     const navigate = useNavigate()
     const submit = (data) => {
         dispatch(LoginAction(data))
-        localStorage.setItem('refresh-token', AuthState.user.refreshToken)
-        AuthState.isConnected && navigate('/')
+
+        // si la globale state isConnected== true donc on va stocker tokens dans localstorage
+        AuthState.isConnected && localStorage.setItem('authTokens', JSON.stringify(AuthState.tokens))
+        AuthState.isConnected && localStorage.setItem('user', JSON.stringify(AuthState.user))
+        // wa9t eli yetsab token f localstorage yaamel redirection lel page home
+        localStorage.getItem('authTokens') && navigate('/')
+
         console.log(AuthState);
     }
 

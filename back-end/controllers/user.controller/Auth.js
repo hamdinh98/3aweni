@@ -50,20 +50,8 @@ const registration = (req, res) => {
                         newUser.password = hash;
                         User.create(newUser)
                             .then(async u => {
-                                const accessToken = await JWT.sign({ user: u.email }, process.env.ACCESS_TOKEN_SECRET, {
-                                    expiresIn: '15', algorithm: 'HS256'
-                                })
-                                const refreshToken = await JWT.sign({ user: u.email }, process.env.REFRESH_TOKEN_SECRET, {
-                                    expiresIn: '2h', algorithm: 'HS256'
-                                })
-                                refreshTokens.push(refreshToken)
-
-                                console.log(refreshTokens);
                                 mailer(u)
-                                res.status(200).json({
-                                    accessToken,
-                                    refreshToken,
-                                });
+                                res.status(200).json("successfull registration");
                             })
 
                     })
@@ -112,28 +100,30 @@ const login = async (req, res) => {
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "1h",
+                expiresIn: "5s",
             }
         );
 
         const refreshToken = await JWT.sign(
-            { email: email },
+            {
+                email: email,
+                role: userfounded.role
+            },
             process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "2h",
+                expiresIn: "90d",
             }
         );
 
 
         // Set refersh token in refreshTokens array
         refreshTokens.push(refreshToken);
-
-
+        console.log(refreshTokens);
 
         return res.json({
             accessToken,
             refreshToken,
-            userfounded
+            user: userfounded
         });
         // console.log(refreshTokens);
     }
@@ -143,22 +133,17 @@ const login = async (req, res) => {
 
 
 const generateAccessToken = async (req, res) => {
-    const refreshToken = req.header("refresh-token");
 
     // If token is not provided, send error message
-    if (!refreshToken) {
-        res.status(401).json({
-            errors: [
-                {
-                    msg: "Token not found",
-                },
-            ],
-        });
+    if (!req.body.refresh) {
+        return res.status(401).json({ msg: "Token not found", });
     }
 
+    //console.log(req.body.refresh);
+
     // If token does not exist, send error message
-    if (!refreshTokens.includes(refreshToken)) {
-        res.status(403).json({
+    if (!refreshTokens.includes(req.body.refresh)) {
+        return res.status(403).json({
             errors: [
                 {
                     msg: "Invalid refresh token",
@@ -168,20 +153,20 @@ const generateAccessToken = async (req, res) => {
     }
 
     try {
-        const user = await JWT.verify(
-            refreshToken,
+        const user = JWT.verify(
+            req.body.refresh,
             process.env.REFRESH_TOKEN_SECRET
         );
-
+        //console.log(`user generate token ${user}`);
         const { email } = user;
-        const accessToken = await JWT.sign(
+        const accessToken = JWT.sign(
             { email },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "10s" }
+            { expiresIn: "5s" }
         );
-        res.json({ accessToken });
+        return res.json(accessToken);
     } catch (error) {
-        res.status(403).json({
+        return res.status(403).json({
             errors: [
                 {
                     msg: "Invalid token",
@@ -193,8 +178,7 @@ const generateAccessToken = async (req, res) => {
 
 
 const logout = (req, res) => {
-    const refreshToken = req.header("refresh-token");
-    refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+    refreshTokens = refreshTokens.filter((token) => token !== req.body);
     console.log(refreshTokens);
     return res.status(204).json({ msg: "logout successfully" });
 

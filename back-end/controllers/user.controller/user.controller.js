@@ -138,6 +138,7 @@ const modifiePassword = async (req, res) => {
 
 
 const profile = (req, res) => {
+    // console.log(req.user);
     return res.status(200).json(req.user)
 }
 // as a donor, i can see statistics about my spending and the number of projects i backed

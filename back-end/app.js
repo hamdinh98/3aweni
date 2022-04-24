@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const userRoute = require('./routes/user.route');
 const projectRoute = require('./routes/project.route');
 const commentsRoute = require('./routes/comments.route')
-
+const CategoryProjectRoute = require("./routes/Category.route")
 const badgeCategoryRoute = require('./routes/Badge.route');
 const ledgerBookRoute = require('./routes/LedgerBook.route');
 const cors = require('cors')
@@ -25,7 +25,7 @@ app.use(logger('dev'))
 
 app.use(userRoute);
 app.use(passport.initialize())
-
+app.use(CategoryProjectRoute)
 app.use(projectRoute);
 app.use(badgeCategoryRoute);
 app.use(ledgerBookRoute);
