@@ -24,8 +24,7 @@ const IncomeForm =() =>{
                             <div className="text-center pt-1 mb-5 pb-1 d-flex justify-content-center align-items-center">
                                 <button
                                     className="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3 col-3"
-                                    type="button">Add Income
-                                </button>
+                                    type="button">Add Income</button>
 
                             </div>
 
