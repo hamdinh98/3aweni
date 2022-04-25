@@ -12,7 +12,6 @@ import NotFound404 from './pages/NotFound404';
 import LedgerBook from './pages/LedgerBook';
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Test from './pages/test';
 import PrivateRoute from './utils/PrivateRoute';
 
 import PublicRouteHandler from './utils/PublicRouteHandler';
@@ -47,7 +46,6 @@ export default function App() {
                     <Route path='/ProjectsList' element={<ProjectsList />} />
                     <Route path='/LedgerBook' element={<LedgerBook />} />
                     <Route path='/Dashboard/*' element={<Dashboard />} />
-                    <Route path='/test' element={<Test />} />
                 </Route>
 
 

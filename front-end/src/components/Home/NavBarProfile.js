@@ -1,21 +1,17 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { logout } from "../../redux/actions/AuthActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 const NavBarProfile = () => {
     const dispatch = useDispatch()
     const datauser = JSON.parse(localStorage.getItem('user'))
-    const [islogout, setIslogout] = useState(false)
+    const Auth = useSelector(state => state.Auth)
 
     const logoutHandler = () => {
         dispatch(logout())
-        setIslogout(!islogout)
-        Navigate('/')
     }
-    useEffect(() => {
-        console.log("test");
-    }, [logout])
+
 
 
     return (
@@ -35,6 +31,9 @@ const NavBarProfile = () => {
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <button className="dropdown-item" href="#"><Link to="/profile">Profile</Link></button>
+
+                            {Auth?.user?.Role === 'ADMIN' && <button className="dropdown-item"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
+
                             <button className="dropdown-item" onClick={logoutHandler}>Log Out</button>
                         </div>
                     </li>

@@ -6,8 +6,8 @@ import NavBarProfile from "../../components/Home/NavBarProfile"
 import NavbarMenu from '../../components/Home/NavbarMenu';
 import { useSelector } from "react-redux";
 const Header = () => {
-
     const Auth = useSelector(state => state.Auth)
+
     return (
 
         <header
@@ -26,10 +26,6 @@ const Header = () => {
 
                             {!Auth.isConnected ? <><Login /><SignUp /></>
                                 : <NavBarProfile />}
-                            {console.log(Auth)}
-                            <div>
-                                {Auth?.user?.Role === 'ADMIN' && <button className="btn btn-primary"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
-                            </div>
                         </div>
 
 
