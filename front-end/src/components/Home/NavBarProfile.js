@@ -1,16 +1,19 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { logout } from "../../redux/actions/AuthActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 const NavBarProfile = () => {
     const dispatch = useDispatch()
     const datauser = JSON.parse(localStorage.getItem('user'))
 
+
     const logoutHandler = () => {
         dispatch(logout())
-        !localStorage.getItem('user') && Navigate('/')
+        Navigate('/')
+
     }
+
 
     return (
         <nav className="navbar navbar-dark  navbar-expand-sm">
@@ -28,8 +31,8 @@ const NavBarProfile = () => {
                             <img src={`../${datauser?.img}`} alt="Admin" className="rounded-circle" width="50" />
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a className="dropdown-item" href="#"><Link to="/profile">Profile</Link></a>
-                            <a className="dropdown-item" onClick={logoutHandler}>Log Out</a>
+                            <button className="dropdown-item" href="#"><Link to="/profile">Profile</Link></button>
+                            <button className="dropdown-item" onClick={logoutHandler}>Log Out</button>
                         </div>
                     </li>
                 </ul>
