@@ -26,7 +26,7 @@ const ProjectContent = () => {
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudatium totam rem aperiam, eaque ipsa quae ab ventore veritatis et quasi architecto beatae vitae dictsunt explicabo. Nemo enim ipsam voluptate voluptasit aspernatur aut odit aut fugit, sed quia cons</p>
             <ul className="cart-list d-sm-flex align-items-center">
 
-                <li><a className="theme_btn theme_btn_bg" href="contact.html"
+                <li><a className="theme_btn theme_btn_bg" href="Donate"
                     data-animation="fadeInLeft" data-delay=".5s">Donate now <i
                         className="far fa-arrow-right"></i></a>
                 </li>
