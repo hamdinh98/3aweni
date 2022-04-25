@@ -11,7 +11,6 @@ export const ERROR = "ERROR"
 
 export default function (state = initialState, action) {
 
-    console.log(state.data);
     switch (action.type) {
         case TOTAL_MONEY_DONATED:
             return {

@@ -7,7 +7,7 @@ import NavbarMenu from '../../components/Home/NavbarMenu';
 import { useSelector } from "react-redux";
 const Header = () => {
 
-    const { isConnected } = useSelector(state => state.Auth)
+    const Auth = useSelector(state => state.Auth)
     return (
 
         <header
@@ -24,10 +24,11 @@ const Header = () => {
                         <NavbarMenu />
                         <div className="d-flex justify-content-end">
 
-                            {!localStorage.getItem('user') ? <><Login /><SignUp /></>
+                            {!Auth.isConnected ? <><Login /><SignUp /></>
                                 : <NavBarProfile />}
+                            {console.log(Auth)}
                             <div>
-                                {JSON.parse(localStorage.getItem('user'))?.Role === 'ADMIN' && <button className="btn btn-primary"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
+                                {Auth?.user?.Role === 'ADMIN' && <button className="btn btn-primary"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
                             </div>
                         </div>
 

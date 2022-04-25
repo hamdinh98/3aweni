@@ -25,6 +25,7 @@ export const RegistrationAction = (user) => dispatch => {
 export const LoginAction = (credentials) => dispatch => {
     axios.post('http://localhost:5000/login', credentials)
         .then(result => {
+            console.log(result.data);
             dispatch({
                 type: LOGIN_ACTION,
                 payload: { accessToken: result.data.accessToken, refreshToken: result.data.refreshToken },

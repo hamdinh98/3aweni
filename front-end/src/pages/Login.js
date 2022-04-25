@@ -11,17 +11,18 @@ const Login = () => {
     const dispatch = useDispatch()
     const AuthState = useSelector(state => state.Auth)
     const navigate = useNavigate()
-    const submit = (data) => {
+    const submit = async (data) => {
         dispatch(LoginAction(data))
-
         // si la globale state isConnected== true donc on va stocker tokens dans localstorage
-        AuthState.isConnected && localStorage.setItem('authTokens', JSON.stringify(AuthState.tokens))
-        AuthState.isConnected && localStorage.setItem('user', JSON.stringify(AuthState.user))
         // wa9t eli yetsab token f localstorage yaamel redirection lel page home
-        localStorage.getItem('authTokens') && navigate('/')
-
         console.log(AuthState);
     }
+    useEffect(() => {
+        AuthState.isConnected && localStorage.setItem('authTokens', JSON.stringify(AuthState.tokens))
+        AuthState.isConnected && localStorage.setItem('user', JSON.stringify(AuthState.user))
+        localStorage.getItem('authTokens') && navigate('/')
+
+    }, [AuthState.isConnected])
 
     return (
         <div>

@@ -6,13 +6,16 @@ import { Link, Navigate } from "react-router-dom";
 const NavBarProfile = () => {
     const dispatch = useDispatch()
     const datauser = JSON.parse(localStorage.getItem('user'))
-
+    const [islogout, setIslogout] = useState(false)
 
     const logoutHandler = () => {
         dispatch(logout())
+        setIslogout(!islogout)
         Navigate('/')
-
     }
+    useEffect(() => {
+        console.log("test");
+    }, [logout])
 
 
     return (
