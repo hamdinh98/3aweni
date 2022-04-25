@@ -1,20 +1,23 @@
 
 import React from "react";
 import { logout } from "../../redux/actions/AuthActions";
-import { useDispatch } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 const NavBarProfile = () => {
     const dispatch = useDispatch()
     const datauser = JSON.parse(localStorage.getItem('user'))
+    const Auth = useSelector(state => state.Auth)
+
     const logoutHandler = () => {
         dispatch(logout())
-        !localStorage && Navigate('/')
-
     }
+
+
+
     return (
-        <nav className="navbar navbar-dark bg-dark navbar-expand-sm">
-            <a className="navbar-brand" href="#">
-                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo" />
+        <nav className="navbar navbar-dark  navbar-expand-sm">
+            <a className="navbar-brand text-info " href="#">
+
                 {datauser?.name}
             </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,11 +27,14 @@ const NavBarProfile = () => {
                 <ul className="navbar-nav">
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src={`../${datauser?.img}`} />
+                            <img src={`../${datauser?.img}`} alt="Admin" className="rounded-circle" width="50" />
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a className="dropdown-item" href="#">Profile</a>
-                            <a className="dropdown-item" onClick={logoutHandler}>Log Out</a>
+                            <button className="dropdown-item" href="#"><Link to="/profile">Profile</Link></button>
+
+                            {Auth?.user?.Role === 'ADMIN' && <button className="dropdown-item"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
+
+                            <button className="dropdown-item" onClick={logoutHandler}>Log Out</button>
                         </div>
                     </li>
                 </ul>

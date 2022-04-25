@@ -35,7 +35,7 @@ const registration = (req, res) => {
                     name: req.body.name,
                     email: req.body.email,
                     password: req.body.password,
-                    img: '/back-end/uploads/' + req.files[0].filename,
+                    img: '/uploads/' + req.files[0].filename,
                     birthDate: req.body.birthDate,
                     gender: req.body.gender,
                     country: req.body.country,
@@ -75,8 +75,8 @@ const login = async (req, res) => {
     if (!isValid) {
         return res.status(400).json({ error: errors })
     } else {
-        const userfounded = await User.findOne({ email: email })
-
+        const userfounded = await User.findOne({ email: email }).populate('donations')
+        // console.log(userfounded.donations);
         if (!userfounded) {
             return res.status(400).json({ error: "Invalid credentials" })
         }
@@ -143,6 +143,7 @@ const generateAccessToken = async (req, res) => {
 
     // If token does not exist, send error message
     if (!refreshTokens.includes(req.body.refresh)) {
+        console.log(refreshTokens);
         return res.status(403).json({
             errors: [
                 {

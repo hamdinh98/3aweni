@@ -1,8 +1,7 @@
 
 import axios from "axios"
-import JWT from 'jwt-decode'
 import axiosInstance from "../../utils/axiosInterceptor"
-import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION, SET_CONNECTED, LOGOUT, PROFILE } from "../reducers/AuthReducer"
+import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION, SET_CONNECTED, LOGOUT } from "../reducers/AuthReducer"
 export const RegistrationAction = (user) => dispatch => {
     axios.post("http://localhost:5000/signIn", user, {
         headers: {
@@ -26,6 +25,7 @@ export const RegistrationAction = (user) => dispatch => {
 export const LoginAction = (credentials) => dispatch => {
     axios.post('http://localhost:5000/login', credentials)
         .then(result => {
+            console.log(result.data);
             dispatch({
                 type: LOGIN_ACTION,
                 payload: { accessToken: result.data.accessToken, refreshToken: result.data.refreshToken },

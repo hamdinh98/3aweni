@@ -171,7 +171,7 @@ const Registration = () => {
                                     </form>
 
                                 </div>
-                                {AuthState.user && <div className="alert alert-success" role="alert">
+                                {!AuthState.error && <div className="alert alert-success" role="alert">
                                     successfull registration please check your email to confirm your account
                                 </div>}
                                 {AuthState.error && <div className="alert alert-warning" role="alert">
