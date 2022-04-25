@@ -141,25 +141,9 @@ const profile = (req, res) => {
     // console.log(req.user);
     return res.status(200).json(req.user)
 }
-// as a donor, i can see statistics about my spending and the number of projects i backed
-// id user est récupérer de token 
-const totalMoneyBacked = (req, res) => {
-    Donation.find({
-        '_id': req.user.donations
-    }, { _id: 0, Money: 1 }, function (err, docs) {
-        if (err)
-            return res.status(500).json(err)
 
-        var total = 0;
-        for (let i = 0; i < docs.length; i++) {
-            total += docs[i].Money
-        }
-        return res.status(200).json({ total: total })
-    });
 
-}
-
-module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, profile, totalMoneyBacked };
+module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, profile };
 
 
 

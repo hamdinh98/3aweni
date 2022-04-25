@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 
 
@@ -6,7 +7,7 @@ const NavbarMenu = () => {
         <div className="nav-menu menu____">
             <ul>
 
-                <li><a href="contact">what we do </a></li>
+                <li><a href="contact"><Link to="/about">what we do</Link> </a></li>
 
                 <li><a href="#">Start a Campaign
 

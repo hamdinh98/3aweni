@@ -16,6 +16,7 @@ import Test from './pages/test';
 import PrivateRoute from './utils/PrivateRoute';
 
 import PublicRouteHandler from './utils/PublicRouteHandler';
+import Profile from './pages/profile/Profile';
 
 export default function App() {
 
@@ -33,12 +34,15 @@ export default function App() {
                 <Route path='/LedgerBook' element={<LedgerBook />} />
                 <Route path='/Donate' element={<Donate />} />
                 <Route exact path='/' element={<PrivateRoute />} />
+
                 <Route exact path='/' element={<PublicRouteHandler />} >
                     <Route path='/Registration' element={<Registration />} />
                     <Route path='/login' element={<Login />} />
                 </Route>
 
+                  // hotou fi wost route hedi les routes eli yetaalbou andou user ykoun connecté bech yaccedilhom
                 <Route exact path='/' element={<PrivateRoute />} >
+                    <Route path='/profile' element={<Profile />} />
                     <Route path='/projectDetails/*' element={<ProjectDetails />} />
                     <Route path='/ProjectsList' element={<ProjectsList />} />
                     <Route path='/LedgerBook' element={<LedgerBook />} />

@@ -26,7 +26,11 @@ const Header = () => {
 
                             {!localStorage.getItem('user') ? <><Login /><SignUp /></>
                                 : <NavBarProfile />}
+                            <div>
+                                {JSON.parse(localStorage.getItem('user'))?.Role === 'ADMIN' && <button className="btn btn-primary"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
+                            </div>
                         </div>
+
 
                     </div>
                 </div>

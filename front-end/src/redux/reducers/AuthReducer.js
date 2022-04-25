@@ -13,7 +13,6 @@ export const REGISTRATION_ACTION = "REGISTRATION";
 export const ERROR = "ERROR"
 export const SET_CONNECTED = "SET_CONNECTED"
 export const LOGOUT = "LOGOUT"
-export const PROFILE = "PROFILE"
 
 export default function (state = initialState, action) {
 
