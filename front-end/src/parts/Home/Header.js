@@ -6,8 +6,8 @@ import NavBarProfile from "../../components/Home/NavBarProfile"
 import NavbarMenu from '../../components/Home/NavbarMenu';
 import { useSelector } from "react-redux";
 const Header = () => {
-    const Auth = useSelector(state => state.Auth)
 
+    const Auth = useSelector(state => state.Auth)
     return (
 
         <header
@@ -24,7 +24,7 @@ const Header = () => {
                         <NavbarMenu />
                         <div className="d-flex justify-content-end">
 
-                            {!Auth.isConnected ? <><Login /><SignUp /></>
+                            {!localStorage.getItem('user') || !Auth.isConnected ? <><Login /><SignUp /></>
                                 : <NavBarProfile />}
                         </div>
 

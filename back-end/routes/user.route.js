@@ -15,17 +15,10 @@ route.delete('/logout', logout)
 route.get('/confirm/:id', confirm)
 
 
-//private ressources
-route.get('/private', passport.authenticate('jwt', { session: false }), (req, res) => {
 
-    res.send("hello")
-})
 
-//private ressource based on role 
-route.get('/admin', passport.authenticate('jwt', { session: false }), inRole(ROLES.USER), (req, res) => {
 
-    res.send("admin")
-})
+
 
 //private ressource based on role 
 route.delete('/suspend', passport.authenticate('jwt', { session: false }), inRole(ROLES.ADMIN), suspend)
