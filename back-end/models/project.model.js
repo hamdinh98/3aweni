@@ -26,6 +26,34 @@ const projectSchema = new mongoose.Schema({
         required: true
     },
 
+
+    incomes:[{
+        incomeAmount : {
+            type : Number,
+            required : true
+        },
+
+        source :{
+            type : String,
+            default: "Donation"
+        },
+    }],
+
+        expenses:[{
+            expenseAmount :{
+                type:Number,
+                required:true
+            },
+
+            purpose:{
+                type:String,
+                required:true
+            }
+        }
+        ],
+
+
+
     Founder: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     donations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Donation' }],
     hasLedger: { type: mongoose.Schema.Types.ObjectId, ref: 'LedgerBook' },

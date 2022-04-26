@@ -8,11 +8,6 @@ const donationSchema = new mongoose.Schema({
         required: true
     },
 
-    /*usableMoney:{
-        type:Number,
-        default:this.Money
-    },*/
-
     Project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
     Backer: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 },

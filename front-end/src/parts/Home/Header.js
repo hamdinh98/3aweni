@@ -26,6 +26,8 @@ const Header = () => {
 
                             {!localStorage.getItem('user') && !Auth.isConnected ? <><Login /><SignUp /></>
                                 : <NavBarProfile />}
+                            {console.log(localStorage.getItem('user'))}
+                            {console.log(Auth.isConnected)}
                         </div>
 
 
