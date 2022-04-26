@@ -18,4 +18,4 @@ const PayementSchema = new mongoose.Schema({
 )
 
 
-module.exports = Payement = mongoose.model('Donation', PayementSchema)
+module.exports = Payement = mongoose.model('Payement', PayementSchema)
