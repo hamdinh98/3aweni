@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { logout } from "../../redux/actions/AuthActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
@@ -11,6 +11,7 @@ const NavBarProfile = () => {
     const logoutHandler = () => {
         dispatch(logout())
     }
+
 
 
 

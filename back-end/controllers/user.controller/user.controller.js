@@ -78,7 +78,7 @@ const verifCode = (req, res, next) => {
     if (code == undefined) {
         return res.status(500).json({ msg: 'code does not match' })
     }
-    if (req.body.code != code) {
+    if (req.body.code !== code) {
         return res.status(500).json({ msg: "invalid code" })
     }
     next()
@@ -86,8 +86,8 @@ const verifCode = (req, res, next) => {
 const updatePassword = (req, res) => {
 
     //console.log(req.body.password);
-    if (!Validator.isLength(req.body.password, { min: 6, max: 30 })) {
-        return res.status(400).json({ msg: "Password must be at least 6 characters" })
+    if (!Validator.isLength(req.body.password, { min: 8, max: 30 })) {
+        return res.status(400).json({ msg: "Password must be at least 8 characters" })
     }
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
