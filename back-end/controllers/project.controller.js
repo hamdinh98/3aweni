@@ -3,11 +3,10 @@ const Project = require('../models/project.model');
 const mongoose = require('mongoose')
 const User = require('../models/user.model')
 const Donation = require("../models/donation.model");
-const Ledger = require('../models/LedgerBook.model');
 const Comment = require('../models/comments.model')
 
 const getProject = async (req, res) => {
-
+/*
     try {
         const projects = await Project.find({ enable: 1 }).populate("Founder")
             .populate("donations").populate("hasLedger").populate("comments");
@@ -15,7 +14,7 @@ const getProject = async (req, res) => {
     }
     catch (error) {
         res.status(404).json({ message: error.message });
-    }
+    }*/
 }
 
 
@@ -64,7 +63,8 @@ const donateToProject = (req, res) => {
                         .catch(err => { return res.status(500).json({ msg: "error when updating user collection", err: err }) })
 
                     // add the _id of donation to project collection
-                    Project.findByIdAndUpdate(req.params.idProject, { $push: { donations: donation._id } })
+
+                    Project.findByIdAndUpdate(req.params.idProject, { $push: { donations: donation._id },$push:{incomes:{incomeAmount:donation.Money}} })
                         .catch(err => { return res.status(500).json({ msg: "error when updating project collection", err: err }) })
 
                     return res.status(201).json({ donation: donation })
@@ -75,9 +75,13 @@ const donateToProject = (req, res) => {
                 result.Money += req.body.Money;
                 Donation.updateOne({ _id: result._id }, { Money: result.Money })
                     .then(newResult => {
+                        // update incomes
+                        Project.findByIdAndUpdate(req.params.idProject, {$push:{incomes:{incomeAmount:result.Money}} })
                         return res.status(200).json(newResult)
-                    })
+                    });
+
             }
+
 
         })
 
@@ -93,9 +97,7 @@ const deleteProject = (req, res) => {
         if (error) {
             return res.status(500).json(error);
         }
-        Ledger.findByIdAndDelete(result.hasLedger)
-            .then(result2 => {
-                // lorsque on supprime un projet il faut supprimer ses donts 
+                // lorsque on supprime un projet il faut supprimer ses donts
                 Donation.deleteMany({ Project: req.params.idProjet })
                     .then(async re => {
                         const deleted = await Comment.deleteMany({ Project: req.params.idProject })
@@ -103,7 +105,7 @@ const deleteProject = (req, res) => {
                             return res.status(200).json("project deleted successfully")
                         }
                     })
-            })
+
             .catch(error => {
                 return res.status(500).json(error);
             })
