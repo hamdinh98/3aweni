@@ -24,8 +24,10 @@ const Header = () => {
                         <NavbarMenu />
                         <div className="d-flex justify-content-end">
 
-                            {!localStorage.getItem('user') || !Auth.isConnected ? <><Login /><SignUp /></>
+                            {!localStorage.getItem('user') && !Auth.isConnected ? <><Login /><SignUp /></>
                                 : <NavBarProfile />}
+                            {console.log(localStorage.getItem('user'))}
+                            {console.log(Auth.isConnected)}
                         </div>
 
 

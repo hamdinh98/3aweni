@@ -16,6 +16,7 @@ import PrivateRoute from './utils/PrivateRoute';
 
 import PublicRouteHandler from './utils/PublicRouteHandler';
 import Profile from './pages/profile/Profile';
+import LedgerStats from "./pages/LedgerStats";
 
 export default function App() {
 
@@ -31,6 +32,7 @@ export default function App() {
                 <Route path='/projectDetails/*' element={<ProjectDetails />} />
                 <Route path='/ProjectsList' element={<ProjectsList />} />
                 <Route path='/LedgerBook' element={<LedgerBook />} />
+                <Route path='/LedgerStats' element={<LedgerStats />} />
                 <Route path='/Donate' element={<Donate />} />
                 <Route exact path='/' element={<PrivateRoute />} />
 
@@ -45,6 +47,7 @@ export default function App() {
                     <Route path='/projectDetails/*' element={<ProjectDetails />} />
                     <Route path='/ProjectsList' element={<ProjectsList />} />
                     <Route path='/LedgerBook' element={<LedgerBook />} />
+                    <Route path='/LedgerStats' element={<LedgerStats />} />
                     <Route path='/Dashboard/*' element={<Dashboard />} />
                 </Route>
 

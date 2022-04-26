@@ -21,15 +21,19 @@ const LedgerBookSchema = new mongoose.Schema({
     ],
 
     incomes:[{
-        incomeAmount : {
-            type : Number,
-            required : true
-        },
+        oneDonation:
+        {
+            incomeAmount : {
+                type : Number,
+                required : true
+            },
 
-        source :{
-            type : String,
-            required : true
-        },
+            source :{
+                type : String,
+                required : true
+            },
+        }
+
     }],
 
     forProject :{type:mongoose.Schema.Types.ObjectId, ref: 'Project'},

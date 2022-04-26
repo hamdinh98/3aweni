@@ -12,6 +12,12 @@ const displayLedger = async (req,res)=>{
             const ledger = await LedgerBook.findOne({forProject:req.params.idProjet});
             console.log(project)
             project.donations.map((don)=>{
+                var donation={
+                    incomeAmount:don.Money,
+                    source:"donation",
+                    Project:don.Project
+                }
+                if(!ledger.incomes.includes(donation))
                 ledger.incomes.push({
                     incomeAmount:don.Money,
                     source:"donation"
