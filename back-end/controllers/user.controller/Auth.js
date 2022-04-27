@@ -100,7 +100,7 @@ const login = async (req, res) => {
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "5s",
+                expiresIn: "10s",
             }
         );
 
@@ -111,7 +111,7 @@ const login = async (req, res) => {
             },
             process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "90d",
+                expiresIn: "1d",
             }
         );
 

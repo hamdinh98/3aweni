@@ -7,7 +7,7 @@ const { getProject, AddProject, donateToProject, deleteProject, getFundingProgre
 route.get('/project', getProject);
 
 
-route.post('/addProject/:id', passport.authenticate('jwt', { session: false }), AddProject);
+route.post('/addProject', passport.authenticate('jwt', { session: false }), AddProject);
 route.post("/donateProject/:idProject", passport.authenticate('jwt', { session: false }), donateToProject);
 route.delete('/deleteProject/:idProjet', deleteProject);
 route.get('/getFundingProgress/:idProjet', getFundingProgress);

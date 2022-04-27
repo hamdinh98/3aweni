@@ -32,7 +32,8 @@ route.get('/list', passport.authenticate('jwt', { session: false }), inRole(ROLE
 
 //change forgetten password 
 route.post('/sendVerifCode', sendCode)
-route.post('/updatePassword', verifCode, updatePassword)
+route.post('/verifCode', verifCode)
+route.post('/updatePassword', updatePassword)
 
 
 //modifie password using old one 

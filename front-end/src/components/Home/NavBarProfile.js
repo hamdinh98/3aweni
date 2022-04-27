@@ -33,7 +33,7 @@ const NavBarProfile = () => {
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <button className="dropdown-item" href="#"><Link to="/profile">Profile</Link></button>
 
-                            {JSON.parse(localStorage.getItem('user')).Role === 'ADMIN' && <button className="dropdown-item"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
+                            {JSON.parse(localStorage.getItem('user'))?.Role === 'ADMIN' && <button className="dropdown-item"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
 
                             <button className="dropdown-item" onClick={logoutHandler}>Log Out</button>
                         </div>

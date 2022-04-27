@@ -12,6 +12,7 @@ const Login = () => {
     const AuthState = useSelector(state => state.Auth)
     const navigate = useNavigate()
     const submit = async (data) => {
+        // console.log(data);
         dispatch(LoginAction(data))
         // si la globale state isConnected== true donc on va stocker tokens dans localstorage
         // wa9t eli yetsab token f localstorage yaamel redirection lel page home
@@ -72,7 +73,7 @@ const Login = () => {
                                                     {AuthState?.error?.data?.error && <div className="alert alert-warning" role="alert">
                                                         {AuthState?.error?.data?.error}
                                                     </div>}
-                                                    <a className="text-muted" href="#!">Forgot password?</a>
+                                                    <a className="text-muted" href="#!"><Link to="/forgotPassword">Forgot password ?</Link></a>
                                                 </div>
 
                                                 <div className="d-flex align-items-center justify-content-center pb-4">
