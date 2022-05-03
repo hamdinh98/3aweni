@@ -7,7 +7,7 @@ const Validator = require("validator");
 
 
 
-const { registration, generateAccessToken, login, logout, confirm } = require('../user.controller/Auth')
+const { registration, generateAccessToken, login, logout, confirm, loginWithGoogle } = require('../user.controller/Auth')
 const { genderStat, statusAccounts } = require('../user.controller/StatisticsUser');
 
 
@@ -134,13 +134,8 @@ const modifiePassword = async (req, res) => {
 }
 
 
-const profile = (req, res) => {
-    // console.log(req.user);
-    return res.status(200).json(req.user)
-}
 
-
-module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, profile };
+module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, loginWithGoogle };
 
 
 

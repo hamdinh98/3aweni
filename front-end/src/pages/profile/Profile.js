@@ -85,23 +85,23 @@ const Profile = () => {
                                             </div>
                                         </div>
                                         <hr />
-                                        <div className="row">
+                                        {data.country && <div className="row">
                                             <div className="col-sm-3">
                                                 <h6 className="mb-0"><img src="/assets/img/profileIcons/country.png" height="50px" width='50px' />  country</h6>
                                             </div>
                                             <div className="col-sm-9 text-dark">
                                                 {data.country}
                                             </div>
-                                        </div>
+                                        </div>}
                                         <hr />
-                                        <div className="row">
+                                        {data.state && <div className="row">
                                             <div className="col-sm-3">
                                                 <h6 className="mb-0"><img src="/assets/img/profileIcons/state.png" height="50px" width='50px' />  state</h6>
                                             </div>
                                             <div className="col-sm-9 text-dark">
                                                 {data.state}
                                             </div>
-                                        </div>
+                                        </div>}
                                         <hr />
 
                                         <div className="row">

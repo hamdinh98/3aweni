@@ -1,7 +1,7 @@
 
 import axios from "axios"
 import axiosInstance from "../../utils/axiosInterceptor"
-import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION, SET_CONNECTED, LOGOUT } from "../reducers/AuthReducer"
+import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION, SET_CONNECTED, LOGOUT, LOGIN_WITH_GOOGLE } from "../reducers/AuthReducer"
 export const RegistrationAction = (user) => dispatch => {
     axios.post("http://localhost:5000/signIn", user, {
         headers: {
@@ -58,5 +58,24 @@ export const logout = () => dispatch => {
             })
             localStorage.removeItem('authTokens')
             localStorage.removeItem('user')
+        })
+}
+
+
+export const loginWithGoogle = (user) => dispatch => {
+    axios.post('http://localhost:5000/loginWithGoogle', user)
+        .then(result => {
+            dispatch({
+                type: LOGIN_WITH_GOOGLE,
+                payload: { accessToken: result.data.accessToken, refreshToken: result.data.refreshToken },
+                user: result.data.user
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: ERROR,
+                payload: err.response
+            })
+
         })
 }
