@@ -270,25 +270,30 @@ const enableProject = (req, res) => {
         )
 }
 
-const addIncome =(req,res)=>{
+const addIncome =async (req,res)=>{
+    console.log(req.body)
     if (!req.body)
         return res.status(400).json({ err: "project required" });
 
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
 
-    Project.findByIdAndUpdate(req.params.idProjet,{$push:{incomes:(req.body)}});
+
+    const result = await Project.findByIdAndUpdate(req.params.idProjet,{$push:{incomes: {incomeAmount:req.body.income.amount,source:req.body.income.source}}});
+
     return res.status(200).json("income added successfully")
 }
 
-const addExpense=(req,res)=>{
+const addExpense= async (req,res)=>{
+    console.log(req.body)
     if (!req.body)
         return res.status(400).json({ err: "project required" });
 
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
 
-    Project.findByIdAndUpdate(req.params.idProjet,{$push:{expenses:(req.body)}});
+    const result = await Project.findByIdAndUpdate(req.params.idProjet,{$push:{expenses:req.body}});
+    console.log(result)
     return res.status(200).json("expense added successfully")
 }
 

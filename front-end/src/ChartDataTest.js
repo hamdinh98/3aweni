@@ -72,11 +72,11 @@ export const columns = [
 ];
 
  export const rows = [
-    { id: 1, UserName: 'Snow', Avatar: '/assets/img/logo/3aweni.png', Donated: 35 },
-    { id: 2, UserName: 'Lannister', Avatar: '/assets/img/logo/3aweni.png', Donated: 42 },
-    { id: 3, UserName: 'Lannister', Avatar: '/assets/img/logo/3aweni.png', Donated: 45 },
-    { id: 4, UserName: 'Stark', Avatar: '/assets/img/logo/3aweni.png', Donated: 16 },
-    { id: 5, UserName: 'Targaryen', Avatar: '/assets/img/logo/3aweni.png', Donated: null },
+    { id: 1, UserName: 'Snow', Avatar: '/assets/img/logo/3aweni.png', Donated: 250 },
+    { id: 2, UserName: 'Lannister', Avatar: '/assets/img/logo/3aweni.png', Donated: 130 },
+    { id: 3, UserName: 'FF.Gamer', Avatar: '/assets/img/logo/3aweni.png', Donated: 95 },
+    { id: 4, UserName: 'Stark', Avatar: '/assets/img/logo/3aweni.png', Donated: 25 },
+    { id: 5, UserName: 'TunisiaBest', Avatar: '/assets/img/logo/3aweni.png', Donated: 40 },
     { id: 6, UserName: 'Melisandre', Avatar:'/assets/img/logo/3aweni.png' , Donated: 150 },
     { id: 7, UserName: 'Clifford', Avatar: '/assets/img/logo/3aweni.png', Donated: 44 },
     { id: 8, UserName: 'Frances', Avatar: '/assets/img/logo/3aweni.png', Donated: 36 },

@@ -7,7 +7,7 @@ const { getProject, AddProject, donateToProject, deleteProject, getFundingProgre
 route.get('/project', getProject);
 
 
-route.post('/addProject/:id', passport.authenticate('jwt', { session: false }), AddProject);
+route.post('/addProject', passport.authenticate('jwt', { session: false }), AddProject);
 route.post("/donateProject/:idProject", passport.authenticate('jwt', { session: false }), donateToProject);
 route.delete('/deleteProject/:idProjet', deleteProject);
 route.get('/getFundingProgress/:idProjet', getFundingProgress);
@@ -16,6 +16,6 @@ route.get('/getListOfBackers/:idProjet', getListOfBackers);
 route.get('/distributionByGender/:idProjet', distributionByGender);
 route.get('/distributionByAgeGroup/:idProjet', distributionByAgeGroup);
 route.put('/enableProject/:idProjet', enableProject);
-route.post("/addIncome/:idProject",  addIncome);
-route.post("/addExpense/:idProject", addExpense);
+route.post("/addIncome/:idProjet",  addIncome);
+route.post("/addExpense/:idProjet", addExpense);
 module.exports = route;
