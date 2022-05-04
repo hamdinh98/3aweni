@@ -33,7 +33,7 @@ app.use(commentsRoute)
 app.use('/api/comments', require('./routes/comments.route'))
 
 require('./security/passport')(passport)
-require('./security/google_oauth')(passport)
+//require('./security/google_oauth')(passport)
 // parse application/json
 
 

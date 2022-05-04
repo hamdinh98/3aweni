@@ -37,6 +37,8 @@ const projectSchema = new mongoose.Schema({
             type : String,
             default: "Donation"
         },
+
+        date: { type: Date, default: Date.now }
     }],
 
         expenses:[{
@@ -48,7 +50,8 @@ const projectSchema = new mongoose.Schema({
             purpose:{
                 type:String,
                 required:true
-            }
+            },
+            date: { type: Date, default: Date.now }
         }
         ],
 

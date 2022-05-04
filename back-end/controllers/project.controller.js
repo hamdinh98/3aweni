@@ -292,7 +292,7 @@ const addExpense= async (req,res)=>{
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
 
-    const result = await Project.findByIdAndUpdate(req.params.idProjet,{$push:{expenses:req.body}});
+    const result = await Project.findByIdAndUpdate(req.params.idProjet,{$push:{expenses:{expenseAmount:req.body.expense.expense,purpose:req.body.expense.purpose}}});
     console.log(result)
     return res.status(200).json("expense added successfully")
 }
