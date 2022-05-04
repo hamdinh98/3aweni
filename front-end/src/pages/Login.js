@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../parts/Home/Footer"
 import Header from "../parts/Home/Header"
 import { LoginAction } from "../redux/actions/AuthActions";
-
 import LoginWithGoogle from "../components/Login/LoginWithGoogle";
+import FaceIDLogin from "../components/Login/FaceIDLogin";
 const Login = () => {
+    const [showCam, setShowCam] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch()
     const AuthState = useSelector(state => state.Auth)
@@ -84,7 +85,11 @@ const Login = () => {
                                                 </div>
 
                                                 <div className="text-center social-btn">
-                                                    <a href="#" className="btn btn-primary btn-block"><i className="fa fa-facebook"></i> Sign in with <b>Face ID</b></a>
+                                                    <a href="#" className="btn btn-primary btn-block" onClick={() => setShowCam(true)}><i className="fa fa-facebook"></i> Sign in with <b>Face ID</b></a>
+                                                    {showCam && <FaceIDLogin />}
+
+
+
                                                     <LoginWithGoogle />
                                                 </div>
                                             </form>
