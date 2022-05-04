@@ -15,17 +15,18 @@ const LoginWithGoogle = () => {
         console.log(response);
         //const profile = response.profileObj
         const { data } = await axios.get(`https://people.googleapis.com/v1/people/${response.Ba}?personFields=birthdays,genders,locations&access_token=${response.accessToken}`)
-        console.log(data);
+
         const user = {
             name: response.profileObj.name,
             email: response.profileObj.email,
-            birthDate: `${data.birthdays[0].date.year}-${data.birthdays[0].date.month}-${data.birthdays[0].date.day}` || null,
+            birthDate: data.birthdays ? data.birthdays[0].date.year + "-" + data?.birthdays[0].date.month + "-" + data?.birthdays[0].date.day : undefined,
             img: response.profileObj.imageUrl,
             confirm: 1,
-            gender: data.genders[0].value || "male",
+            gender: data.genders ? data?.genders[0].value : "male",
         }
         console.log(user);
         dispatch(loginWithGoogle(user))
+        console.log(AuthState);
     }
     const responseErrorGoogle = (response) => {
         console.log(response);
