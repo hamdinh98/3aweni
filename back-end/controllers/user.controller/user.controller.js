@@ -6,9 +6,8 @@ const mailer = require('../../utils/mailer');
 const Validator = require("validator");
 
 
-const Donation = require('../../models/donation.model')
 
-const { registration, generateAccessToken, login, logout, confirm } = require('../user.controller/Auth')
+const { registration, generateAccessToken, login, logout, confirm, loginWithGoogle } = require('../user.controller/Auth')
 const { genderStat, statusAccounts } = require('../user.controller/StatisticsUser');
 
 
@@ -40,7 +39,7 @@ const listUsers = async (req, res) => {
 let code
 let user
 const sendCode = (req, res, next) => {
-    // console.log(req.body.email);
+    // console.log("body" + req.body.email);
     if (!Validator.isEmail(req.body.email)) {
         return res.status(400).json({ msg: "invalid email" })
     }
@@ -49,7 +48,7 @@ const sendCode = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(userData => {
             if (!userData) {
-                return res.status(404).json({ msg: "user not found please verify your email" })
+                return res.status(404).json({ msg: "This email does not exist" })
             }
             user = userData
             code = Math.floor(1000 + Math.random() * 9000)
@@ -63,31 +62,29 @@ const sendCode = (req, res, next) => {
                 console.log("code value set to undefiend");
             }, 1.2e+6)
 
-            res.status(200).json({ code: code })
-            next()
+            return res.status(200).json("code send with success")
 
         })
         .catch(err => res.status(500).json({ msg: "something wrong" }))
 }
 const verifCode = (req, res, next) => {
-    console.log(code);
+    //console.log(code);
     if (!req.body.code) {
-        return res.status(400).json({ msg: "please type you code to verify your identity" })
+        return res.status(400).json("please type you code to verify your identity")
     }
 
-    if (code == undefined) {
-        return res.status(500).json({ msg: 'code does not match' })
+
+    if (req.body.code != code) {
+        console.log(req.body.code, code);
+        return res.status(500).json("invalid code")
     }
-    if (req.body.code !== code) {
-        return res.status(500).json({ msg: "invalid code" })
-    }
-    next()
+    return res.status(200).json("valid password")
 }
 const updatePassword = (req, res) => {
 
     //console.log(req.body.password);
     if (!Validator.isLength(req.body.password, { min: 8, max: 30 })) {
-        return res.status(400).json({ msg: "Password must be at least 8 characters" })
+        return res.status(400).json("Password must be at least 8 characters")
     }
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -137,13 +134,8 @@ const modifiePassword = async (req, res) => {
 }
 
 
-const profile = (req, res) => {
-    // console.log(req.user);
-    return res.status(200).json(req.user)
-}
 
-
-module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, profile };
+module.exports = { registration, login, logout, generateAccessToken, suspend, listUsers, confirm, sendCode, updatePassword, verifCode, modifiePassword, statusAccounts, genderStat, loginWithGoogle };
 
 
 

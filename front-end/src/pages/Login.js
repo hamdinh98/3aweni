@@ -6,12 +6,14 @@ import Footer from "../parts/Home/Footer"
 import Header from "../parts/Home/Header"
 import { LoginAction } from "../redux/actions/AuthActions";
 
+import LoginWithGoogle from "../components/Login/LoginWithGoogle";
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch()
     const AuthState = useSelector(state => state.Auth)
     const navigate = useNavigate()
     const submit = async (data) => {
+        // console.log(data);
         dispatch(LoginAction(data))
         // si la globale state isConnected== true donc on va stocker tokens dans localstorage
         // wa9t eli yetsab token f localstorage yaamel redirection lel page home
@@ -23,6 +25,7 @@ const Login = () => {
         localStorage.getItem('authTokens') && navigate('/')
 
     }, [AuthState.isConnected])
+
 
     return (
         <div>
@@ -72,7 +75,7 @@ const Login = () => {
                                                     {AuthState?.error?.data?.error && <div className="alert alert-warning" role="alert">
                                                         {AuthState?.error?.data?.error}
                                                     </div>}
-                                                    <a className="text-muted" href="#!">Forgot password?</a>
+                                                    <a className="text-muted" href="#!"><Link to="/forgotPassword">Forgot password ?</Link></a>
                                                 </div>
 
                                                 <div className="d-flex align-items-center justify-content-center pb-4">
@@ -81,8 +84,8 @@ const Login = () => {
                                                 </div>
 
                                                 <div className="text-center social-btn">
-                                                    <a href="#" className="btn btn-primary btn-block"><i className="fa fa-facebook"></i> Sign in with <b>Facebook</b></a>
-                                                    <a href="#" className="btn btn-danger btn-block"><i className="fa fa-google"></i> Sign in with <b>Google</b></a>
+                                                    <a href="#" className="btn btn-primary btn-block"><i className="fa fa-facebook"></i> Sign in with <b>Face ID</b></a>
+                                                    <LoginWithGoogle />
                                                 </div>
                                             </form>
 
