@@ -4,7 +4,7 @@ const passport = require("passport")
 const { getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth, getListOfBackers,
     distributionByGender, distributionByAgeGroup, enableProject,addIncome,addExpense } = require("../controllers/project.controller");
 
-route.get('/project', getProject);
+route.get('/project/:idProjet', getProject);
 
 
 route.post('/addProject', passport.authenticate('jwt', { session: false }), AddProject);

@@ -5,9 +5,17 @@ const User = require('../models/user.model')
 const Donation = require("../models/donation.model");
 const Comment = require('../models/comments.model')
 
-const getProject = async (req, res) => {
-/*
-    try {
+const getProject =  (req, res) => {
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required");
+
+     Project.findById(req.params.idProjet,(err,result)=>{
+        if(err)
+            return res.status(500).json(err)
+        return res.status(200).json(result)
+    });
+
+/*    try {
         const projects = await Project.find({ enable: 1 }).populate("Founder")
             .populate("donations").populate("comments");
         res.status(200).json(projects);
