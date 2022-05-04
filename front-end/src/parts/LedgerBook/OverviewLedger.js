@@ -11,8 +11,8 @@ const OverviewLedger =() =>{
                         <span className="ItemTitle">Total Incomes</span>
 
                         <div className="itemsContainer">
-                            <span className="UserNumber">1546 TND</span>
-                            <span className="UserTrend">126 <ArrowUpward className="ArrowIcon"/></span>
+                            <span className="UserNumber">28.500 TND</span>
+                            {/*<span className="UserTrend">126 <ArrowUpward className="ArrowIcon"/></span>*/}
                         </div>
 
                     </div>
@@ -23,8 +23,8 @@ const OverviewLedger =() =>{
                         <span className="ItemTitle">Total Expenses</span>
 
                         <div className="itemsContainer">
-                            <span className="UserNumber">1546 TND</span>
-                            <span className="UserTrend">126 <ArrowDownward className="ArrowIcon"/></span>
+                            <span className="UserNumber">11,500 TND</span>
+                            {/*<span className="UserTrend">126 <ArrowDownward className="ArrowIcon"/></span>*/}
                         </div>
 
                     </div>
@@ -35,8 +35,8 @@ const OverviewLedger =() =>{
                         <span className="ItemTitle">Balance</span>
 
                         <div className="itemsContainer">
-                            <span className="UserNumber">1546 TND</span>
-                            <span className="UserTrend">126 <ArrowUpward className="ArrowIcon negative"/></span>
+                            <span className="UserNumber">17,000 TND</span>
+                            {/*<span className="UserTrend">126 <ArrowUpward className="ArrowIcon negative"/></span>*/}
                         </div>
 
                     </div>
