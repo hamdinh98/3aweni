@@ -15,7 +15,7 @@ const NavBarProfile = () => {
 
     // const img = datauser?.img[0] == '/' ? `${datauser?.img}` : datauser?.img
 
-    // console.log(datauser?.img);
+    console.log(datauser?.img);
 
 
     return (

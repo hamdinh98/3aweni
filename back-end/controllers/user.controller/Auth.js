@@ -157,17 +157,17 @@ const loginWithGoogle = async (req, res) => {
 
 
     const user = await User.find({ email: req.body.email })
-    // console.log(user);
+    console.log(user);
     if (user) {
         refreshTokens.push(refreshToken);
-        //console.log("test");
+        console.log("test");
         return res.status(200).json({
             accessToken,
             refreshToken,
             user: user[0]
         })
     } else {
-
+        console.log(req.body);
         User.create(req.body)
             .then(result => {
                 console.log("result" + result);
@@ -180,6 +180,7 @@ const loginWithGoogle = async (req, res) => {
                 })
             })
             .catch(err => {
+                console.log(err);
                 return res.status(500).json(err)
             })
     }
