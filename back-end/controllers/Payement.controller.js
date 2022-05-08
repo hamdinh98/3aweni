@@ -8,13 +8,14 @@ const Payement = require('../models/Payement.model');
 })*/
 
 const getPayement = (req, res) => {
-    if (!req.params.idPayement)
+    if (!req.params.idProject)
         return res.setStatus(400)
-    Payement.findById(req.params.idBadge, (err, result) => {
+    Payement.find(req.params.Project, (err, result) => {
         if (err)
             return res.status(500).json(err)
         return res.status(200).json(result)
-    })
+    }
+    )
 }
 
 const getAllPayements = (req, res) => {
@@ -29,8 +30,8 @@ const getAllPayements = (req, res) => {
 
 const addPayement = (req, res) => {
     if (!req.body)
-        return res.status(400).json("Body required");
-    if (!req.params.idProjet)
+    return res.status(400).json("Body required");
+    if (!req.params.idProject)
         return res.status(400).json("id project required");
     Payement.create(req.body, (err, result) => {
         if (err)

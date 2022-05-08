@@ -17,6 +17,8 @@ import PrivateRoute from './utils/PrivateRoute';
 import PublicRouteHandler from './utils/PublicRouteHandler';
 import Profile from './pages/profile/Profile';
 import LedgerStats from "./pages/LedgerStats";
+import BackerList from './parts/ProjectDetails/BackerList';
+import Comments_List from './parts/Commentaire/Comments_List';
 import ForgotPaswword from './pages/ForgotPassword';
 
 export default function App() {
@@ -25,6 +27,7 @@ export default function App() {
     return (
         <BrowserRouter>
             {/*<Header />*/}
+
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<AboutUs />} />

@@ -1,8 +1,10 @@
 import styles from "../Donate/donate.css";
 import { toast } from "react-toastify";
-import {useState , useEffect} from "react";
+import React,{Component, useState,useEffect} from 'react';
+import axios from 'axios';
 
 var Notification_Sucess = () => {
+    
 toast.success("Successful Payment ! ");
 }
 
@@ -10,54 +12,42 @@ var Notification_Error = () => {
     toast.success("Error in form ! ");
     }
 
-const Donate = () => {
-    const values = { amount:"", card_number:"", expiration:"", ccv:""};
-    const [formValues,setFormValues]= useState(values);
-    const [formErrors,setFormErrors]= useState({});
-    const [isSubmit,setIsSubmit]= useState(false);
+ 
 
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormValues({...formValues,[name]: value });
-        console.log(formValues);
-    };
+class Donate extends Component{
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setFormErrors(validate(formValues));
-        setIsSubmit(true);
-    };
+    constructor(props) {
+        super(props);
+        
+    this.state = {
+        Money:""
+    }
+    }
 
-    useEffect(() => {
-        console.log(formErrors);
-        if (Object.keys(formErrors).length === 0) {
-            console.log(formValues);
-        }
-    },[formErrors]);
+    changeHandler = (e) => {
+        this.setState({[e.target.name]:e.target.value});
+    }
 
-    const validate = (values) => {
-        const errors = {};
-        if (!values.amount){
-            errors.amount = " Amount is required ! "
-        }
-        if (!values.card_number){
-            errors.card_number = " Card Number is required ! "
-        }
-        if (!values.expiration){
-            errors.expiration = " Expiration Date is required ! "
-        }
-        if (!values.ccv){
-            errors.ccv = " CCV Code is required ! "
-        }
-        return errors;
+    submitHandler = (e) => {
+        e.preventDefault()
+    console.log(this.state)
+    axios.post('http://localhost:5000/addPayement/624b0ed9f6b79446ac5f3639',this.state)
+    .then(response => {
+        console.log(response)
+    })
+    .catch(err => {
+        console.log(err)
+    })}
 
-    }; 
+
+    render() {
+        const {Money} = this.state
     return (
+        
     
     <div class="test">   
     <div class="container_don p-0">
-    <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={this.submitHandler}>
     <div class="card_don px-4">
         <p class="h8 py-3">Payment Details</p>
         <div class="row gx-3">
@@ -73,31 +63,30 @@ const Donate = () => {
             </div>
             <div class="col-12">
                 <div class="d-flex flex-column">
-                    <p class="text mb-1">Amount Of Donation</p> <input name="amount" class="form-control_don mb-3" type="text" placeholder="10 $" value={formValues.amount} required="required"
-                    onChange={handleChange} />
+                    <p class="text mb-1">Amount Of Donation</p> <input name="Money" class="form-control_don mb-3" type="text" placeholder="10 $" value={Money} onChange={this.changeHandler} required="required"
+                     />
                 </div>
-                <p>{formErrors.amount}</p>
             </div>
             <div class="col-12">
                 <div class="d-flex flex-column">
-                    <p class="text mb-1">Card Number</p> <input  name="card_number" class="form-control_don mb-3" type="text" placeholder="****" value={formValues.card_number} required="required" 
-                    onChange={handleChange} />
+                    <p class="text mb-1">Card Number</p> <input  name="card_number" class="form-control_don mb-3" type="text" placeholder="****"  required="required" 
+                    />
                 </div>
             </div>
             <div class="col-6">
                 <div class="d-flex flex-column">
-                    <p class="text mb-1">Expiry</p> <input  name="expiration" class="form-control_don mb-3" type="text" placeholder="MM/YYYY" value={formValues.expiration} required="required"
-                    onChange={handleChange} />
+                    <p class="text mb-1">Expiry</p> <input  name="expiration" class="form-control_don mb-3" type="text" placeholder="MM/YYYY"  required="required"
+                    />
                 </div>
             </div>
             <div class="col-6">
                 <div class="d-flex flex-column">
-                    <p class="text mb-1">CVV/CVC</p> <input  name="ccv" class="form-control_don mb-3 pt-2 " type="password" placeholder="***" value={formValues.ccv} required="required" 
-                    onChange={handleChange} />
+                    <p class="text mb-1">CVV/CVC</p> <input  name="ccv" class="form-control_don mb-3 pt-2 " type="password" placeholder="***" required="required" 
+                     />
                 </div>
             </div>
             <div class="col-12">
-                <button class="btn btn-primary_don mb-3" onClick={Notification_Sucess}> <span class="ps-3">PAY </span> <span class="fas fa-arrow-right"></span> </button>
+                <button class="btn btn-primary_don mb-3" type="submit"  onClick={Notification_Sucess}> <span class="ps-3">PAY </span> <span class="fas fa-arrow-right"></span> </button>
             </div>
         </div>
     </div>
@@ -107,6 +96,7 @@ const Donate = () => {
 
 
     )
+    }
 }
 
 

@@ -1,3 +1,12 @@
+
+const nodemailer = require("nodemailer");
+
+// async..await is not allowed in global scope, must use a wrapper
+
+// NOTICE : 
+// mode : if true => email for registration 
+
+﻿
 const nodemailer = require("nodemailer");
 
 // async..await is not allowed in global scope, must use a wrapper
@@ -246,7 +255,3 @@ module.exports = async function main(email, comments) {
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
-
-
-
-

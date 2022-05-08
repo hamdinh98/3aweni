@@ -56,8 +56,18 @@ const Delete = async (req, res) => {
 const getComment = async (req, res) => {
   const comment = await Comment.findById(req.params.idComment)
   console.log(comment);
-
 }
+
+
+const getAllComments = async (req, res) => {
+  Comment.find({ _id: 0 }, (err, result) => {
+    if (err)
+        return res.status(500).json(err)
+    return res.status(200).json(result)
+})
+}
+
+
 
 const like = (req, res) => {
   Comment.findByIdAndUpdate(req.params.idComment, { $inc: { likes: 1 } })
@@ -95,5 +105,5 @@ const removeByOwner = async (req, res) => {
 
 
 module.exports = {
-  add, update, Delete, getComment, like, dislike, removeByOwner
+  add, update, Delete, getComment, getAllComments ,like, dislike, removeByOwner
 }
