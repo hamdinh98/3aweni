@@ -13,10 +13,10 @@ export default function IncomeAccounts()
                 <thead>
                 <tr className="WidgetLgTr">
                     <th className="WidgetLgTh">User</th>
-                    <th className="WidgetLgTh">Project</th>
+                    <th className="WidgetLgTh">Type</th>
                     <th className="WidgetLgTh">Amount</th>
                     <th className="WidgetLgTh">Date</th>
-                    <th className="WidgetLgTh">Status</th>
+
                 </tr>
                 </thead>
 
@@ -24,69 +24,61 @@ export default function IncomeAccounts()
                 <tr className="WidgetLgTr">
                     <td className="WidgetLgUserColumn">
                         <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
+                        <span className="WidgetLgUsername">Saif Houjji</span>
                     </td>
 
-                    <td className="WidgetLgProject">Vr Goggles</td>
+                    <td className="WidgetLgProject">Donation</td>
 
-                    <td className="WidgetLgAmount">1200DT</td>
+                    <td className="WidgetLgAmount">250 DT</td>
 
-                    <td className="WidgetLgDate">13 jan 2022</td>
+                    <td className="WidgetLgDate">2022-04-06</td>
 
-                    <td className="WidgetLgStatus">
-                        <Button type="Approved"/>
-                    </td>
+
                 </tr>
 
                 <tr className="WidgetLgTr">
                     <td className="WidgetLgUserColumn">
                         <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
+                        <span className="WidgetLgUsername">External User</span>
                     </td>
 
-                    <td className="WidgetLgProject">Vr Goggles</td>
+                    <td className="WidgetLgProject">equipment</td>
 
-                    <td className="WidgetLgAmount">1200DT</td>
+                    <td className="WidgetLgAmount">12000 DT</td>
 
-                    <td className="WidgetLgDate">13 jan 2022</td>
+                    <td className="WidgetLgDate">2022-03-18</td>
 
-                    <td className="WidgetLgStatus">
-                        <Button type="Pending"/>
-                    </td>
+
                 </tr>
 
                 <tr className="WidgetLgTr">
                     <td className="WidgetLgUserColumn">
                         <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
+                        <span className="WidgetLgUsername">External User</span>
                     </td>
 
-                    <td className="WidgetLgProject">Vr Goggles</td>
+                    <td className="WidgetLgProject">Materials</td>
 
-                    <td className="WidgetLgAmount">1200DT</td>
+                    <td className="WidgetLgAmount">4886 DT</td>
 
-                    <td className="WidgetLgDate">13 jan 2022</td>
+                    <td className="WidgetLgDate">2022-02-27</td>
 
-                    <td className="WidgetLgStatus">
-                        <Button type="Pending"/>
-                    </td>
+
                 </tr>
 
                 <tr className="WidgetLgTr">
                     <td className="WidgetLgUserColumn">
                         <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
+                        <span className="WidgetLgUsername">External User</span>
                     </td>
 
-                    <td className="WidgetLgProject">Vr Goggles</td>
+                    <td className="WidgetLgProject">Cash</td>
 
-                    <td className="WidgetLgAmount">1200DT</td>
+                    <td className="WidgetLgAmount">800DT</td>
 
-                    <td className="WidgetLgDate">13 jan 2022</td>
+                    <td className="WidgetLgDate">2022-04-01</td>
 
-                    <td className="WidgetLgStatus">
-                        <Button type="Declined"/>
-                    </td>
+
                 </tr>
                 </tbody>
             </table>

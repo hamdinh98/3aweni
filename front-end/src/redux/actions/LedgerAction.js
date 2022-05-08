@@ -1,5 +1,5 @@
 import axios from "axios"
-import {INCOME_ADDED,EXPENSE_ADDED,ERROR} from "../reducers/LedgerReducer";
+import {INCOME_ADDED,EXPENSE_ADDED,ERROR,PROJECT_RETRIEVED} from "../reducers/LedgerReducer";
 
 export const AddIncome = (income) => dispatch =>{
     axios.post("http://localhost:5000/addIncome/62688da746a6fe1af8bcf0e0", {income:income})
@@ -34,6 +34,16 @@ export const AddExpense = (expense) => dispatch=>{
             dispatch({
                 type: ERROR,
                 payload: err.response
+            })
+        })
+}
+
+export const GetProject =() => dispatch =>{
+    axios.get('http://localhost:5000/projectTotals/62688da746a6fe1af8bcf0e0')
+        .then(result=>{
+            dispatch({
+                type:PROJECT_RETRIEVED,
+                payload: result.data
             })
         })
 }

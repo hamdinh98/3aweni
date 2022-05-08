@@ -20,7 +20,7 @@ export default function WidgetSmExample ()
                 <li className="WidgetSmItem">
                     <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetSmImage"/>
                     <div className="WidgetSmUser">
-                        <span className="WidgetSmUsername">Saifeddine Houji</span>
+                        <span className="WidgetSmUsername">Hamdi Nahdi</span>
                         <span className="WidgetSmJob">Software engineer</span>
                     </div>
                     <button className="WidgetSmButton">
@@ -31,7 +31,7 @@ export default function WidgetSmExample ()
                 <li className="WidgetSmItem">
                     <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetSmImage"/>
                     <div className="WidgetSmUser">
-                        <span className="WidgetSmUsername">Saifeddine Houji</span>
+                        <span className="WidgetSmUsername">Tarek Zaafrane</span>
                         <span className="WidgetSmJob">Software engineer</span>
                     </div>
                     <button className="WidgetSmButton">

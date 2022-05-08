@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react';
 import {AddExpense} from "../../redux/actions/LedgerAction";
+import {useState} from "react";
+import ExpensesModal from "../../components/LedgerBook/ExpenesModal";
+
 
 const ExpensesForm =() =>{
+
+    const [useModal, setUseModal] = useState(false)
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch();
@@ -40,10 +44,12 @@ const ExpensesForm =() =>{
                                 </div>
 
                                 <div className="text-center pt-1 mb-5 pb-1 d-flex justify-content-center align-items-center">
-                                    <button
+                                    <button onClick={()=>{setUseModal(true)}}
                                         className="btn btn-primary btn-block col-3"
                                         type="submit">Add Expense
                                     </button>
+                                    {useModal && <ExpensesModal closeModal={setUseModal}/>}
+
 
                                 </div>
 

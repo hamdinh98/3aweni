@@ -7,7 +7,7 @@ export default function WidgetLgExample ()
     }
     return (
         <div className="WidgetLgExample">
-            <span className="WidgetLgTitle">Project requests (handmade table)</span>
+            <span className="WidgetLgTitle">Latest project requests</span>
             <table className="WidgetLgTable">
                 <thead>
                     <tr className="WidgetLgTr">
@@ -26,11 +26,11 @@ export default function WidgetLgExample ()
                             <span className="WidgetLgUsername">Hàmdi Nahdi</span>
                         </td>
 
-                        <td className="WidgetLgProject">Vr Goggles</td>
+                        <td className="WidgetLgProject">School renovation</td>
 
-                        <td className="WidgetLgAmount">1200DT</td>
+                        <td className="WidgetLgAmount">8000 DT</td>
 
-                        <td className="WidgetLgDate">13 jan 2022</td>
+                        <td className="WidgetLgDate">2022-03-28</td>
 
                         <td className="WidgetLgStatus">
                             <Button type="Approved"/>
@@ -40,14 +40,14 @@ export default function WidgetLgExample ()
                     <tr className="WidgetLgTr">
                         <td className="WidgetLgUserColumn">
                             <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                            <span className="WidgetLgUsername">Hàmdi Nahdi</span>
+                            <span className="WidgetLgUsername">Saifeddine Houji</span>
                         </td>
 
-                        <td className="WidgetLgProject">Vr Goggles</td>
+                        <td className="WidgetLgProject">Video Game : City Manager</td>
 
-                        <td className="WidgetLgAmount">1200DT</td>
+                        <td className="WidgetLgAmount">50000 DT</td>
 
-                        <td className="WidgetLgDate">13 jan 2022</td>
+                        <td className="WidgetLgDate">2022-03-16</td>
 
                         <td className="WidgetLgStatus">
                             <Button type="Pending"/>
@@ -57,31 +57,14 @@ export default function WidgetLgExample ()
                     <tr className="WidgetLgTr">
                         <td className="WidgetLgUserColumn">
                             <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                            <span className="WidgetLgUsername">Hàmdi Nahdi</span>
+                            <span className="WidgetLgUsername">Tarek Zaafrane</span>
                         </td>
 
                         <td className="WidgetLgProject">Vr Goggles</td>
 
-                        <td className="WidgetLgAmount">1200DT</td>
+                        <td className="WidgetLgAmount">6000 DT</td>
 
-                        <td className="WidgetLgDate">13 jan 2022</td>
-
-                        <td className="WidgetLgStatus">
-                            <Button type="Pending"/>
-                        </td>
-                    </tr>
-
-                    <tr className="WidgetLgTr">
-                        <td className="WidgetLgUserColumn">
-                            <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                            <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                        </td>
-
-                        <td className="WidgetLgProject">Vr Goggles</td>
-
-                        <td className="WidgetLgAmount">1200DT</td>
-
-                        <td className="WidgetLgDate">13 jan 2022</td>
+                        <td className="WidgetLgDate">2022-02-24</td>
 
                         <td className="WidgetLgStatus">
                             <Button type="Declined"/>

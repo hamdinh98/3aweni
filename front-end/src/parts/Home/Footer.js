@@ -22,10 +22,10 @@ const Footer = () => {
 
                                 <div className="widget about-widget">
 
-                                    <div className="footer-logo"><img src="/assets/img/logo-white.png" alt="Funden" />
+                                    <div className="footer-logo"><img src="/assets/img/logo/logo_small.png" alt="Funden" />
                                     </div>
 
-                                    <p>Sed ut perspiciatis unde omn iste natus error sit voluptatem</p>
+                                    <p>Together, we achieve more</p>
 
                                     <div className="newsletter-form">
                                         <h5 className="form-title">Join Newsletters</h5>

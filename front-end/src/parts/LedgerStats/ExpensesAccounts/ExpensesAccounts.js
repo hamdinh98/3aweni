@@ -12,81 +12,59 @@ export default function ExpensesAccounts ()
             <table className="WidgetLgTable">
                 <thead>
                 <tr className="WidgetLgTr">
-                    <th className="WidgetLgTh">User</th>
-                    <th className="WidgetLgTh">Project</th>
+
+                    <th className="WidgetLgTh">Purpose</th>
                     <th className="WidgetLgTh">Amount</th>
                     <th className="WidgetLgTh">Date</th>
-                    <th className="WidgetLgTh">Status</th>
+
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                    </td>
 
-                    <td className="WidgetLgProject">Vr Goggles</td>
 
-                    <td className="WidgetLgAmount">1200DT</td>
+                    <td className="WidgetLgProject">Software license purchase</td>
 
-                    <td className="WidgetLgDate">13 jan 2022</td>
+                    <td className="WidgetLgAmount">750 DT</td>
 
-                    <td className="WidgetLgStatus">
-                        <Button type="Approved"/>
-                    </td>
+                    <td className="WidgetLgDate">2022-03-16</td>
+
                 </tr>
 
                 <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                    </td>
 
-                    <td className="WidgetLgProject">Vr Goggles</td>
 
-                    <td className="WidgetLgAmount">1200DT</td>
+                    <td className="WidgetLgProject">Repairs</td>
 
-                    <td className="WidgetLgDate">13 jan 2022</td>
+                    <td className="WidgetLgAmount">73 DT</td>
 
-                    <td className="WidgetLgStatus">
-                        <Button type="Pending"/>
-                    </td>
+                    <td className="WidgetLgDate">2022-04-20</td>
+
+
                 </tr>
 
                 <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                    </td>
 
-                    <td className="WidgetLgProject">Vr Goggles</td>
 
-                    <td className="WidgetLgAmount">1200DT</td>
+                    <td className="WidgetLgProject">Outsourcing Design</td>
 
-                    <td className="WidgetLgDate">13 jan 2022</td>
+                    <td className="WidgetLgAmount">3000 DT</td>
 
-                    <td className="WidgetLgStatus">
-                        <Button type="Pending"/>
-                    </td>
+                    <td className="WidgetLgDate">2022-04-19</td>
+
+
                 </tr>
 
                 <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                    </td>
 
-                    <td className="WidgetLgProject">Vr Goggles</td>
+                    <td className="WidgetLgProject">Miscellaneous expenses</td>
 
-                    <td className="WidgetLgAmount">1200DT</td>
+                    <td className="WidgetLgAmount">300 DT</td>
 
-                    <td className="WidgetLgDate">13 jan 2022</td>
+                    <td className="WidgetLgDate">2022-04-06</td>
 
-                    <td className="WidgetLgStatus">
-                        <Button type="Declined"/>
-                    </td>
+
                 </tr>
                 </tbody>
             </table>

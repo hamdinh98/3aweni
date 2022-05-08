@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react';
 import {AddIncome} from "../../redux/actions/LedgerAction";
+import IncomesModal from "../../components/LedgerBook/IncomesModal";
+
 
 const IncomeForm =() =>{
-
+    const [useModal, setUseModal] = useState(false)
         const { register, handleSubmit, formState: { errors } } = useForm();
         const dispatch = useDispatch();
         const submit = (data) =>{
@@ -43,10 +45,10 @@ const IncomeForm =() =>{
                             </div>
 
                             <div className="text-center pt-1 mb-5 pb-1 d-flex justify-content-center align-items-center">
-                                <button
+                                <button onClick={()=>{setUseModal(true)}}
                                     className="btn btn-primary btn-block col-3"
                                     type="submit">Add Income</button>
-
+                                {useModal && <IncomesModal closeModal={setUseModal}/>}
                             </div>
 
                         </form>

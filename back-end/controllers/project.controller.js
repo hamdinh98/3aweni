@@ -4,25 +4,40 @@ const mongoose = require('mongoose')
 const User = require('../models/user.model')
 const Donation = require("../models/donation.model");
 const Comment = require('../models/comments.model')
+const {log} = require("nodemon/lib/utils");
 
 const getProject =  (req, res) => {
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
 
-     Project.findById(req.params.idProjet,(err,result)=>{
-        if(err)
+    Project.findById(req.params.idProjet, (err, result) => {
+        if (err)
             return res.status(500).json(err)
         return res.status(200).json(result)
     });
+}
 
-/*    try {
-        const projects = await Project.find({ enable: 1 }).populate("Founder")
-            .populate("donations").populate("comments");
-        res.status(200).json(projects);
-    }
-    catch (error) {
-        res.status(404).json({ message: error.message });
-    }*/
+
+const getTotals =  (req, res) => {
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required");
+
+    let totalExpenses=0;
+    let totalIncomes=0;
+
+    Project.findById(req.params.idProjet,(err,result)=>{
+        if(err)
+            return res.status(500).json(err)
+
+        for (let i = 0; i < result.incomes.length; i++) {
+            totalIncomes +=result.incomes[i].incomeAmount;
+        }
+        for (let i = 0; i < result.expenses.length; i++) {
+            totalExpenses +=result.expenses[i].expenseAmount;
+        }
+        return res.status(200).json({totalIncomes,totalExpenses})
+        });
+
 }
 
 
@@ -175,6 +190,17 @@ const getListOfBackers = async (req, res) => {
     if (!req.params.idProjet)
         return res.status(400).json("_id project required");
 
+    const projectDetails = await Project.findById(req.params.idProjet,{donations:1}).populate('donations');
+
+    var result = [] ;
+    for (let i = 0 ; i<projectDetails.donations.length;i++)
+    {
+         result.push(await projectDetails.donations[i].populate('Backer'))
+    }
+    return res.status(200).json(result);
+   // console.log(result)
+
+/*
     Donation.aggregate([
 
         { $match: { "Project": mongoose.Types.ObjectId(req.params.idProjet) } },
@@ -199,7 +225,7 @@ const getListOfBackers = async (req, res) => {
         //console.log(dons)
         return res.status(200).json(dons)
     }
-    )
+    )*/
 }
 
 
@@ -309,5 +335,5 @@ const addExpense= async (req,res)=>{
 
 module.exports = {
     getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth, getListOfBackers,
-    distributionByGender, distributionByAgeGroup, enableProject,addIncome,addExpense
+    distributionByGender, distributionByAgeGroup, enableProject,addIncome,addExpense,getTotals
 };

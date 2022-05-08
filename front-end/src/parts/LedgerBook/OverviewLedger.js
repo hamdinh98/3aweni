@@ -1,8 +1,24 @@
 import "./OverviewLedger.css"
-import {ArrowDownward, ArrowUpward} from "@mui/icons-material";
-import React from "react";
+import React, {useEffect} from "react";
+
+import { useDispatch, useSelector } from 'react-redux'
+import {GetProject} from "../../redux/actions/LedgerAction";
+
 
 const OverviewLedger =() =>{
+
+    const dispatch = useDispatch();
+    const project = useSelector(state=>state.Ledger)
+    useEffect(()=>{
+      dispatch(GetProject())
+        //console.log(project)
+        console.log(project.project.totalExpenses)
+    },[])
+
+    const total = project.project.totalIncomes - project.project.totalExpenses;
+
+
+
     return(
         <div>
             <div className="OverviewLedgerComponentExample">
@@ -11,8 +27,8 @@ const OverviewLedger =() =>{
                         <span className="ItemTitle">Total Incomes</span>
 
                         <div className="itemsContainer">
-                            <span className="UserNumber">28.500 TND</span>
-                            {/*<span className="UserTrend">126 <ArrowUpward className="ArrowIcon"/></span>*/}
+                            <span className="UserNumber">{project.project.totalIncomes} TND</span>
+
                         </div>
 
                     </div>
@@ -23,8 +39,8 @@ const OverviewLedger =() =>{
                         <span className="ItemTitle">Total Expenses</span>
 
                         <div className="itemsContainer">
-                            <span className="UserNumber">11,500 TND</span>
-                            {/*<span className="UserTrend">126 <ArrowDownward className="ArrowIcon"/></span>*/}
+                            <span className="UserNumber">{project.project.totalExpenses} TND</span>
+
                         </div>
 
                     </div>
@@ -35,14 +51,18 @@ const OverviewLedger =() =>{
                         <span className="ItemTitle">Balance</span>
 
                         <div className="itemsContainer">
-                            <span className="UserNumber">17,000 TND</span>
-                            {/*<span className="UserTrend">126 <ArrowUpward className="ArrowIcon negative"/></span>*/}
+                            <span className="UserNumber" style={{"color":"Green"}}>{total} TND</span>
+
                         </div>
 
                     </div>
                 </div>
 
             </div>
+
+
+
+
         </div>
     )
 }
