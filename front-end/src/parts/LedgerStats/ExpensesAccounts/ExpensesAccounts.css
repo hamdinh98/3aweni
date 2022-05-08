@@ -1,12 +1,13 @@
-.WidgetLgExample{
+.WidgetLgExpenses{
     flex: 2;
     padding: 10px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 15px -7px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 15px -7px rgba(0,0,0,0.75);
+    margin-top: 30px;
 }
 
-.WidgetLgTitle{
+.WidgetLgTitleExpenses{
     font-size: 1.4rem;
     font-weight: bold;
 }

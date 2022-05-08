@@ -7,9 +7,8 @@ export default function IncomeAccounts()
     }
     return (
 
-        <div className="WidgetLgExample">
-            <p>account</p>
-            <span className="WidgetLgTitle">Project requests (handmade table)</span>
+        <div className="WidgetLgAccounts">
+            <span className="WidgetLgTitle">Incomes Accounts</span>
             <table className="WidgetLgTable">
                 <thead>
                 <tr className="WidgetLgTr">

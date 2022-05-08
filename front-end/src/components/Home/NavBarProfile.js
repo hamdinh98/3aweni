@@ -11,8 +11,11 @@ const NavBarProfile = () => {
     const logoutHandler = () => {
         dispatch(logout())
     }
+    // console.log(Auth);
 
+    // const img = datauser?.img[0] == '/' ? `${datauser?.img}` : datauser?.img
 
+    console.log(datauser?.img);
 
 
     return (
@@ -28,12 +31,13 @@ const NavBarProfile = () => {
                 <ul className="navbar-nav">
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src={`../${datauser?.img}`} alt="Admin" className="rounded-circle" width="50" />
+                            <img src={datauser?.img} alt="Admin" className="rounded-circle" width="50" />
+
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <button className="dropdown-item" href="#"><Link to="/profile">Profile</Link></button>
 
-                            {JSON.parse(localStorage.getItem('user')).Role === 'ADMIN' && <button className="dropdown-item"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
+                            {JSON.parse(localStorage.getItem('user'))?.Role === 'ADMIN' && <button className="dropdown-item"><Link to="/Dashboard" className="text-dark">Dashboard</Link></button>}
 
                             <button className="dropdown-item" onClick={logoutHandler}>Log Out</button>
                         </div>

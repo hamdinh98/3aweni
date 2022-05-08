@@ -9,7 +9,7 @@ const getProject = async (req, res) => {
 /*
     try {
         const projects = await Project.find({ enable: 1 }).populate("Founder")
-            .populate("donations").populate("hasLedger").populate("comments");
+            .populate("donations").populate("comments");
         res.status(200).json(projects);
     }
     catch (error) {
@@ -270,9 +270,36 @@ const enableProject = (req, res) => {
         )
 }
 
+const addIncome =async (req,res)=>{
+    console.log(req.body)
+    if (!req.body)
+        return res.status(400).json({ err: "project required" });
+
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required");
+
+
+    const result = await Project.findByIdAndUpdate(req.params.idProjet,{$push:{incomes: {incomeAmount:req.body.income.amount,source:req.body.income.source}}});
+
+    return res.status(200).json("income added successfully")
+}
+
+const addExpense= async (req,res)=>{
+    console.log(req.body)
+    if (!req.body)
+        return res.status(400).json({ err: "project required" });
+
+    if (!req.params.idProjet)
+        return res.status(400).json("_id project required");
+
+    const result = await Project.findByIdAndUpdate(req.params.idProjet,{$push:{expenses:{expenseAmount:req.body.expense.expense,purpose:req.body.expense.purpose}}});
+    console.log(result)
+    return res.status(200).json("expense added successfully")
+}
+
 // somme mta3 el money na7iha mel methodes lo5rin w 7otha fil donation (kol user 3andou entré wa7da w dima te7seb total)
 
 module.exports = {
     getProject, AddProject, donateToProject, deleteProject, getFundingProgress, getDonationTrendByMonth, getListOfBackers,
-    distributionByGender, distributionByAgeGroup, enableProject
+    distributionByGender, distributionByAgeGroup, enableProject,addIncome,addExpense
 };

@@ -1,95 +1,23 @@
 import "./Contributors.css";
+import * as React from 'react'
+import { DataGrid } from '@mui/x-data-grid';
+import {rows} from '../../../ChartDataTest';
+import {columns} from '../../../ChartDataTest'
+
 
 export default function Contributors ()
 {
-    const Button = ({type}) =>{
-        return <button className={"WidgetLgButton " + type}>{type}</button>
-    }
     return (
-        <div className="WidgetLgExample">
-            <p>contr</p>
-            <span className="WidgetLgTitle">Project requests (handmade table)</span>
-            <table className="WidgetLgTable">
-                <thead>
-                <tr className="WidgetLgTr">
-                    <th className="WidgetLgTh">User</th>
-                    <th className="WidgetLgTh">Project</th>
-                    <th className="WidgetLgTh">Amount</th>
-                    <th className="WidgetLgTh">Date</th>
-                    <th className="WidgetLgTh">Status</th>
-                </tr>
-                </thead>
+        <div className="ContributorsPart" style={{ height: 400, width: '50%', margin:'30px auto' }}>
+            <h1 style={{textAlign:"center"}}>Contributors</h1>
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                checkboxSelection
+            />
 
-                <tbody>
-                <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                    </td>
-
-                    <td className="WidgetLgProject">Vr Goggles</td>
-
-                    <td className="WidgetLgAmount">1200DT</td>
-
-                    <td className="WidgetLgDate">13 jan 2022</td>
-
-                    <td className="WidgetLgStatus">
-                        <Button type="Approved"/>
-                    </td>
-                </tr>
-
-                <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                    </td>
-
-                    <td className="WidgetLgProject">Vr Goggles</td>
-
-                    <td className="WidgetLgAmount">1200DT</td>
-
-                    <td className="WidgetLgDate">13 jan 2022</td>
-
-                    <td className="WidgetLgStatus">
-                        <Button type="Pending"/>
-                    </td>
-                </tr>
-
-                <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                    </td>
-
-                    <td className="WidgetLgProject">Vr Goggles</td>
-
-                    <td className="WidgetLgAmount">1200DT</td>
-
-                    <td className="WidgetLgDate">13 jan 2022</td>
-
-                    <td className="WidgetLgStatus">
-                        <Button type="Pending"/>
-                    </td>
-                </tr>
-
-                <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Hàmdi Nahdi</span>
-                    </td>
-
-                    <td className="WidgetLgProject">Vr Goggles</td>
-
-                    <td className="WidgetLgAmount">1200DT</td>
-
-                    <td className="WidgetLgDate">13 jan 2022</td>
-
-                    <td className="WidgetLgStatus">
-                        <Button type="Declined"/>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     )
 }

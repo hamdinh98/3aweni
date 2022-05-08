@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 // mode : if true => email for registration 
 // mode : if false => email for verification identiy for changing the forgetten password  
 
-module.exports = async function main(receiver, mode = true, code ) {
+module.exports = async function main(receiver, mode = true, code) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -28,7 +28,7 @@ module.exports = async function main(receiver, mode = true, code ) {
         info = await transporter.sendMail({
             from: '"aweni" <noreply@example.com>',
             to: receiver.email, // list of receivers
-            subject: "Hello ✔", // Subject line
+            subject: "Hello ", // Subject line
             text: "thank you for registration", // plain text body
             html: `thank you for registration ${receiver.name}<br/><a href='http://localhost:5000/confirm/${receiver._id}'>confirm</a>`, // html body
         });

@@ -93,25 +93,24 @@ const login = async (req, res) => {
             return res.status(401).json({ error: "password invalid" })
         }
 
-        const accessToken = await JWT.sign(
+        const accessToken = JWT.sign(
             {
                 email: userfounded.email,
-                role: userfounded.role
+
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "5s",
+                expiresIn: "10s",
             }
         );
 
-        const refreshToken = await JWT.sign(
+        const refreshToken = JWT.sign(
             {
                 email: email,
-                role: userfounded.role
             },
             process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "90d",
+                expiresIn: "1d",
             }
         );
 
@@ -126,6 +125,64 @@ const login = async (req, res) => {
             user: userfounded
         });
         // console.log(refreshTokens);
+    }
+
+}
+
+
+const loginWithGoogle = async (req, res) => {
+    if (!req.body)
+        return res.status(400).json("body required")
+
+    const accessToken = JWT.sign(
+        {
+            email: req.body.email,
+
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: "10s",
+        }
+    );
+
+    const refreshToken = JWT.sign(
+        {
+            email: req.body.email,
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+            expiresIn: "1d",
+        }
+    );
+
+
+    const user = await User.find({ email: req.body.email })
+    console.log(user);
+    if (user) {
+        refreshTokens.push(refreshToken);
+        console.log("test");
+        return res.status(200).json({
+            accessToken,
+            refreshToken,
+            user: user[0]
+        })
+    } else {
+        console.log(req.body);
+        User.create(req.body)
+            .then(result => {
+                console.log("result" + result);
+                refreshTokens.push(refreshToken);
+                console.log(refreshToken);
+                return res.status(200).json({
+                    accessToken,
+                    refreshToken,
+                    user: result
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                return res.status(500).json(err)
+            })
     }
 
 }
@@ -206,7 +263,8 @@ module.exports = {
     login,
     registration,
     confirm,
-    refreshTokens
+    refreshTokens,
+    loginWithGoogle
 
 
 }

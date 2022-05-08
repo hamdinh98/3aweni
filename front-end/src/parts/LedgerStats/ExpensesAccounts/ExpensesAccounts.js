@@ -6,9 +6,9 @@ export default function ExpensesAccounts ()
         return <button className={"WidgetLgButton " + type}>{type}</button>
     }
     return (
-        <div className="WidgetLgExample">
-            <p>expenses</p>
-            <span className="WidgetLgTitle">Project requests (handmade table)</span>
+        <div className="WidgetLgExpenses">
+
+            <span className="WidgetLgTitleExpenses">Expenses Accounts</span>
             <table className="WidgetLgTable">
                 <thead>
                 <tr className="WidgetLgTr">
