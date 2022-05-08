@@ -1,7 +1,28 @@
+import React,{Component, useState,useEffect} from 'react';
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL:"http://localhost:5000/getPayement/624b0ed9f6b79446ac5f3639"
 
 
+});
 
-const BackerList = () => {
+class BackerList extends Component {
+
+
+    state = {
+        donations:[]
+    }
+
+constructor(){
+    super();
+    api.get('/').then(res => {
+        console.log(res.data)
+        this.setState({ donations: res.data})
+    })
+}
+
+render() {
     return (
         <div className="mx-5 my-5">
             <table className="table">
@@ -13,41 +34,18 @@ const BackerList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>David Jhonshon</td>
-                        <td>$25630</td>
-                        <td>25 Dec 2020</td>
-                    </tr>
-                    <tr>
-                        <td>Somalia D Silva</td>
-                        <td>$26630</td>
-                        <td>26 Dec 2020</td>
-                    </tr>
-                    <tr>
-                        <td>Michel J Hasi</td>
-                        <td>$30630</td>
-                        <td>27 Dec 2020</td>
-                    </tr>
-                    <tr>
-                        <td>Radarfort D Oska</td>
-                        <td>$27630</td>
-                        <td>28 Dec 2020</td>
-                    </tr>
-                    <tr>
-                        <td>Walton Pothe</td>
-                        <td>$28630</td>
-                        <td>29 Dec 2020</td>
-                    </tr>
-                    <tr>
-                        <td>Maskuran Polder</td>
-                        <td>$29630</td>
-                        <td>30 Dec 2020</td>
-                    </tr>
+                {this.state.donations.map(donations => <tr>
+                                        <td>Tarek</td>
+                                        <td>{donations.Money}</td>
+                                        <td>{donations.createdAt}</td>
+                                    </tr>)}
+                   
                 </tbody>
             </table>
         </div>
 
     )
-}
+                    }}
+
 
 export default BackerList

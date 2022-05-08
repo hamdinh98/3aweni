@@ -103,7 +103,7 @@ const DescriptionProject = () => {
                                                 <li><i className="far fa-trophy-alt"></i> 29 Rewards Left
                                                 </li>
                                             </ul>
-                                            <a className="theme_btn theme_btn_bg" href="donate.html"
+                                            <a className="theme_btn theme_btn_bg" href="donate"
                                                 data-animation="fadeInLeft" data-delay=".5s">select
                                                 rewards <i className="far fa-arrow-right"></i></a>
                                         </div>
@@ -114,7 +114,7 @@ const DescriptionProject = () => {
                                             <h5>Donate Now</h5>
                                             <h3>Want To Donate
                                                 Our Product</h3>
-                                            <a className="theme_btn theme_btn_bg" href="donate.html"
+                                            <a className="theme_btn theme_btn_bg" href="donate"
                                                 data-animation="fadeInLeft" data-delay=".5s">donate now
                                                 <i className="far fa-arrow-right"></i></a>
                                         </div>

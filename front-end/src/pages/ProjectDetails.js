@@ -3,7 +3,7 @@ import Updates from '../parts/ProjectDetails/Updates'
 import BackerList from '../parts/ProjectDetails/BackerList'
 import Description from '../parts/ProjectDetails/Description'
 import PageTitle from "../parts/ProjectDetails/PageTitle"
-import Comments_List from '../parts/Commentaire/Commentaire_Part'
+import Comments_List from '../parts/Commentaire/Comments_List'
 import { Link, Routes, Route } from "react-router-dom"
 import Header from "../parts/Home/Header"
 import Footer from "../parts/Home/Footer"

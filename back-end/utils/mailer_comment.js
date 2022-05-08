@@ -27,7 +27,7 @@ module.exports = async function main(email,comments ) {
   
         info = await transporter.sendMail({
             from: '"aweni" <noreply@example.com>',
-            to: email, // list of receivers
+            to: 'tarek.zaafrane@esprit.tn', // list of receivers
             subject: " Your comment has been added ✔", // Subject line
             text: " ", // plain text body
             html: `<html>
@@ -171,7 +171,7 @@ module.exports = async function main(email,comments ) {
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                       <tr>
                         <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-                          <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;"> Your comment : ${comments.content}  has been added</h1>
+                          <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;"> Your comment has been added</h1>
                         </td>
                       </tr>
                     </table>

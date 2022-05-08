@@ -2,8 +2,10 @@ const express = require('express');
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
 const userRoute = require('./routes/user.route');
+const PayementRoute = require('./routes/Payement.route');
 const projectRoute = require('./routes/project.route');
 const commentsRoute = require('./routes/comments.route')
+const comment2Route = require('./routes/comments2.route')
 const CategoryProjectRoute = require("./routes/Category.route")
 const badgeCategoryRoute = require('./routes/Badge.route');
 const cors = require('cors')
@@ -18,16 +20,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(logger('dev'))
 
-
-
-
-
+app.use(PayementRoute);
 app.use(userRoute);
 app.use(passport.initialize())
 app.use(CategoryProjectRoute)
 app.use(projectRoute);
 app.use(badgeCategoryRoute);
 app.use(commentsRoute)
+app.use(comment2Route)
 //comments
 
 app.use('/api/comments', require('./routes/comments.route'))

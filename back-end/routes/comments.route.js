@@ -1,5 +1,5 @@
 const express = require('express')
-const { Delete, add, getComment, update, like, dislike, removeByOwner } = require('../controllers/comments.controller')
+const { Delete, add, getComment,getAllComments, update, like, dislike, removeByOwner } = require('../controllers/comments.controller')
 const passport = require("passport")
 const router = express.Router()
 const { ROLES, inRole } = require('../security/RoleMiddleware')
@@ -12,6 +12,8 @@ router.delete('/delete/:id', passport.authenticate('jwt', { session: false }), i
 
 
 router.get('/searchComment/:idComment', passport.authenticate('jwt', { session: false }), getComment)
+
+router.get('/getAllComments', getAllComments)
 
 router.post("/like/:idComment", passport.authenticate('jwt', { session: false }), like)
 router.post("/dislike/:idComment", passport.authenticate('jwt', { session: false }), dislike)
