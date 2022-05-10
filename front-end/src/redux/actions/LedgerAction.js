@@ -2,7 +2,7 @@ import axios from "axios"
 import {INCOME_ADDED,EXPENSE_ADDED,ERROR,PROJECT_RETRIEVED} from "../reducers/LedgerReducer";
 
 export const AddIncome = (income) => dispatch =>{
-    axios.post("http://localhost:5000/addIncome/62688da746a6fe1af8bcf0e0", {income:income})
+    axios.post("https://aweni1-2022.herokuapp.com/addIncome/62688da746a6fe1af8bcf0e0", {income:income})
         .then(result =>{
             console.log(result.data)
             dispatch({
@@ -21,7 +21,7 @@ export const AddIncome = (income) => dispatch =>{
 
 
 export const AddExpense = (expense) => dispatch=>{
-    axios.post("http://localhost:5000/addExpense/62688da746a6fe1af8bcf0e0",{expense:expense})
+    axios.post("https://aweni1-2022.herokuapp.com/addExpense/62688da746a6fe1af8bcf0e0",{expense:expense})
         .then(result =>{
             //console.log(result.data)
             dispatch({
@@ -39,7 +39,7 @@ export const AddExpense = (expense) => dispatch=>{
 }
 
 export const GetProject =() => dispatch =>{
-    axios.get('http://localhost:5000/projectTotals/62688da746a6fe1af8bcf0e0')
+    axios.get('https://aweni1-2022.herokuapp.com/projectTotals/62688da746a6fe1af8bcf0e0')
         .then(result=>{
             dispatch({
                 type:PROJECT_RETRIEVED,

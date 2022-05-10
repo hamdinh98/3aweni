@@ -3,7 +3,7 @@ import axios from "axios"
 import axiosInstance from "../../utils/axiosInterceptor"
 import { ERROR, LOGIN_ACTION, REGISTRATION_ACTION, SET_CONNECTED, LOGOUT, LOGIN_WITH_GOOGLE } from "../reducers/AuthReducer"
 export const RegistrationAction = (user) => dispatch => {
-    axios.post("http://localhost:5000/signIn", user, {
+    axios.post("https://aweni1-2022.herokuapp.com/signIn", user, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
@@ -23,7 +23,7 @@ export const RegistrationAction = (user) => dispatch => {
 }
 
 export const LoginAction = (credentials) => dispatch => {
-    axios.post('http://localhost:5000/login', credentials)
+    axios.post('https://aweni1-2022.herokuapp.com/login', credentials)
         .then(result => {
             console.log(result.data);
             dispatch({
@@ -63,7 +63,7 @@ export const logout = () => dispatch => {
 
 
 export const loginWithGoogle = (user) => dispatch => {
-    axios.post('http://localhost:5000/loginWithGoogle', user)
+    axios.post('https://aweni1-2022.herokuapp.com/loginWithGoogle', user)
         .then(result => {
             dispatch({
                 type: LOGIN_WITH_GOOGLE,

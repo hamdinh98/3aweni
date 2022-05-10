@@ -3,7 +3,7 @@ import React,{Component, useState,useEffect} from 'react';
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL:"http://localhost:5000/getComments/624b0ed9f6b79446ac5f3639"
+    baseURL:"https://aweni1-2022.herokuapp.com/getComments/624b0ed9f6b79446ac5f3639"
 });
 
 
@@ -38,7 +38,7 @@ constructor(props) {
 deleteComment(id){
     if ( window.confirm('Are you sure you want to delete this ? '))
     {
-        fetch("http://localhost:5000/deletecomment/"+id,{
+        fetch("https://aweni1-2022.herokuapp.com/deletecomment/"+id,{
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json',
             'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ changeHandler = e => {
 submitHandler = e => {
     e.preventDefault()
     console.log(this.state)
-    axios.post('http://localhost:5000/newcomment/624b0ed9f6b79446ac5f3639',this.state)
+    axios.post('https://aweni1-2022.herokuapp.com/newcomment/624b0ed9f6b79446ac5f3639',this.state)
     .then(response => {
         console.log(response)
     })

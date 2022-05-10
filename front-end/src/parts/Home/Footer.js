@@ -28,7 +28,7 @@ const Footer = () => {
                                     <p>Together, we achieve more</p>
 
                                     <div className="newsletter-form">
-                                        <h5 className="form-title">Join Newsletters</h5>
+                                        <h5 className="form-title">Join Our Newsletters</h5>
 
                                         <form action="#">
                                             <input type="text" placeholder="Email Address" /><button type="submit"><i

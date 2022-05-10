@@ -31,7 +31,7 @@ class Donate extends Component{
     submitHandler = (e) => {
         e.preventDefault()
     console.log(this.state)
-    axios.post('http://localhost:5000/addPayement/624b0ed9f6b79446ac5f3639',this.state)
+    axios.post('https://aweni1-2022.herokuapp.com/addPayement/624b0ed9f6b79446ac5f3639',this.state)
     .then(response => {
         console.log(response)
     })

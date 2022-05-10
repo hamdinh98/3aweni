@@ -3,7 +3,7 @@ import { SEND_VERIF_CODE, ERROR, UPDATE_PASSWORD, VERIFCATE_CODE } from '../redu
 
 
 export const sendVerifCode = (email) => dispatch => {
-    axios.post('http://localhost:5000/sendVerifCode', { email: email })
+    axios.post('https://aweni1-2022.herokuapp.com/sendVerifCode', { email: email })
         .then(result => {
             //console.log("result: " + result);
             dispatch({
@@ -21,7 +21,7 @@ export const sendVerifCode = (email) => dispatch => {
 }
 
 export const verifCode = (code) => dispatch => {
-    axios.post('http://localhost:5000/verifCode', { code: code })
+    axios.post('https://aweni1-2022.herokuapp.com/verifCode', { code: code })
         .then(result => {
             dispatch({
                 type: VERIFCATE_CODE,
@@ -39,7 +39,7 @@ export const verifCode = (code) => dispatch => {
 
 
 export const updatePassword = (password) => dispatch => {
-    axios.post('http://localhost:5000/updatePassword', { password: password })
+    axios.post('https://aweni1-2022.herokuapp.com/updatePassword', { password: password })
         .then(result => {
             dispatch({
                 type: UPDATE_PASSWORD,
