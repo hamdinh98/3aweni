@@ -15,6 +15,7 @@ const IncomeForm =() =>{
             formData.append("amount", data.amount)
             formData.append("source", data.source)
             dispatch(AddIncome(data))
+            console.log("income added")
         }
 
     return(

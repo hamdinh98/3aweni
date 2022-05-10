@@ -82,7 +82,7 @@ render(){
                                             <div class="media-body">
                                                 <div class="row">
                                                     <div class="col-12 d-flex">
-                                                        <h5>Tarek</h5>
+                                                        <h5>SaifFF</h5>
                                                     </div>
                                                 </div> {comments.content}
                                                 <br></br>

@@ -37,7 +37,6 @@ const ProjectDetails = () => {
                             <Route path="/updates" element={<Updates />} />
                             <Route path="/backerList" element={<BackerList />} />
 
-
                         </Routes>
                     </div>
                 </div>

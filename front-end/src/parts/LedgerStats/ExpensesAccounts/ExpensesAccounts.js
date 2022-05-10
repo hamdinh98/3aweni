@@ -1,7 +1,38 @@
 import "./ExpensesAccounts.css";
+import {useEffect, useState} from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import {getProject} from "../../../redux/actions/LedgerStatsAction";
+
 
 export default function ExpensesAccounts ()
 {
+    const dispatch = useDispatch();
+    const project = useSelector(state=>state.LedgerStats)
+    useEffect(()=>{
+        dispatch(getProject())
+
+    },[])
+
+    console.log(project)
+    if(project.project.expenses !=undefined){
+        var  expenses =  project.project?.expenses.map(el=>{
+            return <tr className="WidgetLgTr">
+
+
+                <td className="WidgetLgProject">{el.purpose}</td>
+
+                <td className="WidgetLgAmount">{el.expenseAmount}</td>
+
+                <td className="WidgetLgDate">{el.date.split('T')[0]}</td>
+
+            </tr>
+
+        })
+
+    }
+
+
+
     const Button = ({type}) =>{
         return <button className={"WidgetLgButton " + type}>{type}</button>
     }
@@ -21,51 +52,11 @@ export default function ExpensesAccounts ()
                 </thead>
 
                 <tbody>
-                <tr className="WidgetLgTr">
 
 
-                    <td className="WidgetLgProject">Software license purchase</td>
-
-                    <td className="WidgetLgAmount">750 DT</td>
-
-                    <td className="WidgetLgDate">2022-03-16</td>
-
-                </tr>
-
-                <tr className="WidgetLgTr">
+                {expenses}
 
 
-                    <td className="WidgetLgProject">Repairs</td>
-
-                    <td className="WidgetLgAmount">73 DT</td>
-
-                    <td className="WidgetLgDate">2022-04-20</td>
-
-
-                </tr>
-
-                <tr className="WidgetLgTr">
-
-
-                    <td className="WidgetLgProject">Outsourcing Design</td>
-
-                    <td className="WidgetLgAmount">3000 DT</td>
-
-                    <td className="WidgetLgDate">2022-04-19</td>
-
-
-                </tr>
-
-                <tr className="WidgetLgTr">
-
-                    <td className="WidgetLgProject">Miscellaneous expenses</td>
-
-                    <td className="WidgetLgAmount">300 DT</td>
-
-                    <td className="WidgetLgDate">2022-04-06</td>
-
-
-                </tr>
                 </tbody>
             </table>
         </div>

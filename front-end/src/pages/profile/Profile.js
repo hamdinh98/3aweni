@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Footer from "../../parts/Home/Footer";
 import Header from "../../parts/Home/Header";
 import './Profile.module.css'
+import {Link} from 'react-router-dom'
 
 
 const Profile = () => {
@@ -40,8 +41,8 @@ const Profile = () => {
                                     <ul className="list-group list-group-flush">
 
                                         <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 className="mb-0"><img src="/assets/img/profileIcons/project.png" height="50px" width='50px' />  Founded projects</h6>
-                                            <span className="text-secondary">{data.FoundedProjects.length}</span>
+                                            <h6 className="mb-0"><img src="/assets/img/profileIcons/project.png" height="50px" width='50px' />  <a><Link to="/projectDetails">Founded projects</Link></a></h6>
+                                            <span className="text-secondary">{data.FoundedProjects.length+1}</span>
                                         </li>
                                         <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                             <h6 className="mb-0"><img src="/assets/img/profileIcons/backedProject.png" height="50px" width='50px' />Backed projects</h6>

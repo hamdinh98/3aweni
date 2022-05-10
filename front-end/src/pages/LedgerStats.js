@@ -17,7 +17,7 @@ const LedgerStats = ()=>{
             <div className="d-flex justify-content-around">
                 <button className="btn btn-primary" onClick={() => setShow(0)}>Incomes Accounts</button>
                 <button className="btn btn-success" onClick={() => setShow(1)}>Contributors</button>
-                <button className="btn btn-primary" onClick={() => setShow(2)}>Expenses Accounts form</button>
+                <button className="btn btn-primary" onClick={() => setShow(2)}>Expenses Accounts</button>
                 <button className="btn btn-primary" >
                     <Link style={{"color":"white"}} to="/LedgerBook">Add entries</Link>
                 </button>

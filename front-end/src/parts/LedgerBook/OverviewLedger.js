@@ -11,11 +11,11 @@ const OverviewLedger =() =>{
     const project = useSelector(state=>state.Ledger)
     useEffect(()=>{
       dispatch(GetProject())
-        //console.log(project)
-        console.log(project.project.totalExpenses)
+        console.log("test overview ledger")
+       // console.log(project.project.totalExpenses)
     },[])
 
-    const total = project.project.totalIncomes - project.project.totalExpenses;
+    const total = project.project?.totalIncomes - project.project?.totalExpenses;
 
 
 
@@ -27,7 +27,7 @@ const OverviewLedger =() =>{
                         <span className="ItemTitle">Total Incomes</span>
 
                         <div className="itemsContainer">
-                            <span className="UserNumber">{project.project.totalIncomes} TND</span>
+                            <span className="UserNumber">{project.project?.totalIncomes} TND</span>
 
                         </div>
 
@@ -39,7 +39,7 @@ const OverviewLedger =() =>{
                         <span className="ItemTitle">Total Expenses</span>
 
                         <div className="itemsContainer">
-                            <span className="UserNumber">{project.project.totalExpenses} TND</span>
+                            <span className="UserNumber">{project.project?.totalExpenses} TND</span>
 
                         </div>
 

@@ -35,7 +35,7 @@ render() {
                 </thead>
                 <tbody>
                 {this.state.donations.map(donations => <tr>
-                                        <td>Tarek</td>
+                                        <td>SaifFF</td>
                                         <td>{donations.Money}</td>
                                         <td>{donations.createdAt}</td>
                                     </tr>)}

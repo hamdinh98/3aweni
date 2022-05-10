@@ -1,7 +1,38 @@
 import "./IncomeAccounts.css"
+import {useEffect, useState} from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import {getProject} from "../../../redux/actions/LedgerStatsAction";
+
 
 export default function IncomeAccounts()
 {
+
+    const dispatch = useDispatch();
+    const project = useSelector(state=>state.LedgerStats)
+    useEffect(()=>{
+        dispatch(getProject())
+
+    },[])
+
+
+    if(project.project.incomes !=undefined){
+        var  incomes =  project.project?.incomes.map(el=>{
+            return <tr className="WidgetLgTr">
+
+
+                <td className="WidgetLgProject">{el.source}</td>
+
+                <td className="WidgetLgAmount">{el.incomeAmount}</td>
+
+                <td className="WidgetLgDate">{el.date.split('T')[0]}</td>
+
+            </tr>
+
+        })
+
+    }
+
+
     const Button = ({type}) =>{
         return <button className={"WidgetLgButton " + type}>{type}</button>
     }
@@ -12,7 +43,7 @@ export default function IncomeAccounts()
             <table className="WidgetLgTable">
                 <thead>
                 <tr className="WidgetLgTr">
-                    <th className="WidgetLgTh">User</th>
+
                     <th className="WidgetLgTh">Type</th>
                     <th className="WidgetLgTh">Amount</th>
                     <th className="WidgetLgTh">Date</th>
@@ -21,65 +52,9 @@ export default function IncomeAccounts()
                 </thead>
 
                 <tbody>
-                <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">Saif Houjji</span>
-                    </td>
 
-                    <td className="WidgetLgProject">Donation</td>
+                {incomes}
 
-                    <td className="WidgetLgAmount">250 DT</td>
-
-                    <td className="WidgetLgDate">2022-04-06</td>
-
-
-                </tr>
-
-                <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">External User</span>
-                    </td>
-
-                    <td className="WidgetLgProject">equipment</td>
-
-                    <td className="WidgetLgAmount">12000 DT</td>
-
-                    <td className="WidgetLgDate">2022-03-18</td>
-
-
-                </tr>
-
-                <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">External User</span>
-                    </td>
-
-                    <td className="WidgetLgProject">Materials</td>
-
-                    <td className="WidgetLgAmount">4886 DT</td>
-
-                    <td className="WidgetLgDate">2022-02-27</td>
-
-
-                </tr>
-
-                <tr className="WidgetLgTr">
-                    <td className="WidgetLgUserColumn">
-                        <img src="/assets/img/logo/3aweni.png" alt="" className="WidgetLgImage"/>
-                        <span className="WidgetLgUsername">External User</span>
-                    </td>
-
-                    <td className="WidgetLgProject">Cash</td>
-
-                    <td className="WidgetLgAmount">800DT</td>
-
-                    <td className="WidgetLgDate">2022-04-01</td>
-
-
-                </tr>
                 </tbody>
             </table>
         </div>

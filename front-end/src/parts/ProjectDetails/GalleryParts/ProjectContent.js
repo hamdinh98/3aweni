@@ -4,7 +4,7 @@ import ProgressBar from "../../../components/Project/ProgressBar"
 import ProjectRaised from "../../../components/Project/ProjectRaised"
 import ReleaseDate from "../../../components/Project/ReleaseDate"
 import TitleProject from "../../../components/Project/titleProject"
-
+import  {Link} from 'react-router-dom'
 
 
 const ProjectContent = () => {
@@ -30,6 +30,13 @@ const ProjectContent = () => {
                     data-animation="fadeInLeft" data-delay=".5s">Donate now <i
                         className="far fa-arrow-right"></i></a>
                 </li>
+                <li>
+                    <Link to="/LedgerBook">
+                    <a className="theme_btn theme_btn_bg"
+                            data-animation="fadeInLeft" data-delay=".5s">View ledger book<i
+                className="far fa-arrow-right"></i>
+                    </a></Link>
+            </li>
             </ul>
         </div>
     )

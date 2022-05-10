@@ -22,6 +22,7 @@ export default function Contributors ()
         setS(!s);
     },[])
 
+    console.log(backers)
 
     const columns = [
 

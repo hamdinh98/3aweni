@@ -53,7 +53,7 @@ class Donate extends Component{
         <div class="row gx-3">
         <div class="col-12">
                 <div class="d-flex flex-column">
-                    <p class="text mb-1">Donor Name </p> <input class="form-control_don2 mb-3" type="text" value="Foulén Fouléni" readonly="readonly"/>
+                    <p class="text mb-1">Donor Name </p> <input class="form-control_don2 mb-3" type="text" value="SaifFF" readonly="readonly"/>
                 </div>
             </div>
             <div class="col-12">
@@ -69,7 +69,7 @@ class Donate extends Component{
             </div>
             <div class="col-12">
                 <div class="d-flex flex-column">
-                    <p class="text mb-1">Card Number</p> <input  name="card_number" class="form-control_don mb-3" type="text" placeholder="****"  required="required" 
+                    <p class="text mb-1">Card Number</p> <input  name="card_number" class="form-control_don mb-3" type="text" placeholder="****"  required="required"
                     />
                 </div>
             </div>
