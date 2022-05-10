@@ -17,7 +17,7 @@ const Home = () => {
             <PopularCategories />
 
             <About />
-            <CounterSection />
+            {/*<CounterSection />*/}
             <Footer />
 
         </div>

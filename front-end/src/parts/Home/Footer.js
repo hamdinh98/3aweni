@@ -80,7 +80,7 @@ const Footer = () => {
                                             <span className="info">
 
                                                 <span className="info-title">Phone Number
-                                                </span><a href="#">+012(345) 78 93</a>
+                                                </span><a href="#">+216 70 685 685</a>
                                             </span>
                                         </li>
                                         <li>
@@ -91,7 +91,7 @@ const Footer = () => {
                                             <span className="info">
 
                                                 <span className="info-title">Email Address
-                                                </span><a href="#">support@gmail.com</a>
+                                                </span><a href="#">3aweni2022@gmail.com</a>
                                             </span>
                                         </li>
                                         <li>
@@ -102,7 +102,7 @@ const Footer = () => {
                                             <span className="info">
 
                                                 <span className="info-title">Locations
-                                                </span><a href="#">59 Main Street, USA</a>
+                                                </span><a href="#">Cebalat Ben Ammar 2083, TUNISIA</a>
                                             </span>
                                         </li>
                                     </ul>
@@ -128,7 +128,7 @@ const Footer = () => {
                             <div className="col-md-6">
 
                                 <p className="copyright-text">©
-                                    2022
+                                    2022 <span> </span>
                                     <a href="#">3aweni</a>. All Rights Reserved
                                 </p>
                             </div>

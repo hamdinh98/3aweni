@@ -29,9 +29,9 @@ const PopularCategories = () => {
                 <div class="row">
                     <div class="col-xl-10 offset-xl-1 wow fadeInUp2 animated" data-wow-delay='.1s'>
                         <div class="section-title text-center mb-85">
-                            <h6 class="left-line pl-75 pr-75">Features Categories</h6>
-                            <h2>Explore Our Crowd Founding <br />
-                                <span>Features Categories</span></h2>
+                            <h6 class="left-line pl-75 pr-75">Featured Categories</h6>
+                            <h2>Explore Current Campaigns <br />
+                                <span>Featured Categories</span></h2>
                         </div>
                     </div>
                 </div>

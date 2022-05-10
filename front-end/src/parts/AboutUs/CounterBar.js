@@ -73,14 +73,14 @@ const CounterBar = () => {
 
                                 <div class="count-wrap">
 
-                                    <span class="count" data-to="4756">24/7 Active Staff
+                                    <span class="count" data-to="4756">24/7
                                     </span>
 
 
                                 </div>
-                                <h6 class="title"></h6>
+                                <h6 class="title"> Active Staff</h6>
 
-                                <p>Have a question or a problem? <br /> We are always available to help!</p>
+                                <p>Have questions or problems? <br /> We are always available to help!</p>
                             </div>
                         </div>
                     </div>

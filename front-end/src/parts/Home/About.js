@@ -32,8 +32,8 @@ const About = () => {
                                 <h2 className="title">Why Choose Us</h2>
                             </div>
 
-                            <p>Sedut perspiciatis unde omnis iste natus voluptatem accusantium dolore dantiumy totam rem
-                                apeam, eaque ipsa quaventore veritatis quasi architecto beatae.</p>
+                            <p>As one of the pioneers in a relatively young field in our country, 3AWENI provides few
+                            advantages and unique quirks you might not enjoy on other apps. But why talk? take a look around and see for yourself!</p>
 
 
                         </div>
