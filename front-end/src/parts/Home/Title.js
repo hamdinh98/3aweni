@@ -1,4 +1,4 @@
-
+import  {Link} from 'react-router-dom'
 const Title = () => {
 
     return (
@@ -15,8 +15,12 @@ const Title = () => {
                             <span className="tagline wow fadeInUp" data-wow-delay="0.3s">Crowdfounding Agency
                             </span>
                             <h1 className="title wow fadeInUp" data-wow-delay="0.4s">Help Kickstart The Future!
-                            </h1><a className="main-btn wow fadeInUp" data-wow-delay="0.5s" href="project-1">Explore
-                                Projects <i className="far fa-arrow-right"></i></a>
+                            </h1>
+                            <Link to="/ProjectsList">
+                                <a className="main-btn wow fadeInUp" data-wow-delay="0.5s" href="project-1">Explore
+                                    Projects <i className="far fa-arrow-right"></i></a>
+                            </Link>
+
                         </div>
                     </div>
                 </div>

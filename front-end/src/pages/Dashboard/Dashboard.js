@@ -13,7 +13,7 @@ const Dashboard = () => {
         <div>
 
             <Topbar />
-            {/*DO NOT CHANGE THE CLASSNAME TO CONTAINER!!!
+            {/*DO NOT CHANGE THE CLASSNAME TO CONTAINER!!! I WILL KILL YOU IF YOU DO IT !!!
             container is a bootstrap reserved name, and it will ruin the current style*/}
             <div className="contain">
                 <Sidebar />

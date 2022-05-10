@@ -2,7 +2,7 @@
 
 
 const ReleaseDate = () => {
-    return (<span className="date"><i class="far fa-calendar-alt"></i> 25 February 2021
+    return (<span className="date"><i class="far fa-calendar-alt"></i> 15 April 2022
     </span>)
 }
 

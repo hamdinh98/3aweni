@@ -13,74 +13,55 @@ const DescriptionProject = () => {
                             <div className="col-xl-8 col-lg-8 col-md-12">
                                 <div className="image-content-left">
                                     <div className="left-content-box mb-45">
-                                        <h3 className="img-title mb-10">Best Smart Headphone In 2020</h3>
-                                        <p className="mb-40">Sed ut perspiciatis unde omnis iste natus error
-                                            sit voluptatem accusantium doloremque laudantium, totam rem
-                                            aperiam, eaque ipsa quae ab illo inventore veritatis et
-                                            quasi architecto beatae vitae dicta sunt explicabo. Nemo
-                                            enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                                            aut fugit, sed quia consequuntur magni dolores eos qui
-                                            ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                                            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-                                            velit, sed quia non numquam eius modi tempora incidunt ut
-                                            labore et dolore magnam aliquam quaerat voluptatem. Ut enim
-                                            ad minima veniam, quis nostrum exercitationem ullam corporis
-                                            suscipit laboriosam, nisi ut aliquid ex ea commodi
-                                            consequatur? Quis autem vel eum iure reprehenderit qui in ea
-                                            voluptate velit esse quam nihil molestiae consequatur, vel
-                                            illum qui dolorem eum fugiat quo voluptas nulla pariatu</p>
+                                        <h3 className="img-title mb-10">The best VR set for the future</h3>
+                                        <p className="mb-40">Experience gaming like you never have before! With our brand new VR set,
+                                            the innovative technology just throws you in the heat of the action!
+                                            Support us now and help usher in a new era for gaming!
+                                            all supporters with a diamond rank will get a free Gen3 Airoha Air Pro 3 TWS VR Set
+                                            as a patron prize!</p>
                                         <div className="image-content-thumb">
-                                            <img src="assets/img/project/20.jpg" alt="" />
+                                            <img style={{"width":"500px","height":"400px","margin-left":"150px"}} src="assets/img/project/28.jpg" alt="" />
                                         </div>
                                     </div>
                                     <div className="events-details-list left-content-list mb-35  wow fadeInUp animated"
                                         data-wow-delay='.3s'>
-                                        <h3 className="img-title">Why Donate Our Product</h3>
-                                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                                            odit aut fugit, sed quia consequuntur magni dolores eos qui
-                                            ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                                            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-                                            velit, sed quia non numquam eius modi temporadunt ut labore
-                                            et dolore magnam aliquam quaerat voluptatem. Ut enim ad
-                                            minima veniam, quis nostrum exercitationem ullam corporis
-                                            suscipit laboriosam, nisi ut aliquid </p>
+                                        <h3 className="img-title">Donation : should i support this project?</h3>
+                                        <p>
+                                            Like any field, developing new technologies tends to be quite costly,
+                                            more so in the case of gaming technologies. Our project holds the potential
+                                            to completely revolutionize the gaming industry, which is where you, as an
+                                            individual, come into play. CrowdFunding is our best shot at making this project see the daylight,
+                                            without the risk of it being shutoff midway due to heavy interest rates from banks.
+                                            And rest assured, we have set donation goals, and tiers, and each person who meets the criteria for
+                                            a certain tier will get the tier reward, which you can learn more about in our Rewards section.
+                                        </p>
                                         <ul className="details-list pt-40 mb-20">
-                                            <li>SEO Belong Your Web Design Process</li>
-                                            <li>1914 translation by H. Rackham</li>
-                                            <li>Section Finibus Bonorum et Malorum</li>
-                                            <li>Build Music Manager With Nuxt Express</li>
-                                            <li>Standard Lorem Sum Passage Used</li>
-                                            <li>Build Music Manager With Nuxt Express</li>
+                                            <li>Support technological innovation</li>
+                                            <li>Different reward tiers for donors</li>
+                                            <li>Constant updates on the state of the project</li>
+                                            <li>Built-in noise canceling headphones</li>
+                                            <li>Less cables means less restricted movement</li>
+                                            <li>High quality pictures, supports high FPS</li>
                                         </ul>
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6">
                                                 <div className="image-content-thumb mb-30">
-                                                    <img src="/assets/img/project/21.jpg" alt="" />
+                                                    <img style={{"width":"300px","height":"300px"}} src="/assets/img/project/06.jpg" alt="" />
                                                 </div>
                                             </div>
                                             <div className="col-xl-6 col-lg-6 col-md-6">
                                                 <div className="image-content-thumb mb-30">
-                                                    <img src="/assets/img/project/22.jpg" alt="" />
+                                                    <img style={{"width":"300px","height":"300px"}} src="/assets/img/project/29.jpg" alt="" />
                                                 </div>
                                             </div>
                                         </div>
-                                        <p>But I must explain to you how all this mistaken idea of
-                                            denouncing pleasure and praising pain was born and I will
-                                            give you a complete account of the system, and expound the
-                                            actual teachings of the great explorer of the truth, the
-                                            master-builder of human happiness. No one rejects, dislikes,
-                                            or avoids pleasure itself, because it is pleasure, but
-                                            because those who do not know how to pursue pleasure
-                                            rationally encounter consequences that are extremely
-                                            painful. Nor again is there anyone who loves or pursues or
-                                            desires to obtain pain of itself, because it is pain, but
-                                            because occasionally circumstances occur in which toil and
-                                            pain can procure him some great pleasure. To take a trivial
-                                            example, which of us ever undertakes laborious physical
-                                            exercise, except to obtain some advantage from it? But who
-                                            has any right to find fault with a man who chooses to enjoy
-                                            a pleasure that has no annoying consequences, or one who
-                                            avoids a pain that produces no resultant pleasure</p>
+                                        <p>Like any field, developing new technologies tends to be quite costly,
+                                            more so in the case of gaming technologies. Our project holds the potential
+                                            to completely revolutionize the gaming industry, which is where you, as an
+                                            individual, come into play. CrowdFunding is our best shot at making this project see the daylight,
+                                            without the risk of it being shutoff midway due to heavy interest rates from banks.
+                                            And rest assured, we have set donation goals, and tiers, and each person who meets the criteria for
+                                            a certain tier will get the tier reward, which you can learn more about in our Rewards section.</p>
                                     </div>
                                 </div>
                             </div>
@@ -90,17 +71,16 @@ const DescriptionProject = () => {
                                         <div className="widget-rewards">
                                             <h4>Rewards</h4>
                                             <div className="reaward__thumb text-center mb-25">
-                                                <img src="/assets/img/project/04.png" alt="" />
+                                                <img style={{"width":"200px","height":"200px"}} src="/assets/img/project/vr.webp" alt="" />
                                             </div>
-                                            <h5><span>258</span> or More</h5>
-                                            <p className="mb-20">But must explain to you how all this
-                                                mistaken idea of denouncing plasue and praising pain was
-                                                born</p>
-                                            <h5>30 Dec 2020</h5>
+                                            <h5><span>275 DT</span> or More</h5>
+                                            <p className="mb-20">This is our highest tier reward, donate today and
+                                            be one of the lucky first who get to try our product</p>
+                                            <h5>30 Dec 2024</h5>
                                             <p>Estimated Delivery</p>
                                             <ul className="rewards-list pt-15 mb-25">
                                                 <li><i className="far fa-user-circle"></i> 5 Backers</li>
-                                                <li><i className="far fa-trophy-alt"></i> 29 Rewards Left
+                                                <li><i className="far fa-trophy-alt"></i> 39 Rewards Left
                                                 </li>
                                             </ul>
                                             <a className="theme_btn theme_btn_bg" href="donate"

@@ -11,7 +11,7 @@ export default function Topbar()
 
 
 
-                    <Link to="/Dashboard">
+                    <Link to="/">
                         <img className="topbarImage" src="/assets/img/logo/3aweni.png" alt=""/>
                     </Link>
                 </div>

@@ -3,7 +3,7 @@
 
 const Category = () => {
     return (
-        <a href="#" className="new-tag">headphone</a>
+        <a href="#" className="new-tag">Gaming Accessories</a>
     )
 }
 

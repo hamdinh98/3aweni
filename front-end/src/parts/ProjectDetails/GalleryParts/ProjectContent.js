@@ -23,7 +23,12 @@ const ProjectContent = () => {
             <br />
             {/* <ProjectRaised /> */}
             <ProgressBar />
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudatium totam rem aperiam, eaque ipsa quae ab ventore veritatis et quasi architecto beatae vitae dictsunt explicabo. Nemo enim ipsam voluptate voluptasit aspernatur aut odit aut fugit, sed quia cons</p>
+            <p>Experience gaming like you never have before! With our brand new VR set,
+                the innovative technology just throws you in the heat of the action!
+                Support us now and help usher in a new era for gaming!
+                all supporters with a diamond rank will get a free Gen3 Airoha Air Pro 3 TWS VR Set
+                as a patron prize!
+            </p>
             <ul className="cart-list d-sm-flex align-items-center">
 
                 <li><a className="theme_btn theme_btn_bg" href="Donate"

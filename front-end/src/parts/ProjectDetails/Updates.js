@@ -320,15 +320,14 @@ const Updates = () => {
                                         <div className="reaward__thumb text-center mb-25">
                                             <img src="/assets/img/project/04.png" alt="" />
                                         </div>
-                                        <h5><span>258</span> or More</h5>
-                                        <p className="mb-20">But must explain to you how all this
-                                            mistaken idea of denouncing plasue and praising pain was
-                                            born</p>
-                                        <h5>30 Dec 2020</h5>
+                                        <h5><span>275 DT</span> or More</h5>
+                                        <p className="mb-20">This is our highest tier reward, donate today and
+                                            be one of the lucky first who get to try our product</p>
+                                        <h5>30 Dec 2024</h5>
                                         <p>Estimated Delivery</p>
                                         <ul className="rewards-list pt-15 mb-25">
                                             <li><i className="far fa-user-circle"></i> 5 Backers</li>
-                                            <li><i className="far fa-trophy-alt"></i> 29 Rewards Left
+                                            <li><i className="far fa-trophy-alt"></i> 39 Rewards Left
                                             </li>
                                         </ul>
                                         <a className="theme_btn theme_btn_bg" href="contact.html"

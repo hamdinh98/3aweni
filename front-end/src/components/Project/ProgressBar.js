@@ -4,8 +4,8 @@
 const ProgressBar = () => {
     return (
         <div className="skill mb-20">
-            <p className="skill-para">Raised of <span>$2535</span></p>
-            <h5>95%</h5>
+            <p className="skill-para">Raised of <span>35000 DT</span></p>
+            <h5>85%</h5>
             <div className="progress">
                 <div className="progress-bar" role="progressbar" aria-valuenow="95"
                     aria-valuemin="0" aria-valuemax="95">

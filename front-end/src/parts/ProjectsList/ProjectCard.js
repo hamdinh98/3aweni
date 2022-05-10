@@ -3,6 +3,8 @@ import Founder from "../../components/Project/Founder"
 import ProgressBar from "../../components/Project/ProgressBar"
 import ReleaseDate from "../../components/Project/ReleaseDate"
 import TitleProject from "../../components/Project/titleProject"
+import  {Link} from 'react-router-dom'
+
 
 const ProjectCard = () => {
 
@@ -18,7 +20,10 @@ const ProjectCard = () => {
                     <div className="author">
                         <Founder />
                     </div>
-                    <h5 className="title"><TitleProject /></h5>
+                    <Link to={"/projectDetails"}>
+                        <h5 className="title"><TitleProject /></h5>
+                    </Link>
+
 
                     <div className="project-stats">
                         <ProgressBar />
